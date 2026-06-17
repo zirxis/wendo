@@ -1,3 +1,4 @@
+
 /**
  * WENDO - Premium Application Logic
  * Modern Vanilla JS Architecture
@@ -12,6 +13,13 @@ const app = {
         selectedCareersForCompare: [],
         quiz: { currentQuestion: 0, scores: { tech: 0, health: 0, business: 0, art: 0, humanities: 0 } }
     },
+
+    // --- Mobile Menu ---
+    toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('active');
+    },
+
 	renderDashboard() {
         const container = document.getElementById('dashboard-content');
         container.innerHTML = `
@@ -80,6 +88,9 @@ const app = {
             target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        // إغلاق القائمة في حال كانت مفتوحة
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenu) mobileMenu.classList.remove('active');
     },
 
     toggleTheme() {
@@ -94,7 +105,6 @@ const app = {
         document.getElementById('theme-toggle').innerText = theme === "dark" ? "☀️" : "🌙";
     },
 
-    // --- Toast Notifications ---
     showToast(message) {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -108,7 +118,6 @@ const app = {
         }, 3000);
     },
 
-    // --- Rendering Core Data ---
     renderUniversities(filtered = this.data.universities) {
         const grid = document.getElementById('universities-grid');
         const emptyState = document.getElementById('universities-empty');
@@ -165,7 +174,6 @@ const app = {
         this.navigate('specialties-view');
     },
 
-    // --- Careers & Comparison Logic ---
     renderCareers() {
         const container = document.getElementById('careers-grid-container');
         container.innerHTML = this.data.careers.map(career => `
@@ -188,7 +196,7 @@ const app = {
         if (isChecked) {
             if (this.state.selectedCareersForCompare.length >= 2) {
                 this.showToast("يمكنك مقارنة مهنتين فقط في نفس الوقت.");
-                event.target.checked = false; // Safely uncheck
+                event.target.checked = false;
                 return;
             }
             this.state.selectedCareersForCompare.push(careerId);
@@ -240,7 +248,6 @@ const app = {
         this.openModal('compare-modal');
     },
 
-    // --- Quiz Logic ---
     startQuiz() {
         this.state.quiz.currentQuestion = 0;
         this.state.quiz.scores = { tech: 0, health: 0, business: 0, art: 0, humanities: 0 };
@@ -307,7 +314,6 @@ const app = {
         return names[cat] || "متعدد التخصصات";
     },
 
-    // --- Modals & Utilities ---
     openModal(modalId) { document.getElementById(modalId).classList.add('active'); },
     closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); },
     closeModalOutside(event, modalId) { if (event.target.id === modalId) this.closeModal(modalId); },
@@ -333,25 +339,16 @@ const app = {
         }
     },
 
-    // --- Authentication Logic ---
     updateAuthUI(name) {
-        // إخفاء أزرار الدخول والتسجيل
         document.getElementById('nav-login-btn').classList.add('hidden');
         document.getElementById('nav-register-btn').classList.add('hidden');
-        
-        // إظهار قائمة المستخدم وزر مساحتي
         const userMenu = document.getElementById('nav-user-menu');
         userMenu.classList.remove('hidden');
         document.getElementById('user-greeting').innerText = `مرحباً، ${name}`;
-        
         const dashBtn = document.getElementById('nav-dashboard-btn');
         if(dashBtn) dashBtn.classList.remove('hidden');
-        
-        // تحديث رسالة الترحيب في مساحتي
         const dashGreeting = document.getElementById('dashboard-greeting');
         if(dashGreeting) dashGreeting.innerText = `مرحباً بك يا ${name} في مساحتك الخاصة`;
-        
-        // بناء محتوى مساحتي
         this.renderDashboard();
     },
 
@@ -363,13 +360,13 @@ const app = {
 
     simulateLogin(e) { 
         e.preventDefault(); 
-        const name = "طالب"; // اسم افتراضي للمحاكاة
+        const name = "طالب";
         this.state.isLoggedIn = true; 
         localStorage.setItem('wendo_user', name);
         this.updateAuthUI(name); 
         this.closeModal('login-modal'); 
         this.showToast("تم تسجيل الدخول بنجاح!");
-        this.navigate('dashboard-view'); // التوجيه التلقائي
+        this.navigate('dashboard-view');
     },
 
     simulateRegister(e) { 
@@ -380,7 +377,7 @@ const app = {
         this.updateAuthUI(nameInput); 
         this.closeModal('register-modal'); 
         this.showToast("تم إنشاء الحساب بنجاح!");
-        this.navigate('dashboard-view'); // التوجيه التلقائي
+        this.navigate('dashboard-view');
     }
 };
 

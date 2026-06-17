@@ -11,9 +11,11 @@
 <body>
 
     <nav class="navbar">
+        <button class="menu-toggle" onclick="app.toggleMobileMenu()">☰</button>
         <div class="nav-brand" onclick="app.navigate('landing-view')" role="button" tabindex="0">WENDO</div>
         <div class="nav-links">
             <button class="icon-btn" onclick="app.toggleTheme()" aria-label="تبديل المظهر" id="theme-toggle">🌙</button>
+            <button class="nav-btn" onclick="app.navigate('landing-view')">🏠 الرئيسية</button>
             <button class="nav-btn" onclick="app.navigate('explorer-view')">الجامعات والمدارس</button>
             <button class="nav-btn" onclick="app.navigate('careers-view')">دليل المهن</button>
             <button class="nav-btn" onclick="app.startQuiz()" style="color: var(--accent-color); font-weight: bold;">اختبار الميول</button>
@@ -26,6 +28,18 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+   <div id="mobile-menu" class="mobile-menu">
+    <button class="close-btn" onclick="app.toggleMobileMenu()">×</button>
+    <div class="mobile-links">
+        <button onclick="app.navigate('landing-view'); app.toggleMobileMenu()">🏠 الرئيسية</button>
+        <button onclick="app.navigate('explorer-view'); app.toggleMobileMenu()">الجامعات والمدارس</button>
+        <button onclick="app.navigate('careers-view'); app.toggleMobileMenu()">دليل المهن</button>
+        <button onclick="app.startQuiz(); app.toggleMobileMenu()">اختبار الميول</button>
+    </div>
+</div>
+<div id="menu-overlay" class="menu-overlay" onclick="app.toggleMobileMenu()"></div>
 
     <main class="app-container">
         
