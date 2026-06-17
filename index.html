@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WENDO - المنصة الموجهة للطلاب في الجزائر لاكتشاف التخصصات، الجامعات، والمهن الأنسب لميولك.">
+    <title>WENDO - منصتك التوجيهية الذكية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand" onclick="app.navigate('landing-view')" role="button" tabindex="0">WENDO</div>
+        <div class="nav-links">
+            <button class="icon-btn" onclick="app.toggleTheme()" aria-label="تبديل المظهر" id="theme-toggle">🌙</button>
+            <button class="nav-btn" onclick="app.navigate('explorer-view')">الجامعات والمدارس</button>
+            <button class="nav-btn" onclick="app.navigate('careers-view')">دليل المهن</button>
+            <button class="nav-btn" onclick="app.startQuiz()" style="color: var(--accent-color); font-weight: bold;">اختبار الميول</button>
+			<button id="nav-dashboard-btn" class="nav-btn hidden" onclick="app.navigate('dashboard-view')" style="color: var(--accent-color); font-weight: bold;">مساحتي</button>
+            <button id="nav-login-btn" class="nav-btn" onclick="app.openModal('login-modal')">دخول</button>
+            <button id="nav-register-btn" class="primary-btn" onclick="app.openModal('register-modal')">إنشاء حساب</button>
+            <div id="nav-user-menu" class="user-menu hidden">
+                <span id="user-greeting" style="font-weight: 600;"></span>
+                <button class="icon-btn logout-btn" onclick="app.logout()" aria-label="تسجيل الخروج" title="تسجيل الخروج">🚪</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-container">
+        
+        <section id="landing-view" class="view-section active">
+            <div class="hero">
+                <h1>اكتشف مستقبلك <span class="text-gradient">مع WENDO </span></h1>
+                <p>المنصة الموجهة للطلاب في الجزائر لاكتشاف التخصصات، الجامعات، والمهن الأنسب لميولك.</p>
+                <div class="hero-buttons">
+                    <button class="primary-btn large" onclick="app.startQuiz()">ابدأ اختبار الميول الآن</button>
+                    <button class="secondary-btn large" onclick="app.navigate('explorer-view')">تصفح التخصصات</button>
+                </div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card interactive" onclick="app.startQuiz()" role="button" tabindex="0">
+                    <div class="icon">🧠</div>
+                    <h3>اختبار الميول الذكي</h3>
+                    <p>أجب عن بعض الأسئلة وسنقترح لك التخصصات والمهن المناسبة لشخصيتك.</p>
+                </div>
+                <div class="feature-card interactive" onclick="app.navigate('careers-view')" role="button" tabindex="0">
+                    <div class="icon">⚖️</div>
+                    <h3> المهن</h3>
+                    <p>قارن بين مهنتين مختلفتين من حيث الطلب، الدخل، وبيئة العمل لاختيار الأفضل.</p>
+                </div>
+                <div class="feature-card interactive" onclick="app.navigate('explorer-view')" role="button" tabindex="0">
+                    <div class="icon">🏛️</div>
+                    <h3>المدارس والجامعات</h3>
+                    <p>دليلك الشامل لجامعات ومدارس النخبة في مختلف ولايات الوطن.</p>
+                </div>
+            </div>
+        </section>
+		<section id="dashboard-view" class="view-section">
+    <div class="header-center">
+        <div class="icon" style="font-size: 3.5rem; color: var(--accent-color); margin-bottom: 1rem;">👋</div>
+        <h2 id="dashboard-greeting">مرحباً بك في مساحتك الخاصة</h2>
+        <p>هنا يمكنك متابعة نشاطاتك، والوصول السريع للأدوات التي تهمك.</p>
+    </div>
+    <div class="dashboard-grid" id="dashboard-content">
+        </div>
+</section>
+
+        <section id="quiz-view" class="view-section">
+            <div class="header-center">
+                <h2>اختبار تحديد الميول</h2>
+                <p>دعنا نتعرف عليك أكثر لنقترح لك الأفضل</p>
+            </div>
+            <div class="quiz-container" id="quiz-container" aria-live="polite">
+                </div>
+        </section>
+
+        <section id="explorer-view" class="view-section">
+            <div class="header-center">
+                <h2>ماذا تريد استكشافه؟</h2>
+            </div>
+            <div class="explorer-grid">
+                <div class="explorer-card interactive" onclick="app.navigate('universities-view')" role="button" tabindex="0">
+                    <div class="icon">🏛️</div>
+                    <h3>الجامعات</h3>
+                </div>
+                <div class="explorer-card interactive" onclick="app.navigate('schools-view')" role="button" tabindex="0">
+                    <div class="icon">🎓</div>
+                    <h3>المدارس العليا</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="universities-view" class="view-section">
+            <div class="header-with-back">
+                <button class="back-btn" onclick="app.navigate('explorer-view')"><i class="fas fa-arrow-right"></i> رجوع</button>
+                <input type="text" class="search-input" placeholder="ابحث عن جامعة أو ولاية..." onkeyup="app.filterData(this.value, 'universities')">
+            </div>
+            <div class="data-grid" id="universities-grid"></div>
+            <div id="universities-empty" class="hidden" style="text-align: center; padding: 3rem; color: var(--text-secondary);">لا توجد نتائج مطابقة لبحثك.</div>
+        </section>
+
+        <section id="schools-view" class="view-section">
+            <div class="header-with-back">
+                <button class="back-btn" onclick="app.navigate('explorer-view')"><i class="fas fa-arrow-right"></i> رجوع</button>
+                <input type="text" class="search-input" placeholder="ابحث عن مدرسة أو ولاية..." onkeyup="app.filterData(this.value, 'schools')">
+            </div>
+            <div class="data-grid" id="schools-grid"></div>
+            <div id="schools-empty" class="hidden" style="text-align: center; padding: 3rem; color: var(--text-secondary);">لا توجد نتائج مطابقة لبحثك.</div>
+        </section>
+
+        <section id="specialties-view" class="view-section">
+            <div class="header-with-back">
+                <button class="back-btn" onclick="app.navigate('explorer-view')"><i class="fas fa-arrow-right"></i> رجوع</button>
+                <h2 id="specialties-title">التخصصات</h2>
+            </div>
+            <div class="data-grid" id="specialties-grid"></div>
+        </section>
+
+        <section id="careers-view" class="view-section">
+            <div class="header-center">
+                <h2>دليل المهن المستقبلية</h2>
+                <p>اختر مهنتين للمقارنة بينهما واكتشاف خصائصهما</p>
+            </div>
+            <div class="careers-grid" id="careers-grid-container"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>WENDO</h3>
+                <p>منصتك الموثوقة لاختيار مستقبلك التعليمي والمهني. نسعى لتوجيه الطلاب نحو أفضل الخيارات الأكاديمية.</p>
+            </div>
+            <div class="footer-section">
+                <h4>تابعنا</h4>
+                <div class="social-media">
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon x-icon" aria-label="X">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.888 6.694H.645l7.73-8.835L.645 2.25h6.706l4.886 6.088L17.461 2.25h.783zM17.007 18.338h1.537L5.314 3.544H3.667l13.34 14.794z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات المقدمة للأغراض التوجيهية فقط.</p>
+        </div>
+    </footer>
+
+    <div id="compare-floating-btn"></div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="compare-modal" class="modal-overlay" onclick="app.closeModalOutside(event, 'compare-modal')">
+        <div class="modal-content large">
+            <button class="close-btn" onclick="app.closeModal('compare-modal')" aria-label="إغلاق">×</button>
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">مقارنة المهن</h2>
+            <div id="compare-content"></div>
+        </div>
+    </div>
+
+    <div id="specialty-modal" class="modal-overlay" onclick="app.closeModalOutside(event, 'specialty-modal')">
+        <div class="modal-content">
+            <button class="close-btn" onclick="app.closeModal('specialty-modal')" aria-label="إغلاق">×</button>
+            <h2 id="modal-spec-title"></h2>
+            <div id="modal-spec-tags" style="margin-top: 1rem;"></div>
+            <p id="modal-spec-desc" style="margin: 1.5rem 0; line-height: 1.8; color: var(--text-secondary);"></p>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal-overlay" onclick="app.closeModalOutside(event, 'login-modal')">
+        <div class="modal-content">
+            <button class="close-btn" onclick="app.closeModal('login-modal')" aria-label="إغلاق">×</button>
+            <h2 style="margin-bottom: 1.5rem;">تسجيل الدخول</h2>
+            <form onsubmit="app.simulateLogin(event)">
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" placeholder="كلمة المرور" required>
+                <button type="submit" class="primary-btn w-100">دخول</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal-overlay" onclick="app.closeModalOutside(event, 'register-modal')">
+        <div class="modal-content">
+            <button class="close-btn" onclick="app.closeModal('register-modal')" aria-label="إغلاق">×</button>
+            <h2 style="margin-bottom: 1.5rem;">إنشاء حساب جديد</h2>
+            <form onsubmit="app.simulateRegister(event)">
+                <input type="text" placeholder="الاسم الكامل" required>
+                <input type="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" placeholder="كلمة المرور" required>
+                <button type="submit" class="primary-btn w-100">إنشاء حساب</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
