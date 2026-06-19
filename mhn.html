@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wendo - Fullscreen Job Swipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* استدعاء الخط المحلي */
+        @font-face {
+            font-family: 'CustomArabic';
+            src: url('arabic.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-purple: #8B71DF;
+            --light-purple: #D5BFF2;
+            --bg-gradient: linear-gradient(135deg, #F5F7FA 0%, #E4E8F2 100%);
+            --text-dark: #2D3142;
+            --text-gray: #82869A;
+            --badge-bg: #EAE3F6;
+            --btn-red: #FF6B6B;
+            --btn-yellow: #FFBE1A;
+            --btn-green: #2ECC71;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'CustomArabic', sans-serif; 
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* حاوية التطبيق أصبحت تملأ الشاشة بالكامل */
+        .app-container {
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-gradient);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .logo {
+            color: var(--primary-purple);
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .lang-icon {
+            color: #82869A;
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lang-icon:hover {
+            color: var(--primary-purple);
+        }
+
+        /* تنسيق زر الرئيسية المضاف */
+        .home-btn {
+            background: transparent;
+            border: 1px solid var(--primary-purple);
+            color: var(--primary-purple);
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            background: white;
+            border: 2px solid var(--badge-bg);
+            color: var(--primary-purple);
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .login-btn:hover {
+            background: var(--badge-bg);
+            transform: translateY(-2px);
+        }
+
+        /* --- منطقة البطاقات (متجاوبة ومُتمركزة) --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .cards-container {
+            width: 100%;
+            max-width: 480px; /* لتجنب التمدد المفرط على شاشات الكمبيوتر */
+            height: 100%;
+            max-height: 680px;
+            position: relative;
+            perspective: 1500px;
+        }
+
+        .card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(45, 49, 66, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform-origin: 50% 90%;
+            will-change: transform, opacity;
+            cursor: grab;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card-top {
+            height: 45%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .icon-circle {
+            width: 130px;
+            height: 130px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* طوابع السحب (معكوسة حسب طلبك) */
+        .card-stamp {
+            position: absolute;
+            top: 30px;
+            padding: 8px 24px;
+            border-radius: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: opacity 0.1s ease;
+            z-index: 5;
+            letter-spacing: 1px;
+            background: rgba(255,255,255,0.9);
+        }
+
+        /* الإعجاب (أخضر) يظهر عند السحب لليسار -> الطابع يكون على اليمين */
+        .stamp-like {
+            right: 30px;
+            border: 4px solid var(--btn-green);
+            color: var(--btn-green);
+            transform: rotate(-15deg);
+        }
+
+        /* التخطي (أحمر) يظهر عند السحب لليمين -> الطابع يكون على اليسار */
+        .stamp-dislike {
+            left: 30px;
+            border: 4px solid var(--btn-red);
+            color: var(--btn-red);
+            transform: rotate(15deg);
+        }
+
+        .card-bottom {
+            height: 55%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+        }
+
+        .category-badge {
+            align-self: flex-start;
+            background-color: var(--badge-bg);
+            color: var(--primary-purple);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            color: var(--text-dark);
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .job-desc {
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .skill-tag {
+            background-color: #F5F3FC;
+            color: #6C5A94;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid #EBE7F5;
+            font-weight: bold;
+        }
+
+        .salary {
+            margin-top: auto;
+            color: var(--text-dark);
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #F8F9FD;
+            padding: 12px 18px;
+            border-radius: 16px;
+        }
+        
+        .salary span.estime {
+            color: #A5A9B9;
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        /* --- شاشة سجل الدخول المبتكرة --- */
+        .login-prompt {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 30px;
+            animation: fadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        .login-prompt .icon-circle {
+            background: #F0EDFC;
+            width: 110px;
+            height: 110px;
+            margin-bottom: 25px;
+        }
+
+        .login-prompt h3 {
+            color: var(--text-dark);
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .login-prompt p {
+            color: var(--text-gray);
+            font-size: 16px;
+            margin-bottom: 35px;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        .login-btn-large {
+            background-color: var(--primary-purple);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(139, 113, 223, 0.35);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 10px 25px rgba(139, 113, 223, 0.35); }
+            50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(139, 113, 223, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 10px 25px rgba(139, 113, 223, 0.35); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* --- الأزرار السفلية (ترتيب جديد حسب عكس الاتجاه) --- */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 20px 24px 40px 24px;
+            z-index: 10;
+        }
+
+        .control-btn {
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: white;
+        }
+
+        .control-btn:active {
+            transform: scale(0.85);
+        }
+
+        .btn-secondary {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 20px;
+            color: var(--btn-yellow);
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        .btn-main {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .btn-dislike {
+            color: var(--btn-red);
+            border: 1px solid #F0F0F0;
+        }
+
+        .btn-like {
+            background-color: var(--primary-purple);
+            color: white;
+            box-shadow: 0 15px 35px rgba(139, 113, 223, 0.4);
+        }
+
+        /* تعديلات للشاشات الصغيرة (الهواتف) */
+        @media (max-width: 600px) {
+            header { padding: 15px 20px; }
+            .header-actions { gap: 10px; }
+            .home-btn { padding: 8px 12px; font-size: 13px; }
+            .login-btn { padding: 8px 15px; font-size: 13px; }
+            .cards-container { max-width: 100%; margin: 0; }
+            .card { border-radius: 24px; }
+            .job-title { font-size: 24px; }
+            .btn-main { width: 70px; height: 70px; font-size: 26px; }
+            .btn-secondary { width: 50px; height: 50px; font-size: 18px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">WENDO</div>
+        <div class="header-actions">
+            <button class="home-btn" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-house"></i> الرئيسية
+            </button>
+            <i class="fa-solid fa-language lang-icon"></i>
+            <button class="login-btn" onclick="window.location.href='index.html?action=login'">تسجيل الدخول</button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="cards-container" id="board"></div>
+    </div>
+
+    <div class="controls" id="controls">
+        <button class="control-btn btn-main btn-dislike" id="dislike-btn"><i class="fa-solid fa-xmark"></i></button>
+        <button class="control-btn btn-secondary" id="undo-btn" title="تراجع"><i class="fa-solid fa-rotate-left"></i></button>
+        <button class="control-btn btn-main btn-like" id="like-btn"><i class="fa-solid fa-heart"></i></button>
+    </div>
+</div>
+
+<script>
+    const jobsDatabase = [
+        { id: 1, category: "التصميم والتكنولوجيا", title: "مصمم واجهات UX/UI", desc: "تقوم بتصميم واجهات رقمية بديهية وجذابة بناءً على سلوك وأبحاث المستخدمين وسد الفجوة مع المطورين.", skills: ["Figma", "إبداع", "بروتوتايب", "أبحاث المستخدم"], salary: "45,000 – 75,000 د.ج/شهر", emoji: "🎨", bgColor: "#D5BFF2" },
+        { id: 2, category: "البرمجة والتطوير", title: "مطور واجهات أمامية", desc: "تُحول التصاميم الثابتة إلى مواقع حية وتفاعلية سريعة الاستجابة باستخدام أحدث تقنيات الويب الحديثة.", skills: ["React", "JavaScript", "HTML/CSS", "Git"], salary: "50,000 – 90,000 د.ج/شهر", emoji: "💻", bgColor: "#A3D2CA" },
+        { id: 3, category: "البيانات والذكاء الاصطناعي", title: "محلل بيانات", desc: "تستخرج الأنماط وتحول البيانات الضخمة والمعقدة إلى تقارير استراتيجية تدعم اتخاذ القرارات الذكية في الشركة.", skills: ["Python", "SQL", "Tableau", "إحصاء"], salary: "60,000 – 100,000 د.ج/شهر", emoji: "📊", bgColor: "#F1D4D4" },
+        { id: 4, category: "التسويق والنمو", title: "أخصائي تحسين محركات البحث", desc: "تتولى مسؤولية تصدر المواقع للنتائج الأولى في محركات البحث وزيادة الزيارات المجانية بشكل دوري ومستدام.", skills: ["SEO", "Google Analytics", "بناء الروابط"], salary: "40,000 – 80,000 د.ج/شهر", emoji: "📈", bgColor: "#FDE2A6" },
+        { id: 5, category: "تطوير الأنظمة", title: "مطور تطبيقات الهواتف", desc: "تبني وتصمم تطبيقات ذكية متكاملة تعمل بكفاءة عالية على منصات Android و iOS باستخدام أحدث الأطر المتاحة.", skills: ["Flutter", "Dart", "REST API", "Firebase"], salary: "70,000 – 120,000 د.ج/شهر", emoji: "📱", bgColor: "#A0E8AF" }
+    ];
+
+    let currentJobs = [...jobsDatabase];
+    let swipedHistory = [];
+
+    const board = document.getElementById('board');
+    const controls = document.getElementById('controls');
+
+    function renderCards() {
+        board.innerHTML = '';
+        if (currentJobs.length === 0) {
+            renderLoginPrompt();
+            return;
+        }
+
+        currentJobs.forEach((job, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.id = job.id;
+            
+            const reverseIndex = currentJobs.length - 1 - index;
+            if (reverseIndex === 0) {
+                card.style.zIndex = 3;
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.opacity = '1';
+            } else if (reverseIndex === 1) {
+                card.style.zIndex = 2;
+                card.style.transform = 'translateY(-20px) scale(0.95)';
+                card.style.opacity = '1';
+            } else if (reverseIndex === 2) {
+                card.style.zIndex = 1;
+                card.style.transform = 'translateY(-40px) scale(0.90)';
+                card.style.opacity = '1';
+            } else {
+                card.style.zIndex = 0;
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(-40px) scale(0.90)';
+            }
+
+            card.innerHTML = `
+                <div class="card-top" style="background-color: ${job.bgColor}">
+                    <div class="card-stamp stamp-like">إعجاب</div>
+                    <div class="card-stamp stamp-dislike">تخطي</div>
+                    <div class="icon-circle">${job.emoji}</div>
+                </div>
+                <div class="card-bottom">
+                    <span class="category-badge">${job.category}</span>
+                    <h2 class="job-title">${job.title}</h2>
+                    <p class="job-desc">${job.desc}</p>
+                    <div class="skills">
+                        ${job.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                    <div class="salary">
+                        💰 ${job.salary} <span class="estime">· تقريبي</span>
+                    </div>
+                </div>
+            `;
+            board.appendChild(card);
+        });
+
+        initSwipe();
+    }
+
+    function renderLoginPrompt() {
+        controls.style.display = 'none';
+        board.innerHTML = `
+            <div class="login-prompt">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-lock" style="color: var(--primary-purple); font-size: 45px;"></i>
+                </div>
+                <h3>استكشف المزيد من الفرص!</h3>
+                <p>لقد شاهدت جميع المهن المقترحة لك حالياً. سجل دخولك الآن لفتح أكثر من 500+ مهنة جديدة مخصصة لمهاراتك.</p>
+                <button class="login-btn-large" onclick="window.location.href='index.html?action=login'">سجل الدخول الآن</button>
+            </div>
+        `;
+    }
+
+    let carouselInstance = null;
+
+    function initSwipe() {
+        const cards = board.querySelectorAll('.card');
+        if (cards.length > 0) {
+            if(carouselInstance) carouselInstance.destroy();
+            carouselInstance = new SwipeCarousel(cards[cards.length - 1]);
+        }
+    }
+
+    class SwipeCarousel {
+        constructor(element) {
+            this.card = element;
+            this.stampLike = element.querySelector('.stamp-like');
+            this.stampDislike = element.querySelector('.stamp-dislike');
+            
+            this.onDownBound = this.onDown.bind(this);
+            this.onMoveBound = this.onMove.bind(this);
+            this.onUpBound = this.onUp.bind(this);
+            
+            this.card.addEventListener('mousedown', this.onDownBound);
+            this.card.addEventListener('touchstart', this.onDownBound, {passive: true});
+        }
+
+        onDown(e) {
+            this.isDragging = true;
+            this.startX = e.clientX || e.touches[0].clientX;
+            this.startY = e.clientY || e.touches[0].clientY;
+            this.card.style.transition = 'none';
+            
+            document.addEventListener('mousemove', this.onMoveBound);
+            document.addEventListener('touchmove', this.onMoveBound, {passive: false});
+            document.addEventListener('mouseup', this.onUpBound);
+            document.addEventListener('touchend', this.onUpBound);
+        }
+
+        onMove(e) {
+            if (!this.isDragging) return;
+            if (e.type === 'touchmove') e.preventDefault();
+
+            const currentX = e.clientX || e.touches[0].clientX;
+            const currentY = e.clientY || e.touches[0].clientY;
+            
+            this.diffX = currentX - this.startX;
+            this.diffY = currentY - this.startY;
+            
+            const rotate = this.diffX * 0.03;
+            this.card.style.transform = `translate(${this.diffX}px, ${this.diffY * 0.15}px) rotate(${rotate}deg)`;
+
+            // الاتجاهات المعكوسة (اليسار إعجاب، اليمين تخطي)
+            const ratio = Math.min(Math.abs(this.diffX) / 100, 1);
+            if (this.diffX < -10) { 
+                this.stampLike.style.opacity = ratio;
+                this.stampDislike.style.opacity = 0;
+            } else if (this.diffX > 10) { 
+                this.stampDislike.style.opacity = ratio;
+                this.stampLike.style.opacity = 0;
+            } else {
+                this.stampLike.style.opacity = 0;
+                this.stampDislike.style.opacity = 0;
+            }
+        }
+
+        onUp() {
+            this.isDragging = false;
+            document.removeEventListener('mousemove', this.onMoveBound);
+            document.removeEventListener('touchmove', this.onMoveBound);
+            document.removeEventListener('mouseup', this.onUpBound);
+            document.removeEventListener('touchend', this.onUpBound);
+
+            const threshold = window.innerWidth * 0.15; 
+            this.card.style.transition = 'transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.4s ease';
+
+            if (this.diffX < -threshold) {
+                this.swipe('left'); 
+            } else if (this.diffX > threshold) {
+                this.swipe('right'); 
+            } else {
+                this.card.style.transform = '';
+                this.stampLike.style.opacity = 0;
+                this.stampDislike.style.opacity = 0;
+            }
+        }
+
+        swipe(direction) {
+            const endX = window.innerWidth + 200;
+            this.card.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+            
+            if (direction === 'left') { 
+                this.card.style.transform = `translate(-${endX}px, ${this.diffY || 0}px) rotate(-35deg)`;
+                this.stampLike.style.opacity = 1;
+            } else { 
+                this.card.style.transform = `translate(${endX}px, ${this.diffY || 0}px) rotate(35deg)`;
+                this.stampDislike.style.opacity = 1;
+            }
+            this.card.style.opacity = '0';
+
+            setTimeout(() => {
+                const poppedJob = currentJobs.pop(); 
+                swipedHistory.push(poppedJob); 
+                renderCards();
+            }, 350);
+        }
+
+        destroy() {
+            this.card.removeEventListener('mousedown', this.onDownBound);
+            this.card.removeEventListener('touchstart', this.onDownBound);
+        }
+    }
+
+    document.getElementById('undo-btn').addEventListener('click', () => {
+        if (swipedHistory.length > 0) {
+            const lastJob = swipedHistory.pop();
+            currentJobs.push(lastJob); 
+            renderCards();
+            
+            const cards = board.querySelectorAll('.card');
+            const targetCard = cards[cards.length - 1];
+            targetCard.style.transition = 'none';
+            targetCard.style.transform = 'translateY(100%) scale(0.9)';
+            targetCard.style.opacity = '0';
+            
+            setTimeout(() => {
+                targetCard.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1), opacity 0.4s ease';
+                targetCard.style.transform = 'translateY(0) scale(1)';
+                targetCard.style.opacity = '1';
+            }, 50);
+        }
+    });
+
+    document.getElementById('like-btn').addEventListener('click', () => {
+        if (carouselInstance && currentJobs.length > 0) {
+            carouselInstance.diffY = 0;
+            carouselInstance.swipe('left');
+        }
+    });
+
+    document.getElementById('dislike-btn').addEventListener('click', () => {
+        if (carouselInstance && currentJobs.length > 0) {
+            carouselInstance.diffY = 0;
+            carouselInstance.swipe('right');
+        }
+    });
+
+    renderCards();
+</script>
+</body>
+</html>
