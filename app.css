@@ -1,4 +1,4 @@
-/* --- WENDO Styles with New Color Palette --- */
+/* --- WENDO Styles --- */
 /* Palette: #382d72 #5c509c #a080e1 #b7c2c6 #e5ccf4 */
 
 @font-face {
@@ -45,9 +45,8 @@
     --shadow-md: 0 12px 32px rgba(56, 45, 114, 0.14);
     --shadow-lg: 0 24px 48px rgba(56, 45, 114, 0.12);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --font-family-ar: 'ArabicFont', 'Tajawal', system-ui, sans-serif;
-    --font-family-fr: 'BebasNeue', 'Arial', system-ui, sans-serif;
 }
+
 [data-theme="dark"] {
     --bg-color: #1a1436;
     --surface-color: #231c44;
@@ -71,66 +70,6 @@
     box-sizing: border-box;
     font-family: 'ArabicFont', 'Tajawal', system-ui, sans-serif;
 }
-/* --- تطبيق خط BebasNeue للغة الفرنسية فقط --- */
-html[lang="fr"] * {
-    font-family: var(--font-family-fr);
-}
-
-/* استثناء بعض العناصر التي قد تحتاج خطوطاً خاصة */
-html[lang="fr"] .logo-hec,
-html[lang="fr"] .card__logo,
-html[lang="fr"] .nav-brand {
-    font-family: var(--font-family-fr);
-}
-
-html[lang="fr"] .logo-hec small,
-html[lang="fr"] .card__logo small {
-    font-family: var(--font-family-fr);
-}
-
-/* تحسين مظهر النص الفرنسي مع خط BebasNeue */
-html[lang="fr"] h1,
-html[lang="fr"] h2,
-html[lang="fr"] h3,
-html[lang="fr"] .hero h1,
-html[lang="fr"] .card__title,
-html[lang="fr"] .card__institute-name,
-html[lang="fr"] .inst-name,
-html[lang="fr"] .wendo-title,
-html[lang="fr"] .wendo-sub,
-html[lang="fr"] .card__wendo-title,
-html[lang="fr"] .card__wendo-subtitle,
-html[lang="fr"] .card__hiparis-title,
-html[lang="fr"] .card__hiparis-subtitle {
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-html[lang="fr"] .card__description,
-html[lang="fr"] p,
-html[lang="fr"] .quiz-option,
-html[lang="fr"] .compare-detail {
-    letter-spacing: 0.5px;
-}
-
-/* تحسين حجم الخط الفرنسي */
-html[lang="fr"] .hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-}
-
-html[lang="fr"] .card__title {
-    font-size: 18px;
-}
-
-html[lang="fr"] .card__description {
-    font-size: 14px;
-    line-height: 1.7;
-}
-
-html[lang="fr"] .inst-name,
-html[lang="fr"] .card__institute-name {
-    font-size: 11px;
-}
 
 html {
     scroll-behavior: smooth;
@@ -145,7 +84,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--border-color);
+    background: var(--accent-purple);
     border-radius: 10px;
 }
 
@@ -159,80 +98,6 @@ body {
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* French mode - LTR support */
-html[lang="fr"] {
-    direction: ltr;
-}
-
-html[lang="fr"] .mobile-links button {
-    text-align: left;
-}
-
-html[lang="fr"] .back-btn {
-    margin-right: 0;
-    margin-left: -1rem;
-}
-
-html[lang="fr"] .back-btn:hover {
-    transform: translateX(-5px);
-}
-
-html[lang="fr"] .social-media {
-    justify-content: flex-start;
-}
-
-html[lang="fr"] .quiz-option {
-    text-align: left;
-}
-
-html[lang="fr"] .quiz-option::before {
-    margin-right: 0;
-    margin-left: 1rem;
-}
-
-html[lang="fr"] .dashboard-grid .feature-card {
-    text-align: left;
-    align-items: flex-start;
-}
-
-html[lang="fr"] .dashboard-grid .feature-card .icon {
-    margin-left: 0;
-}
-
-html[lang="fr"] .tag {
-    align-self: flex-start;
-}
-
-html[lang="fr"] .footer {
-    text-align: left;
-}
-
-html[lang="fr"] .footer-content {
-    text-align: left;
-}
-
-html[lang="fr"] .footer-section p {
-    margin-left: 0;
-}
-
-html[lang="fr"] .header-with-back {
-    flex-direction: row;
-}
-
-html[lang="fr"] .mobile-menu {
-    right: auto;
-    left: -100%;
-}
-
-html[lang="fr"] .mobile-menu.active {
-    right: auto;
-    left: 0;
-}
-
-html[lang="fr"] .compare-detail strong {
-    text-align: left;
 }
 
 h1 {
@@ -260,7 +125,7 @@ p {
 }
 
 .text-gradient {
-    background: linear-gradient(135deg, #382d72, #a080e1);
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -281,7 +146,7 @@ button {
 }
 
 .primary-btn {
-    background: linear-gradient(135deg, #5c509c, #382d72);
+    background: linear-gradient(135deg, var(--accent-color), var(--text-primary));
     color: #fff;
     padding: 0.8rem 1.8rem;
     border-radius: var(--radius-sm);
@@ -289,7 +154,7 @@ button {
 }
 
 .primary-btn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #382d72, #5c509c);
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -353,7 +218,6 @@ button {
     box-shadow: 0 0 0 4px var(--accent-light);
 }
 
-/* --- HEC Style Navbar --- */
 .navbar.hec-style {
     display: flex;
     justify-content: space-between;
@@ -384,7 +248,7 @@ button {
     font-size: 2.2rem;
     font-weight: 800;
     cursor: pointer;
-    background: linear-gradient(135deg, #382d72, #a080e1);
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     flex: 1;
@@ -410,25 +274,6 @@ button {
     color: var(--accent-color);
 }
 
-.lang-switcher {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-secondary);
-    letter-spacing: 1px;
-    cursor: pointer;
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    transition: var(--transition);
-    user-select: none;
-}
-
-.lang-switcher:hover {
-    background: var(--accent-light);
-    color: var(--accent-color);
-    border-color: var(--accent-color);
-}
-
 .program-finder {
     display: flex;
     align-items: center;
@@ -443,10 +288,6 @@ button {
 }
 
 @media (max-width: 768px) {
-    .lang-switcher {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.75rem;
-    }
     .program-finder span {
         display: none;
     }
@@ -455,7 +296,6 @@ button {
     }
 }
 
-/* --- Mobile Menu Styles --- */
 .mobile-menu {
     position: fixed;
     top: 0;
@@ -519,7 +359,6 @@ button {
     transform: translateX(-5px);
 }
 
-/* --- Video Hero Section (Full Screen) --- */
 .hero-video-wrapper {
     position: relative;
     width: 100vw;
@@ -572,7 +411,7 @@ button {
 }
 
 .hero p {
-    color: #e5ccf4;
+    color: var(--accent-light);
     max-width: 600px;
     margin: 0 auto;
     text-shadow: 0 1px 10px rgba(56, 45, 114, 0.3);
@@ -586,7 +425,6 @@ button {
     flex-wrap: wrap;
 }
 
-/* Scroll indicator */
 .scroll-indicator {
     position: absolute;
     bottom: 2rem;
@@ -597,7 +435,7 @@ button {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: #e5ccf4;
+    color: var(--accent-light);
     font-size: 0.9rem;
     animation: bounce 2s infinite;
     cursor: pointer;
@@ -619,27 +457,6 @@ button {
     }
 }
 
-html[lang="fr"] .scroll-indicator {
-    transform: translateX(-50%);
-}
-
-html[lang="fr"] .scroll-indicator {
-    animation: bounce-fr 2s infinite;
-}
-
-@keyframes bounce-fr {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    40% {
-        transform: translateX(-50%) translateY(-10px);
-    }
-    60% {
-        transform: translateX(-50%) translateY(-5px);
-    }
-}
-
-/* --- Marquees (Cards Style) --- */
 .marquees-container {
     margin-top: 3rem;
     display: flex;
@@ -673,78 +490,39 @@ html[lang="fr"] .scroll-indicator {
     animation-direction: reverse;
 }
 
-/* Card Style Marquee Items */
-/* --- Marquees (أشرطة متحركة) --- */
-.marquees-container { 
-    margin-top: 3rem; 
-    display: flex; 
-    flex-direction: column; 
-    overflow: hidden; 
-}
-
-.marquee-wrapper { 
-    width: 100%; 
-    overflow: hidden; 
-    background: var(--surface-color); 
-    border-top: 1px solid var(--border-color); 
-    padding: 1.5rem 0; 
-    white-space: nowrap; 
-    display: flex; 
-    align-items: center; 
-    position: relative;
-}
-
-.marquee-track { 
-    display: flex; 
-    gap: 2rem; 
-    animation: marquee-scroll 35s linear infinite; 
-    width: max-content; 
-}
-
-.marquee-track.reverse { 
-    animation-direction: reverse; 
-}
-
-/* --- التعديلات الرئيسية تمت هنا --- */
-.marquee-item { 
-    /* تحديد الحجم وجعل الشكل مربعاً */
-    width: 160px; /* يمكنك زيادة أو تقليل الرقم حسب حجم المحتوى */
-    aspect-ratio: 1 / 1; /* تضمن أن الطول يساوي العرض دائماً */
-    
-    /* توسيط المحتوى داخل المربع */
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; /* توسيط أفقي */
-    flex-direction: column; /* مفيدة إذا كانت البطاقة تحتوي على أيقونة ونص لتظهر فوق بعضها */
+.marquee-item {
+    width: 160px;
+    aspect-ratio: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     text-align: center;
-    white-space: normal; /* السماح للنص بالتمدد على عدة أسطر داخل المربع */
-    
-    /* التنسيقات الجمالية */
-    padding: 1rem; 
-    border-radius: 12px; /* زوايا ناعمة قليلاً (يمكنك جعلها 0 لزوايا حادة تماماً) */
-    font-weight: 600; 
-    font-size: 1.5rem; 
-    gap: 0.5rem; 
-    border: 1px solid var(--border-color); 
-    background: var(--bg-color); 
-    color: var(--text-primary); 
-    transition: var(--transition); 
-    cursor: default; 
+    white-space: normal;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    gap: 0.5rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-primary);
+    transition: var(--transition);
+    cursor: default;
 }
 
-.marquee-item:hover { 
-    border-color: var(--accent-color); 
-    color: var(--accent-color); 
-    transform: translateY(-5px); /* تم زيادة الارتفاع قليلاً لبروز أفضل للمربع */
-    box-shadow: var(--shadow-sm); 
+.marquee-item:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-sm);
 }
 
 @keyframes marquee-scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(10%); } 
+    100% { transform: translateX(10%); }
 }
 
-/* --- Locked Content Overlay --- */
 .locked-card {
     display: flex;
     flex-direction: column;
@@ -786,7 +564,6 @@ html[lang="fr"] .scroll-indicator {
     box-shadow: var(--shadow-md);
 }
 
-/* --- Remaining styles unchanged --- */
 .app-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -1044,7 +821,7 @@ html[lang="fr"] .scroll-indicator {
 
 .quiz-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #382d72, #a080e1);
+    background: linear-gradient(90deg, var(--text-primary), var(--accent-purple));
     width: 0%;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1232,97 +1009,6 @@ html[lang="fr"] .scroll-indicator {
     }
 }
 
-.footer {
-    background: linear-gradient(135deg, #382d72, #5c509c);
-    border-top: none;
-    padding: 4rem 2rem 1.5rem;
-    text-align: right;
-    color: #e5ccf4;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-section h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #fff;
-    font-weight: 800;
-}
-
-.footer-section h4 {
-    font-size: 1.2rem;
-    margin-bottom: 1.2rem;
-    color: #e5ccf4;
-    font-weight: 700;
-}
-
-.footer-section p {
-    color: #b7c2c6;
-    line-height: 1.8;
-    max-width: 400px;
-}
-
-.social-media {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-}
-
-.social-icon {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    color: #e5ccf4;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.social-icon:hover {
-    background: #a080e1;
-    color: #fff;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    border-color: #a080e1;
-}
-
-.x-icon:hover {
-    background: #000;
-    border-color: #000;
-    color: #fff;
-}
-
-.social-icon svg {
-    width: 1.2rem;
-    height: 1.2rem;
-}
-
-.footer-bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    text-align: center;
-}
-
-.footer-bottom p {
-    color: #b7c2c6;
-    font-size: 0.95rem;
-}
-
 @media (max-width: 768px) {
     .app-container {
         padding: 2rem 1.5rem;
@@ -1339,17 +1025,6 @@ html[lang="fr"] .scroll-indicator {
         justify-content: space-between;
         padding: 1rem;
         font-size: 0.9rem;
-    }
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        text-align: center;
-    }
-    .footer-section p {
-        margin: 0 auto;
-    }
-    .social-media {
-        justify-content: center;
     }
     .header-with-back {
         flex-direction: column;
@@ -1384,270 +1059,21 @@ html[lang="fr"] .scroll-indicator {
     color: var(--accent-color);
 }
 
-/* Data-grid feature cards */
 .features-grid {
-    margin-top: -3rem;
+    margin-top: 6rem;
     position: relative;
     z-index: 5;
 }
 
 .features-grid .feature-card {
-    background: linear-gradient(135deg, #ffffff, #f8f5ff);
+    background: linear-gradient(135deg, #ffffff, var(--accent-light));
     border: 2px solid var(--border-color);
 }
 
 .features-grid .feature-card:hover {
-    border-color: #a080e1;
+    border-color: var(--accent-purple);
 }
 
 [data-theme="dark"] .features-grid .feature-card {
     background: linear-gradient(135deg, #2d2460, #231c44);
-}
-/* Card Container */
-.hec-cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Base Card */
-.hec-card {
-    position: relative;
-    background: #fff;
-    border-radius: 12px;
-    padding: 2rem 1.5rem 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.hec-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* Card Decorations */
-.card__decorations {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    display: flex;
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
-}
-
-.card__decoration {
-    flex: 1;
-    height: 100%;
-}
-
-.card__decoration--yellow { background: #F5A623; }
-.card__decoration--blue { background: #0055A4; }
-.card__decoration--green { background: #4CAF50; }
-.card__decoration--yellow-bottom { display: none; }
-
-/* Card Header */
-.card__header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.card__logo {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 1.1;
-    color: #1a1a1a;
-}
-
-.card__logo small {
-    font-size: 10px;
-    font-weight: 400;
-    display: block;
-}
-
-.card__logo--small {
-    font-size: 14px;
-}
-
-.card__divider {
-    width: 2px;
-    height: 40px;
-    background: #ddd;
-    flex-shrink: 0;
-}
-
-.card__badge {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    color: #1a1a1a;
-    display: inline-flex;
-    align-items: center;
-}
-
-.card__badge-rotate {
-    font-size: 18px;
-    transform: rotate(90deg);
-    margin-left: 2px;
-    display: inline-block;
-}
-
-.card__badge--italic {
-    font-style: italic;
-    font-size: 34px;
-}
-
-.card__institute-name {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: #333;
-    margin-left: auto;
-}
-
-/* Card Title */
-.card__title {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin: 0 0 1.25rem 0;
-    color: #1a1a1a;
-}
-
-/* Card Description */
-.card__description {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-    margin: 0;
-    flex: 1;
-}
-
-.card__description--centered {
-    text-align: center;
-}
-
-/* Hi! PARIS Specific */
-.card__header-hiparis {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-}
-
-.card__hiparis-title {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1;
-    color: #1a1a1a;
-}
-
-.card__hiparis-partners {
-    text-align: right;
-    font-size: 9px;
-    line-height: 1.4;
-}
-
-.card__partner-name {
-    font-weight: 700;
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-}
-
-.card__hiparis-subtitle {
-    font-size: 14px;
-    font-weight: 700;
-    text-align: center;
-    letter-spacing: 1px;
-    color: #333;
-    margin: 0.5rem 0 1rem;
-    border-bottom: 2px solid #0055A4;
-    padding-bottom: 0.5rem;
-}
-
-/* Card Variants */
-.hec-card--sustainability .card__divider { background: #F5A623; }
-.hec-card--innovation .card__divider { background: #4CAF50; }
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hec-cards-container {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-        gap: 1.5rem;
-    }
-    
-    .card__header {
-        flex-wrap: wrap;
-    }
-    
-    .card__institute-name {
-        margin-left: 0;
-        width: 100%;
-    }
-}
-/* --- تحسينات خاصة باللغة الفرنسية مع خط BebasNeue --- */
-html[lang="fr"] .navbar.hec-style .nav-brand {
-    font-family: var(--font-family-fr);
-    letter-spacing: 3px;
-    font-weight: bold;
-}
-
-html[lang="fr"] .primary-btn,
-html[lang="fr"] .secondary-btn,
-html[lang="fr"] button {
-    font-family: var(--font-family-fr);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-html[lang="fr"] .feature-card h3,
-html[lang="fr"] .explorer-card h3,
-html[lang="fr"] .data-card h3 {
-    font-family: var(--font-family-fr);
-    letter-spacing: 1px;
-}
-
-html[lang="fr"] .tag {
-    font-family: var(--font-family-fr);
-    letter-spacing: 0.5px;
-}
-
-html[lang="fr"] .compare-checkbox-label {
-    font-family: var(--font-family-fr);
-    letter-spacing: 0.5px;
-}
-
-html[lang="fr"] .footer-section h3,
-html[lang="fr"] .footer-section h4 {
-    font-family: var(--font-family-fr);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-html[lang="fr"] .modal-content h2 {
-    font-family: var(--font-family-fr);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-/* تحسين مظهر النصوص الفرنسية الطويلة */
-html[lang="fr"] .card__description {
-    font-size: 13px;
-    line-height: 1.6;
-    letter-spacing: 0.3px;
-}
-
-html[lang="fr"] .hero p {
-    font-size: 1.1rem;
-    letter-spacing: 0.5px;
 }

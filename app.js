@@ -1,262 +1,25 @@
 /**
  * WENDO - Premium Application Logic
- * With i18n Support (AR / FR)
+ * باللغة العربية فقط
  */
-
-const translations = {
-    ar: {
-        "meta.title": "WENDO - منصتك التوجيهية الذكية",
-        "nav.menu": "القائمة",
-        "nav.findProgram": "البحث عن تخصص",
-        "nav.home": "🏠 الرئيسية",
-        "nav.universities": "الجامعات والمدارس",
-        "nav.careers": "دليل المهن",
-        "nav.quiz": "اختبار الميول",
-        "nav.mySpace": "مساحتي",
-        "nav.toggleTheme": "🌙 تبديل المظهر",
-        "nav.login": "تسجيل الدخول",
-        "nav.logout": "تسجيل الخروج",
-        "nav.back": "رجوع",
-        "hero.title": "اكتشف مستقبلك <span class=\"text-gradient\">مع WENDO</span>",
-        "hero.subtitle": "المنصة الموجهة للطلاب في الجزائر لاكتشاف التخصصات، الجامعات، والمهن الأنسب لميولك.",
-        "hero.btnQuiz": "ابدأ اختبار الميول الآن",
-        "hero.btnExplore": "تصفح التخصصات",
-        "hero.btnPassion": "ايش شغفك",
-        "hero.scroll": "اكتشف المزيد",
-        "features.quiz.title": "اختبار الميول الذكي",
-        "features.quiz.desc": "أجب عن بعض الأسئلة وسنقترح لك التخصصات والمهن المناسبة لشخصيتك.",
-        "features.careers.title": "المهن",
-        "features.careers.desc": "قارن بين مهنتين مختلفتين من حيث الطلب، الدخل، وبيئة العمل لاختيار الأفضل.",
-        "features.schools.title": "المدارس والجامعات",
-        "features.schools.desc": "دليلك الشامل لجامعات ومدارس النخبة في مختلف ولايات الوطن.",
-        "dashboard.welcome": "مرحباً بك في مساحتك الخاصة",
-        "dashboard.desc": "هنا يمكنك متابعة نشاطاتك، والوصول السريع للأدوات التي تهمك.",
-        "dashboard.quizResult": "نتيجة اختبار الميول",
-        "dashboard.quizResultDesc": "شاهد نتائج آخر اختبار قمت به للتعرف على التخصصات الأنسب لك.",
-        "dashboard.favorites": "التخصصات المحفوظة",
-        "dashboard.favoritesDesc": "قائمة بالتخصصات والمدارس التي قمت بحفظها للرجوع إليها لاحقاً.",
-        "dashboard.careers": "مقارنات المهن",
-        "dashboard.careersDesc": "اذهب إلى دليل المهن لمتابعة استكشاف الخيارات الوظيفية المتاحة.",
-        "quiz.title": "اختبار تحديد الميول",
-        "quiz.subtitle": "دعنا نتعرف عليك أكثر لنقترح لك الأفضل",
-        "quiz.progress": "اكتمل الاختبار!",
-        "quiz.resultText": "بناءً على إجاباتك، تميل شخصيتك إلى مجال: <strong style=\"color: var(--accent-color);\">{category}</strong>",
-        "quiz.suggested": "التخصصات المقترحة لك:",
-        "quiz.noResults": "لا توجد تخصصات مطابقة حالياً.",
-        "quiz.retry": "إعادة الاختبار",
-        "explorer.title": "ماذا تريد استكشافه؟",
-        "explorer.universities": "الجامعات",
-        "explorer.schools": "المدارس العليا",
-        "specialties.title": "التخصصات",
-        "specialties.available": "التخصصات المتاحة",
-        "careers.title": "دليل المهن المستقبلية",
-        "careers.subtitle": "اختر مهنتين للمقارنة بينهما واكتشاف خصائصهما",
-        "careers.demand": "الطلب في السوق: <strong style=\"color:var(--text-primary)\">{value}</strong>",
-        "careers.compare": "قارن",
-        "search.university": "ابحث عن جامعة أو ولاية...",
-        "search.school": "ابحث عن مدرسة أو ولاية...",
-        "search.noResults": "لا توجد نتائج مطابقة لبحثك.",
-        "footer.desc": "منصتك الموثوقة لاختيار مستقبلك التعليمي والمهني. نسعى لتوجيه الطلاب نحو أفضل الخيارات الأكاديمية.",
-        "footer.follow": "تابعنا",
-        "footer.copy": "© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات المقدمة للأغراض التوجيهية فقط.",
-        "modal.compareTitle": "مقارنة المهن",
-        "modal.loginTitle": "تسجيل الدخول",
-        "modal.registerTitle": "إنشاء حساب جديد",
-        "modal.specsLocked": "باقي التخصصات مقفلة",
-        "modal.specsLockedDesc": "سجل الدخول لرؤية القائمة الكاملة",
-        "modal.careersLocked": "المزيد من المهن مقفلة",
-        "modal.careersLockedDesc": "سجل الدخول للمقارنة واكتشاف المزيد",
-        "modal.unisLocked": "الوصول محدود",
-        "modal.unisLockedDesc": "سجل الدخول لرؤية جميع الجامعات",
-        "modal.schoolsLocked": "الوصول محدود",
-        "modal.schoolsLockedDesc": "سجل الدخول لرؤية جميع المدارس العليا",
-        "form.email": "البريد الإلكتروني",
-        "form.password": "كلمة المرور",
-        "form.fullName": "الاسم الكامل",
-        "form.loginBtn": "دخول",
-        "form.registerBtn": "إنشاء حساب",
-        "form.noAccount": "لا تملك حساباً؟ أنشئ حساب الآن",
-        "toast.loginRequired": "يرجى تسجيل الدخول أولاً لتفعيل خاصية المقارنة.",
-        "toast.maxCompare": "يمكنك مقارنة مهنتين فقط في نفس الوقت.",
-        "toast.loginSuccess": "تم تسجيل الدخول بنجاح!",
-        "toast.registerSuccess": "تم إنشاء الحساب بنجاح!",
-        "category.tech": "التكنولوجيا والهندسة",
-        "category.health": "العلوم الطبية والصحية",
-        "category.business": "الأعمال والتسويق",
-        "category.art": "الفنون والتصميم",
-        "category.humanities": "العلوم الإنسانية والقانونية",
-        "compare.demand": "الطلب في السوق",
-        "compare.salary": "مستوى الدخل",
-        "compare.environment": "بيئة العمل",
-        "compare.skills": "المهارات الأساسية",
-        "compare.now": "قارن الآن",
-        "compare.selected": "تم تحديد {count}/2 للمقارنة",
-        "marquee.universities": "جامعة"
-    },
-    fr: {
-        "meta.title": "WENDO - Votre plateforme d'orientation intelligente",
-        "nav.menu": "Menu",
-        "nav.findProgram": "Rechercher une filière",
-        "nav.home": "🏠 Accueil",
-        "nav.universities": "Universités et Écoles",
-        "nav.careers": "Guide des Métiers",
-        "nav.quiz": "Test d'orientation",
-        "nav.mySpace": "Mon Espace",
-        "nav.toggleTheme": "🌙 Changer le thème",
-        "nav.login": "Connexion",
-        "nav.logout": "Déconnexion",
-        "nav.back": "Retour",
-        "hero.title": "Découvrez votre avenir <span class=\"text-gradient\">avec WENDO</span>",
-        "hero.subtitle": "La plateforme dédiée aux étudiants en Algérie pour découvrir les filières, universités et métiers les plus adaptés à vos aspirations.",
-        "hero.btnQuiz": "Commencer le test d'orientation",
-        "hero.btnExplore": "Parcourir les filières",
-        "hero.btnPassion": "Quelle est ta passion",
-        "hero.scroll": "Découvrir plus",
-        "features.quiz.title": "Test d'orientation intelligent",
-        "features.quiz.desc": "Répondez à quelques questions et nous vous suggérerons les filières et métiers adaptés à votre personnalité.",
-        "features.careers.title": "Les Métiers",
-        "features.careers.desc": "Comparez deux métiers différents en termes de demande, revenu et environnement de travail pour choisir le meilleur.",
-        "features.schools.title": "Écoles et Universités",
-        "features.schools.desc": "Votre guide complet des universités et écoles d'élite dans différentes wilayas du pays.",
-        "dashboard.welcome": "Bienvenue dans votre espace privé",
-        "dashboard.desc": "Ici vous pouvez suivre vos activités et accéder rapidement aux outils qui vous intéressent.",
-        "dashboard.quizResult": "Résultat du test d'orientation",
-        "dashboard.quizResultDesc": "Consultez les résultats de votre dernier test pour découvrir les filières les plus adaptées.",
-        "dashboard.favorites": "Filières enregistrées",
-        "dashboard.favoritesDesc": "Liste des filières et écoles que vous avez enregistrées pour les consulter plus tard.",
-        "dashboard.careers": "Comparaisons de métiers",
-        "dashboard.careersDesc": "Allez au guide des métiers pour continuer à explorer les options professionnelles.",
-        "quiz.title": "Test de détermination d'orientation",
-        "quiz.subtitle": "Faisons connaissance pour vous suggérer le meilleur",
-        "quiz.progress": "Test terminé!",
-        "quiz.resultText": "D'après vos réponses, votre personnalité penche vers le domaine: <strong style=\"color: var(--accent-color);\">{category}</strong>",
-        "quiz.suggested": "Filières suggérées pour vous:",
-        "quiz.noResults": "Aucune filière correspondante pour le moment.",
-        "quiz.retry": "Repasser le test",
-        "explorer.title": "Que voulez-vous explorer?",
-        "explorer.universities": "Universités",
-        "explorer.schools": "Écoles Supérieures",
-        "specialties.title": "Filières",
-        "specialties.available": "Filières disponibles",
-        "careers.title": "Guide des métiers d'avenir",
-        "careers.subtitle": "Choisissez deux métiers à comparer et découvrez leurs caractéristiques",
-        "careers.demand": "Demande sur le marché: <strong style=\"color:var(--text-primary)\">{value}</strong>",
-        "careers.compare": "Comparer",
-        "search.university": "Rechercher une université ou wilaya...",
-        "search.school": "Rechercher une école ou wilaya...",
-        "search.noResults": "Aucun résultat ne correspond à votre recherche.",
-        "footer.desc": "Votre plateforme de confiance pour choisir votre avenir académique et professionnel. Nous visons à orienter les étudiants vers les meilleures options académiques.",
-        "footer.follow": "Suivez-nous",
-        "footer.copy": "© 2026 WENDO. Tous droits réservés. | Toutes les données sont fournies à titre indicatif uniquement.",
-        "modal.compareTitle": "Comparaison des métiers",
-        "modal.loginTitle": "Connexion",
-        "modal.registerTitle": "Créer un nouveau compte",
-        "modal.specsLocked": "Le reste des filières est verrouillé",
-        "modal.specsLockedDesc": "Connectez-vous pour voir la liste complète",
-        "modal.careersLocked": "Plus de métiers verrouillés",
-        "modal.careersLockedDesc": "Connectez-vous pour comparer et découvrir plus",
-        "modal.unisLocked": "Accès limité",
-        "modal.unisLockedDesc": "Connectez-vous pour voir toutes les universités",
-        "modal.schoolsLocked": "Accès limité",
-        "modal.schoolsLockedDesc": "Connectez-vous pour voir toutes les écoles supérieures",
-        "form.email": "Adresse e-mail",
-        "form.password": "Mot de passe",
-        "form.fullName": "Nom complet",
-        "form.loginBtn": "Se connecter",
-        "form.registerBtn": "Créer un compte",
-        "form.noAccount": "Vous n'avez pas de compte? Créez-en un maintenant",
-        "toast.loginRequired": "Veuillez d'abord vous connecter pour activer la fonction de comparaison.",
-        "toast.maxCompare": "Vous ne pouvez comparer que deux métiers à la fois.",
-        "toast.loginSuccess": "Connexion réussie!",
-        "toast.registerSuccess": "Compte créé avec succès!",
-        "category.tech": "Technologie et Ingénierie",
-        "category.health": "Sciences médicales et de la santé",
-        "category.business": "Affaires et Marketing",
-        "category.art": "Arts et Design",
-        "category.humanities": "Sciences humaines et juridiques",
-        "compare.demand": "Demande sur le marché",
-        "compare.salary": "Niveau de revenu",
-        "compare.environment": "Environnement de travail",
-        "compare.skills": "Compétences essentielles",
-        "compare.now": "Comparer maintenant",
-        "compare.selected": "{count}/2 sélectionnés pour comparaison",
-        "marquee.universities": "Université"
-    }
-};
 
 const app = {
     state: {
         isLoggedIn: localStorage.getItem('wendo_user') !== null,
         userName: localStorage.getItem('wendo_user') || "",
         theme: localStorage.getItem('wendo_theme') || "light",
-        lang: localStorage.getItem('wendo_lang') || "ar",
         favorites: JSON.parse(localStorage.getItem('wendo_favs')) || [],
         selectedCareersForCompare: [],
         quiz: { currentQuestion: 0, scores: { tech: 0, health: 0, business: 0, art: 0, humanities: 0 } }
     },
 
-    t(key, replacements = {}) {
-        const lang = this.state.lang;
-        let text = translations[lang]?.[key] || translations['ar']?.[key] || key;
-        for (const [k, v] of Object.entries(replacements)) {
-            text = text.replace(`{${k}}`, v);
-        }
-        return text;
-    },
-
     toggleLanguage() {
-        const newLang = this.state.lang === "ar" ? "fr" : "ar";
-        this.state.lang = newLang;
-        localStorage.setItem('wendo_lang', newLang);
-        this.applyLanguage(newLang);
-        this.showToast(newLang === "fr" ? "Langue changée en Français" : "تم تغيير اللغة إلى العربية");
+        // تم إزالة وظيفة الترجمة
     },
 
-    applyLanguage(lang) {
-    const html = document.getElementById('html-root');
-    html.setAttribute('lang', lang);
-    html.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-
-    // تحديث الخط حسب اللغة
-    if (lang === 'fr') {
-        document.documentElement.style.setProperty('--font-family-main', 'BebasNeue, Arial, sans-serif');
-    } else {
-        document.documentElement.style.setProperty('--font-family-main', 'ArabicFont, Tajawal, system-ui, sans-serif');
-    }
-
-    // Update all elements with data-i18n
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-            el.innerHTML = translations[lang][key];
-        }
-    });
-
-    // Update placeholders
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (translations[lang][key]) {
-            el.setAttribute('placeholder', translations[lang][key]);
-        }
-    });
-
-    // Update dynamic content
-    this.renderUniversities();
-    this.renderSchools();
-    this.renderCareers();
-    this.initMarquees();
-
-    // Update dashboard if logged in
-    if (this.state.isLoggedIn) {
-        this.updateAuthUI(this.state.userName);
-    }
-
-    // Update compare floating button if visible
-    this.updateCompareFloatingButton();
-
-    // Update page title
-    document.title = this.t('meta.title');
-},
+    applyLanguage() {
+        // تم إزالة وظيفة الترجمة
+    },
 
     toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
@@ -278,94 +41,225 @@ const app = {
         container.innerHTML = `
             <div class="feature-card interactive" onclick="app.startQuiz()" role="button" tabindex="0">
                 <div class="icon">🧠</div>
-                <h3>${this.t('dashboard.quizResult')}</h3>
-                <p>${this.t('dashboard.quizResultDesc')}</p>
+                <h3>نتيجة اختبار الميول</h3>
+                <p>شاهد نتائج آخر اختبار قمت به للتعرف على التخصصات الأنسب لك.</p>
             </div>
             <div class="feature-card interactive" onclick="app.navigate('specialties-view')" role="button" tabindex="0">
                 <div class="icon">⭐</div>
-                <h3>${this.t('dashboard.favorites')}</h3>
-                <p>${this.t('dashboard.favoritesDesc')}</p>
+                <h3>التخصصات المحفوظة</h3>
+                <p>قائمة بالتخصصات والمدارس التي قمت بحفظها للرجوع إليها لاحقاً.</p>
             </div>
             <div class="feature-card interactive" onclick="app.navigate('careers-view')" role="button" tabindex="0">
                 <div class="icon">⚖️</div>
-                <h3>${this.t('dashboard.careers')}</h3>
-                <p>${this.t('dashboard.careersDesc')}</p>
+                <h3>مقارنات المهن</h3>
+                <p>اذهب إلى دليل المهن لمتابعة استكشاف الخيارات الوظيفية المتاحة.</p>
             </div>
         `;
     },
 
     data: {
         specialties: [
-            { id: 1, title: { ar: "هندسة البرمجيات", fr: "Génie Logiciel" }, field: { ar: "إعلام آلي", fr: "Informatique" }, category: "tech", duration: { ar: "5 سنوات", fr: "5 ans" }, desc: { ar: "تصميم وتطوير الأنظمة البرمجية. تخصص يعتمد على المنطق والرياضيات.", fr: "Conception et développement de systèmes logiciels. Spécialisation basée sur la logique et les mathématiques." } },
-            { id: 2, title: { ar: "الطب البشري", fr: "Médecine" }, field: { ar: "علوم طبية", fr: "Sciences médicales" }, category: "health", duration: { ar: "7 سنوات", fr: "7 ans" }, desc: { ar: "دراسة شاملة لجسم الإنسان والأمراض. يتطلب معدلات عالية وتركيزاً.", fr: "Étude complète du corps humain et des maladies. Nécessite des notes élevées et de la concentration." } },
-            { id: 3, title: { ar: "التسويق الرقمي", fr: "Marketing Digital" }, field: { ar: "تجارة واقتصاد", fr: "Commerce et économie" }, category: "business", duration: { ar: "3 سنوات", fr: "3 ans" }, desc: { ar: "استراتيجيات التسويق عبر الإنترنت وتحليل البيانات.", fr: "Stratégies de marketing en ligne et analyse de données." } },
-            { id: 4, title: { ar: "الطاقات المتجددة", fr: "Énergies Renouvelables" }, field: { ar: "تكنولوجيا", fr: "Technologie" }, category: "tech", duration: { ar: "5 سنوات", fr: "5 ans" }, desc: { ar: "هندسة وتطوير حلول الطاقة النظيفة والمستدامة.", fr: "Ingénierie et développement de solutions d'énergie propre et durable." } },
-            { id: 5, title: { ar: "الصيدلة", fr: "Pharmacie" }, field: { ar: "علوم طبية", fr: "Sciences médicales" }, category: "health", duration: { ar: "6 سنوات", fr: "6 ans" }, desc: { ar: "علم تركيب الأدوية وفهم التفاعلات الكيميائية الحيوية.", fr: "Science de la composition des médicaments et compréhension des interactions biochimiques." } },
-            { id: 6, title: { ar: "الحقوق", fr: "Droit" }, field: { ar: "علوم قانونية", fr: "Sciences juridiques" }, category: "humanities", duration: { ar: "3 سنوات", fr: "3 ans" }, desc: { ar: "دراسة القوانين والأنظمة التشريعية والدفاع عن الحقوق.", fr: "Étude des lois, des systèmes législatifs et défense des droits." } },
-            { id: 7, title: { ar: "التصميم الجرافيكي", fr: "Design Graphique" }, field: { ar: "فنون وتصميم", fr: "Arts et design" }, category: "art", duration: { ar: "3 سنوات", fr: "3 ans" }, desc: { ar: "التواصل البصري وبناء الهويات التجارية رقمياً ومطبوعاً.", fr: "Communication visuelle et construction d'identités commerciales numériques et imprimées." } }
+            { id: 1, title: "هندسة البرمجيات", field: "إعلام آلي", category: "tech", duration: "5 سنوات", desc: "تصميم وتطوير الأنظمة البرمجية. تخصص يعتمد على المنطق والرياضيات." },
+            { id: 2, title: "الطب البشري", field: "علوم طبية", category: "health", duration: "7 سنوات", desc: "دراسة شاملة لجسم الإنسان والأمراض. يتطلب معدلات عالية وتركيزاً." },
+            { id: 3, title: "التسويق الرقمي", field: "تجارة واقتصاد", category: "business", duration: "3 سنوات", desc: "استراتيجيات التسويق عبر الإنترنت وتحليل البيانات." },
+            { id: 4, title: "الطاقات المتجددة", field: "تكنولوجيا", category: "tech", duration: "5 سنوات", desc: "هندسة وتطوير حلول الطاقة النظيفة والمستدامة." },
+            { id: 5, title: "الصيدلة", field: "علوم طبية", category: "health", duration: "6 سنوات", desc: "علم تركيب الأدوية وفهم التفاعلات الكيميائية الحيوية." },
+            { id: 6, title: "الحقوق", field: "علوم قانونية", category: "humanities", duration: "3 سنوات", desc: "دراسة القوانين والأنظمة التشريعية والدفاع عن الحقوق." },
+            { id: 7, title: "التصميم الجرافيكي", field: "فنون وتصميم", category: "art", duration: "3 سنوات", desc: "التواصل البصري وبناء الهويات التجارية رقمياً ومطبوعاً." }
         ],
         careers: [
-            { id: 1, title: { ar: "مطور برمجيات", fr: "Développeur Logiciel" }, demand: { ar: "مرتفع جداً", fr: "Très élevé" }, salary: { ar: "مرتفع", fr: "Élevé" }, icon: "💻", environment: { ar: "مكتبي/عن بعد", fr: "Bureau/À distance" }, skills: { ar: "البرمجة، حل المشكلات، المنطق", fr: "Programmation, résolution de problèmes, logique" } },
-            { id: 2, title: { ar: "طبيب عام", fr: "Médecin généraliste" }, demand: { ar: "مرتفع دائماً", fr: "Toujours élevé" }, salary: { ar: "متوسط إلى مرتفع", fr: "Moyen à élevé" }, icon: "🩺", environment: { ar: "مستشفى/عيادة", fr: "Hôpital/Clinique" }, skills: { ar: "التعاطف، التشخيص، الصبر", fr: "Empathie, diagnostic, patience" } },
-            { id: 3, title: { ar: "مدير تسويق رقمي", fr: "Responsable Marketing Digital" }, demand: { ar: "مرتفع", fr: "Élevé" }, salary: { ar: "متوسط", fr: "Moyen" }, icon: "📈", environment: { ar: "مكتبي/ديناميكي", fr: "Bureau/Dynamique" }, skills: { ar: "التحليل، الإبداع، التواصل", fr: "Analyse, créativité, communication" } },
-            { id: 4, title: { ar: "مهندس طاقات متجددة", fr: "Ingénieur Énergies Renouvelables" }, demand: { ar: "متزايد بقوة", fr: "Fortement croissant" }, salary: { ar: "مرتفع", fr: "Élevé" }, icon: "☀️", environment: { ar: "ميداني/مكتبي", fr: "Terrain/Bureau" }, skills: { ar: "الفيزياء، التخطيط، الهندسة", fr: "Physique, planification, ingénierie" } },
-            { id: 5, title: { ar: "صيدلي إكلينيكي", fr: "Pharmacien clinicien" }, demand: { ar: "مستقر", fr: "Stable" }, salary: { ar: "مرتفع", fr: "Élevé" }, icon: "💊", environment: { ar: "صيدلية/مستشفى", fr: "Pharmacie/Hôpital" }, skills: { ar: "الدقة، الكيمياء، خدمة المرضى", fr: "Précision, chimie, service aux patients" } },
-            { id: 6, title: { ar: "محامي / مستشار قانوني", fr: "Avocat / Conseiller juridique" }, demand: { ar: "متوسط", fr: "Moyen" }, salary: { ar: "متغير", fr: "Variable" }, icon: "⚖️", environment: { ar: "محاكم/مكاتب", fr: "Tribunaux/Bureaux" }, skills: { ar: "الخطابة، التحليل، الإقناع", fr: "Éloquence, analyse, persuasion" } },
-            { id: 7, title: { ar: "مصمم واجهات المستخدم", fr: "Designer UI/UX" }, demand: { ar: "مرتفع جداً", fr: "Très élevé" }, salary: { ar: "مرتفع", fr: "Élevé" }, icon: "🎨", environment: { ar: "مكتبي/عن بعد", fr: "Bureau/À distance" }, skills: { ar: "الإبداع، فهم علم النفس، التصميم", fr: "Créativité, compréhension de la psychologie, design" } }
+            { id: 1, title: "مطور برمجيات", demand: "مرتفع جداً", salary: "مرتفع", icon: "💻", environment: "مكتبي/عن بعد", skills: "البرمجة، حل المشكلات، المنطق" },
+            { id: 2, title: "طبيب عام", demand: "مرتفع دائماً", salary: "متوسط إلى مرتفع", icon: "🩺", environment: "مستشفى/عيادة", skills: "التعاطف، التشخيص، الصبر" },
+            { id: 3, title: "مدير تسويق رقمي", demand: "مرتفع", salary: "متوسط", icon: "📈", environment: "مكتبي/ديناميكي", skills: "التحليل، الإبداع، التواصل" },
+            { id: 4, title: "مهندس طاقات متجددة", demand: "متزايد بقوة", salary: "مرتفع", icon: "☀️", environment: "ميداني/مكتبي", skills: "الفيزياء، التخطيط، الهندسة" },
+            { id: 5, title: "صيدلي إكلينيكي", demand: "مستقر", salary: "مرتفع", icon: "💊", environment: "صيدلية/مستشفى", skills: "الدقة، الكيمياء، خدمة المرضى" },
+            { id: 6, title: "محامي / مستشار قانوني", demand: "متوسط", salary: "متغير", icon: "⚖️", environment: "محاكم/مكاتب", skills: "الخطابة، التحليل، الإقناع" },
+            { id: 7, title: "مصمم واجهات المستخدم", demand: "مرتفع جداً", salary: "مرتفع", icon: "🎨", environment: "مكتبي/عن بعد", skills: "الإبداع، فهم علم النفس، التصميم" }
         ],
+        specialtyDetails: {
+            1: {
+                what: "هندسة البرمجيات هي تخصص يهتم بتصميم وتطوير واختبار وصيانة الأنظمة البرمجية. يعتمد هذا المجال على المنطق والرياضيات وحل المشكلات، ويهدف إلى إنشاء برامج وحلول تقنية تلبي احتياجات المستخدمين والمؤسسات.",
+                subjects: ["الخوارزميات وهياكل البيانات", "لغات البرمجة (Java, Python, C++)", "هندسة البرمجيات", "قواعد البيانات", "شبكات الحاسوب", "أمن المعلومات", "الذكاء الاصطناعي", "تطوير الويب"],
+                path: [
+                    { year: "السنة الأولى", desc: "أساسيات البرمجة والرياضيات" },
+                    { year: "السنة الثانية", desc: "البرمجة المتقدمة وهياكل البيانات" },
+                    { year: "السنة الثالثة", desc: "هندسة البرمجيات وقواعد البيانات" },
+                    { year: "السنة الرابعة", desc: "شبكات الحاسوب وأمن المعلومات" },
+                    { year: "السنة الخامسة", desc: "مشروع التخرج والتخصص الدقيق" }
+                ],
+                jobs: ["مطور برمجيات", "مهندس برمجيات", "محلل نظم", "مدير مشاريع تقنية", "خبير أمن معلومات", "مطور ويب", "مبرمج تطبيقات الهاتف", "عالم بيانات"],
+                suitable: [
+                    "تحب التفكير المنطقي وحل المشكلات",
+                    "لديك شغف بالتكنولوجيا والابتكار",
+                    "تستمتع بالعمل ضمن فريق والتعاون مع الآخرين",
+                    "لديك قدرة على التعلم الذاتي ومتابعة التطورات التقنية",
+                    "تهتم بالتفاصيل والدقة في عملك"
+                ]
+            },
+            2: {
+                what: "الطب البشري هو تخصص يهتم بدراسة جسم الإنسان والأمراض التي تصيبه، وتشخيصها وعلاجها والوقاية منها. يعتمد هذا التخصص على العلوم الأساسية كالتشريح وعلم وظائف الأعضاء والكيمياء الحيوية.",
+                subjects: ["التشريح", "علم وظائف الأعضاء", "الكيمياء الحيوية", "علم الأمراض", "الصيدلة", "الطب الباطني", "الجراحة", "طب الأطفال"],
+                path: [
+                    { year: "السنة الأولى", desc: "العلوم الأساسية والتشريح" },
+                    { year: "السنة الثانية", desc: "علم وظائف الأعضاء والكيمياء الحيوية" },
+                    { year: "السنة الثالثة", desc: "علم الأمراض وعلم الأدوية" },
+                    { year: "السنة الرابعة", desc: "التدريب السريري في المستشفيات" },
+                    { year: "السنة الخامسة", desc: "التخصص الدقيق والتدريب المتقدم" },
+                    { year: "السنة السادسة", desc: "فترة الامتياز والتدريب العملي" },
+                    { year: "السنة السابعة", desc: "التخرج والبدء في الإقامة" }
+                ],
+                jobs: ["طبيب عام", "طبيب اختصاصي", "جراح", "طبيب أطفال", "طبيب القلب", "طبيب الأعصاب", "طبيب العيون", "طبيب الأذن والأنف والحنجرة"],
+                suitable: [
+                    "لديك رغبة قوية في مساعدة الآخرين وخدمة المجتمع",
+                    "لديك قدرة على تحمل الضغط والعمل لساعات طويلة",
+                    "تهتم بالعلوم الطبية والتشريحية",
+                    "لديك مهارات تواصل ممتازة مع المرضى",
+                    "لديك قدرة على اتخاذ القرارات السريعة والحاسمة"
+                ]
+            },
+            3: {
+                what: "التسويق الرقمي هو تخصص يهتم بدراسة استراتيجيات التسويق عبر القنوات الرقمية والإنترنت. يشمل هذا التخصص تحليل البيانات وفهم سلوك المستهلك وإدارة الحملات الإعلانية الرقمية.",
+                subjects: ["تسويق رقمي", "تحليل البيانات", "سلوك المستهلك", "إدارة العلامات التجارية", "الإعلان عبر الإنترنت", "التجارة الإلكترونية", "وسائل التواصل الاجتماعي", "تحسين محركات البحث"],
+                path: [
+                    { year: "السنة الأولى", desc: "أساسيات التسويق والتجارة" },
+                    { year: "السنة الثانية", desc: "التسويق الرقمي وتحليل البيانات" },
+                    { year: "السنة الثالثة", desc: "الحملات الإعلانية وإدارة الماركات" }
+                ],
+                jobs: ["مدير تسويق رقمي", "أخصائي تحسين محركات البحث", "أخصائي تسويق عبر وسائل التواصل", "محلل بيانات تسويقية", "مدير العلامات التجارية", "خبير التجارة الإلكترونية"],
+                suitable: [
+                    "لديك مهارات تحليلية وقدرة على فهم الأرقام",
+                    "لديك إبداع في التفكير وتطوير الأفكار الجديدة",
+                    "تستمتع بمتابعة التكنولوجيا والتطورات الرقمية",
+                    "لديك مهارات تواصل ممتازة",
+                    "لديك القدرة على العمل في بيئة ديناميكية سريعة التغير"
+                ]
+            },
+            4: {
+                what: "الطاقات المتجددة هو تخصص يهتم بدراسة وتطوير حلول الطاقة النظيفة والمستدامة مثل الطاقة الشمسية وطاقة الرياح والطاقة المائية، بهدف تقليل الاعتماد على المصادر التقليدية للطاقة وحماية البيئة.",
+                subjects: ["فيزياء الطاقة", "الطاقة الشمسية", "طاقة الرياح", "الطاقة المائية", "الطاقة الحيوية", "كفاءة الطاقة", "تخزين الطاقة", "سياسات الطاقة المتجددة"],
+                path: [
+                    { year: "السنة الأولى", desc: "أساسيات الفيزياء والطاقة" },
+                    { year: "السنة الثانية", desc: "الطاقات المتجددة والنظيفة" },
+                    { year: "السنة الثالثة", desc: "هندسة الطاقة والأنظمة" },
+                    { year: "السنة الرابعة", desc: "تصميم الأنظمة المتجددة" },
+                    { year: "السنة الخامسة", desc: "مشروع التخرج والابتكار" }
+                ],
+                jobs: ["مهندس طاقات متجددة", "مصمم أنظمة شمسية", "خبير كفاءة الطاقة", "مدير مشاريع الطاقة النظيفة", "باحث في مجال الطاقة", "مستشار الطاقة"],
+                suitable: [
+                    "لديك اهتمام بالبيئة والحفاظ على الموارد",
+                    "تحب الفيزياء والعلوم الهندسية",
+                    "لديك القدرة على التفكير الابتكاري",
+                    "تستمتع بالعمل الميداني والعملي",
+                    "تهتم بمستقبل الطاقة والاستدامة"
+                ]
+            },
+            5: {
+                what: "الصيدلة هي تخصص يهتم بدراسة تركيب الأدوية وتطويرها، وفهم التفاعلات الكيميائية الحيوية في الجسم، وكيفية تأثير الأدوية على صحة الإنسان، مع التركيز على سلامة وفعالية العلاجات.",
+                subjects: ["الكيمياء الصيدلانية", "الصيدلة السريرية", "علم الأدوية", "الكيمياء الحيوية", "الصيدلة المجتمعية", "الصيدلة الصناعية", "التشخيص المخبري", "القوانين الصيدلانية"],
+                path: [
+                    { year: "السنة الأولى", desc: "العلوم الأساسية والكيمياء" },
+                    { year: "السنة الثانية", desc: "الكيمياء الحيوية وعلم الأدوية" },
+                    { year: "السنة الثالثة", desc: "الصيدلة السريرية والصيدلة المجتمعية" },
+                    { year: "السنة الرابعة", desc: "التدريب العملي في الصيدليات" },
+                    { year: "السنة الخامسة", desc: "الصيدلة الصناعية والمشاريع" },
+                    { year: "السنة السادسة", desc: "فترة الامتياز والتخصص" }
+                ],
+                jobs: ["صيدلي", "صيدلي سريري", "مسؤول الجودة الصيدلانية", "مدير الصيدلية", "صيدلي صناعي", "باحث صيدلاني", "خبير الأدوية", "أخصائي التسويق الصيدلاني"],
+                suitable: [
+                    "لديك شغف بالعلوم الكيميائية والطبية",
+                    "تهتم بالدقة والتفاصيل في عملك",
+                    "لديك القدرة على التواصل مع المرضى وتقديم المشورة",
+                    "تستمتع بالبحث والاكتشاف العلمي",
+                    "لديك مسؤولية عالية تجاه صحة الآخرين"
+                ]
+            },
+            6: {
+                what: "الحقوق هو تخصص يهتم بدراسة القوانين والأنظمة التشريعية التي تنظم المجتمع، وتحليل النصوص القانونية، وفهم حقوق وواجبات الأفراد والمؤسسات، والدفاع عن العدالة وحماية الحقوق.",
+                subjects: ["القانون المدني", "القانون الجنائي", "القانون التجاري", "القانون الدولي", "القانون الإداري", "القانون الدستوري", "القانون الاجتماعي", "القانون البيئي"],
+                path: [
+                    { year: "السنة الأولى", desc: "مبادئ القانون" },
+                    { year: "السنة الثانية", desc: "القانون المدني والجنائي" },
+                    { year: "السنة الثالثة", desc: "القانون التجاري والإداري" }
+                ],
+                jobs: ["محامي", "مستشار قانوني", "قاضي", "كاتب عدل", "محامي الشركات", "محامي حقوق الإنسان", "خبير قانوني في المؤسسات الدولية", "أستاذ القانون"],
+                suitable: [
+                    "لديك اهتمام بالعدالة والقوانين",
+                    "تمتلك مهارات تحليلية وقدرة على فهم النصوص المعقدة",
+                    "لديك مهارات خطابة وإقناع ممتازة",
+                    "تهتم بحقوق الإنسان والعدالة الاجتماعية",
+                    "لديك القدرة على العمل تحت الضغط وحل النزاعات"
+                ]
+            },
+            7: {
+                what: "التصميم الجرافيكي هو تخصص يهتم بالتواصل البصري والإبداعي، حيث يتم إنشاء تصاميم ورسومات تنقل الأفكار والرسائل عبر الوسائط المطبوعة والرقمية، مع التركيز على الجمالية والوظيفية.",
+                subjects: ["تصميم الجرافيك", "تصميم الواجهات", "الطباعة والتصميم المطبوع", "التصميم الرقمي", "التصوير الفوتوغرافي", "الرسوم المتحركة", "فن الخط", "نظريات الألوان"],
+                path: [
+                    { year: "السنة الأولى", desc: "أساسيات التصميم ونظريات الألوان" },
+                    { year: "السنة الثانية", desc: "تصميم الجرافيك والطباعة" },
+                    { year: "السنة الثالثة", desc: "التصميم الرقمي والمشاريع" }
+                ],
+                jobs: ["مصمم جرافيك", "مصمم واجهات المستخدم", "مصمم تجارب المستخدم", "رسام حر", "مخرج فني", "مصمم إعلانات", "رسام أنيميشن", "مصمم هوية تجارية"],
+                suitable: [
+                    "لديك شغف بالفن والإبداع",
+                    "تمتلك حساً جمالياً قوياً",
+                    "لديك القدرة على الابتكار وتقديم أفكار جديدة",
+                    "تستمتع بالعمل الرقمي واستخدام التكنولوجيا",
+                    "لديك صبر ودقة في التفاصيل"
+                ]
+            }
+        },
         quizQuestions: [
             {
-                question: { ar: "في أوقات فراغك، ما هو النشاط المفضل لديك؟", fr: "Pendant votre temps libre, quelle est votre activité préférée?" },
+                question: "في أوقات فراغك، ما هو النشاط المفضل لديك؟",
                 options: [
-                    { text: { ar: "حل الألغاز والمشكلات التقنية", fr: "Résoudre des énigmes et problèmes techniques" }, category: "tech" },
-                    { text: { ar: "قراءة مواضيع صحية ومساعدة الآخرين", fr: "Lire des sujets de santé et aider les autres" }, category: "health" },
-                    { text: { ar: "متابعة أخبار الشركات والمشاريع التجارية", fr: "Suivre l'actualité des entreprises et projets commerciaux" }, category: "business" },
-                    { text: { ar: "الرسم، التصميم أو التعديل على الصور", fr: "Dessiner, designer ou éditer des images" }, category: "art" }
+                    { text: "حل الألغاز والمشكلات التقنية", category: "tech" },
+                    { text: "قراءة مواضيع صحية ومساعدة الآخرين", category: "health" },
+                    { text: "متابعة أخبار الشركات والمشاريع التجارية", category: "business" },
+                    { text: "الرسم، التصميم أو التعديل على الصور", category: "art" }
                 ]
             },
             {
-                question: { ar: "كيف تفضل أن تكون بيئة عملك المستقبلية؟", fr: "Quel environnement de travail préférez-vous?" },
+                question: "كيف تفضل أن تكون بيئة عملك المستقبلية؟",
                 options: [
-                    { text: { ar: "أمام حاسوب، ويمكنني العمل من أي مكان", fr: "Devant un ordinateur, pouvoir travailler de n'importe où" }, category: "tech" },
-                    { text: { ar: "في بيئة حيوية كالمستشفيات أو المخابر", fr: "Dans un environnement dynamique comme les hôpitaux ou laboratoires" }, category: "health" },
-                    { text: { ar: "في مكتب مع فريق عمل وحملات تسويقية", fr: "Dans un bureau avec une équipe et des campagnes marketing" }, category: "business" },
-                    { text: { ar: "مكتب هادئ مليء بالأنظمة والوثائق والأبحاث", fr: "Bureau calme rempli de systèmes, documents et recherches" }, category: "humanities" }
+                    { text: "أمام حاسوب، ويمكنني العمل من أي مكان", category: "tech" },
+                    { text: "في بيئة حيوية كالمستشفيات أو المخابر", category: "health" },
+                    { text: "في مكتب مع فريق عمل وحملات تسويقية", category: "business" },
+                    { text: "مكتب هادئ مليء بالأنظمة والوثائق والأبحاث", category: "humanities" }
                 ]
             },
             {
-                question: { ar: "ما هي المادة الدراسية التي كنت تتفوق فيها وتستمتع بها؟", fr: "Quelle matière excelliez-vous et appréciez-vous?" },
+                question: "ما هي المادة الدراسية التي كنت تتفوق فيها وتستمتع بها؟",
                 options: [
-                    { text: { ar: "الرياضيات والفيزياء", fr: "Mathématiques et physique" }, category: "tech" },
-                    { text: { ar: "العلوم الطبيعية (Biology)", fr: "Sciences naturelles (Biologie)" }, category: "health" },
-                    { text: { ar: "الفلسفة والتاريخ والتعبير", fr: "Philosophie, histoire et expression" }, category: "humanities" },
-                    { text: { ar: "النشاطات الفنية واللغات", fr: "Activités artistiques et langues" }, category: "art" }
+                    { text: "الرياضيات والفيزياء", category: "tech" },
+                    { text: "العلوم الطبيعية (Biology)", category: "health" },
+                    { text: "الفلسفة والتاريخ والتعبير", category: "humanities" },
+                    { text: "النشاطات الفنية واللغات", category: "art" }
                 ]
             },
             {
-                question: { ar: "إذا واجهت مشكلة، كيف تتعامل معها؟", fr: "Si vous rencontrez un problème, comment le gérez-vous?" },
+                question: "إذا واجهت مشكلة، كيف تتعامل معها؟",
                 options: [
-                    { text: { ar: "أقوم بتحليلها منطقياً وتقسيمها لخطوات", fr: "Je l'analyse logiquement et la divise en étapes" }, category: "tech" },
-                    { text: { ar: "أبحث عن حل يفيد ويحمي الأشخاص المتضررين", fr: "Je cherche une solution qui profite et protège les personnes affectées" }, category: "health" },
-                    { text: { ar: "أفكر في كيفية تحويل المشكلة لفرصة للربح", fr: "Je réfléchis à comment transformer le problème en opportunité de profit" }, category: "business" },
-                    { text: { ar: "أبحث عن حل إبداعي وخارج الصندوق", fr: "Je cherche une solution créative et hors des sentiers battus" }, category: "art" }
+                    { text: "أقوم بتحليلها منطقياً وتقسيمها لخطوات", category: "tech" },
+                    { text: "أبحث عن حل يفيد ويحمي الأشخاص المتضررين", category: "health" },
+                    { text: "أفكر في كيفية تحويل المشكلة لفرصة للربح", category: "business" },
+                    { text: "أبحث عن حل إبداعي وخارج الصندوق", category: "art" }
                 ]
             }
         ],
         universities: [
-            { id: 1, name: { ar: "جامعة هواري بومدين (USTHB)", fr: "Université Houari Boumediene (USTHB)" }, wilaya: { ar: "الجزائر", fr: "Alger" }, type: { ar: "علوم وتكنولوجيا", fr: "Sciences et technologie" } },
-            { id: 2, name: { ar: "جامعة أبو بكر بلقايد", fr: "Université Abou Bekr Belkaïd" }, wilaya: { ar: "تلمسان", fr: "Tlemcen" }, type: { ar: "متعددة التخصصات", fr: "Pluridisciplinaire" } },
-            { id: 3, name: { ar: "جامعة قسنطينة 2", fr: "Université Constantine 2" }, wilaya: { ar: "قسنطينة", fr: "Constantine" }, type: { ar: "إعلام آلي ورياضيات", fr: "Informatique et mathématiques" } }
+            { id: 1, name: "جامعة هواري بومدين (USTHB)", wilaya: "الجزائر", type: "علوم وتكنولوجيا" },
+            { id: 2, name: "جامعة أبو بكر بلقايد", wilaya: "تلمسان", type: "متعددة التخصصات" },
+            { id: 3, name: "جامعة قسنطينة 2", wilaya: "قسنطينة", type: "إعلام آلي ورياضيات" }
         ],
         schools: [
-            { id: 1, name: { ar: "المدرسة الوطنية العليا للإعلام الآلي (ESI)", fr: "École Nationale Supérieure d'Informatique (ESI)" }, wilaya: { ar: "الجزائر", fr: "Alger" }, type: { ar: "إعلام آلي", fr: "Informatique" } },
-            { id: 2, name: { ar: "المدرسة العليا للتجارة (ESC)", fr: "École Supérieure de Commerce (ESC)" }, wilaya: { ar: "القليعة", fr: "Koléa" }, type: { ar: "اقتصاد وتجارة", fr: "Économie et commerce" } },
-            { id: 3, name: { ar: "المدرسة المتعددة التقنيات (ENP)", fr: "École Nationale Polytechnique (ENP)" }, wilaya: { ar: "الحراش", fr: "El Harrach" }, type: { ar: "هندسة", fr: "Ingénierie" } }
+            { id: 1, name: "المدرسة الوطنية العليا للإعلام الآلي (ESI)", wilaya: "الجزائر", type: "إعلام آلي" },
+            { id: 2, name: "المدرسة العليا للتجارة (ESC)", wilaya: "القليعة", type: "اقتصاد وتجارة" },
+            { id: 3, name: "المدرسة المتعددة التقنيات (ENP)", wilaya: "الحراش", type: "هندسة" }
         ]
     },
 
     init() {
         this.applyTheme(this.state.theme);
-        this.applyLanguage(this.state.lang);
         this.renderUniversities();
         this.renderSchools();
         this.renderCareers();
@@ -377,17 +271,16 @@ const app = {
     },
 
     initMarquees() {
-        const lang = this.state.lang;
         let careersContent = '';
         for (let i = 0; i < 8; i++) {
-            careersContent += this.data.careers.map(c => `<span class="marquee-item">${c.icon} ${c.title[lang]}</span>`).join('');
+            careersContent += this.data.careers.map(c => `<span class="marquee-item">${c.icon} ${c.title}</span>`).join('');
         }
         document.getElementById('marquee-careers').innerHTML = careersContent;
 
         let unisContent = '';
         for (let i = 0; i < 8; i++) {
-            unisContent += this.data.specialties.map(s => `<span class="marquee-item">${s.title[lang]} (${s.field[lang]})</span>`).join('');
-            unisContent += this.data.universities.map(u => `<span class="marquee-item">🏛️ ${u.name[lang]}</span>`).join('');
+            unisContent += this.data.specialties.map(s => `<span class="marquee-item">${s.title} (${s.field})</span>`).join('');
+            unisContent += this.data.universities.map(u => `<span class="marquee-item">🏛️ ${u.name}</span>`).join('');
         }
         document.getElementById('marquee-unis').innerHTML = unisContent;
     },
@@ -399,7 +292,6 @@ const app = {
             target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        // Show/hide hero video based on view
         const heroVideo = document.getElementById('hero-video-wrapper');
         if (heroVideo) {
             if (viewId === 'landing-view') {
@@ -429,7 +321,7 @@ const app = {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.innerHTML = `<i class="fas fa-info-circle" style="margin-${this.state.lang === 'ar' ? 'left' : 'right'}: 8px;"></i> ${message}`;
+        toast.innerHTML = `<i class="fas fa-info-circle" style="margin-left: 8px;"></i> ${message}`;
         container.appendChild(toast);
 
         setTimeout(() => {
@@ -441,7 +333,6 @@ const app = {
     renderUniversities(filtered = this.data.universities) {
         const grid = document.getElementById('universities-grid');
         const emptyState = document.getElementById('universities-empty');
-        const lang = this.state.lang;
 
         if (filtered.length === 0) {
             grid.innerHTML = '';
@@ -458,20 +349,20 @@ const app = {
             lockedHTML = `
                 <div class="data-card locked-card" onclick="app.openModal('login-modal')">
                     <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <h3>${this.t('modal.unisLocked')}</h3>
-                    <p>${this.t('modal.unisLockedDesc')}</p>
-                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">${this.t('nav.login')}</button>
+                    <h3>الوصول محدود</h3>
+                    <p>سجل الدخول لرؤية جميع الجامعات</p>
+                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">تسجيل الدخول</button>
                 </div>
             `;
         }
 
         grid.innerHTML = displayData.map(u => `
-            <div class="data-card" onclick="app.showSpecialties('${lang === 'ar' ? 'جامعة' : 'Université'}')" tabindex="0" role="button">
+            <div class="data-card" onclick="app.showSpecialties('جامعة')" tabindex="0" role="button">
                 <div>
-                    <h3>${u.name[lang]}</h3>
-                    <p><i class="fas fa-map-marker-alt" style="margin-${lang === 'ar' ? 'left' : 'right'}: 5px;"></i> ${u.wilaya[lang]}</p>
+                    <h3>${u.name}</h3>
+                    <p><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> ${u.wilaya}</p>
                 </div>
-                <span class="tag">${u.type[lang]}</span>
+                <span class="tag">${u.type}</span>
             </div>
         `).join('') + lockedHTML;
     },
@@ -479,7 +370,6 @@ const app = {
     renderSchools(filtered = this.data.schools) {
         const grid = document.getElementById('schools-grid');
         const emptyState = document.getElementById('schools-empty');
-        const lang = this.state.lang;
 
         if (filtered.length === 0) {
             grid.innerHTML = '';
@@ -496,27 +386,26 @@ const app = {
             lockedHTML = `
                 <div class="data-card locked-card" onclick="app.openModal('login-modal')">
                     <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <h3>${this.t('modal.schoolsLocked')}</h3>
-                    <p>${this.t('modal.schoolsLockedDesc')}</p>
-                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">${this.t('nav.login')}</button>
+                    <h3>الوصول محدود</h3>
+                    <p>سجل الدخول لرؤية جميع المدارس العليا</p>
+                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">تسجيل الدخول</button>
                 </div>
             `;
         }
 
         grid.innerHTML = displayData.map(s => `
-            <div class="data-card" onclick="app.showSpecialties('${lang === 'ar' ? 'مدرسة عليا' : 'École supérieure'}')" tabindex="0" role="button">
+            <div class="data-card" onclick="app.showSpecialties('مدرسة عليا')" tabindex="0" role="button">
                 <div>
-                    <h3>${s.name[lang]}</h3>
-                    <p><i class="fas fa-map-marker-alt" style="margin-${lang === 'ar' ? 'left' : 'right'}: 5px;"></i> ${s.wilaya[lang]}</p>
+                    <h3>${s.name}</h3>
+                    <p><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> ${s.wilaya}</p>
                 </div>
-                <span class="tag">${s.type[lang]}</span>
+                <span class="tag">${s.type}</span>
             </div>
         `).join('') + lockedHTML;
     },
 
     showSpecialties(context) {
-        const lang = this.state.lang;
-        document.getElementById('specialties-title').innerText = this.t('specialties.available');
+        document.getElementById('specialties-title').innerText = 'التخصصات المتاحة';
 
         let displayData = this.data.specialties;
         let lockedHTML = '';
@@ -526,28 +415,95 @@ const app = {
             lockedHTML = `
                 <div class="data-card locked-card" onclick="app.openModal('login-modal')">
                     <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <h3>${this.t('modal.specsLocked')}</h3>
-                    <p>${this.t('modal.specsLockedDesc')}</p>
-                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">${this.t('nav.login')}</button>
+                    <h3>باقي التخصصات مقفلة</h3>
+                    <p>سجل الدخول لرؤية القائمة الكاملة</p>
+                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">تسجيل الدخول</button>
                 </div>
             `;
         }
 
         document.getElementById('specialties-grid').innerHTML = displayData.map(spec => `
-            <div class="data-card" onclick="app.openSpecialtyModal(${spec.id})" tabindex="0" role="button">
+            <div class="data-card" onclick="app.openSpecialtyDetails(${spec.id})" tabindex="0" role="button">
                 <div>
-                    <h3>${spec.title[lang]}</h3>
-                    <p><i class="far fa-clock" style="margin-${lang === 'ar' ? 'left' : 'right'}: 5px;"></i> ${spec.duration[lang]}</p>
+                    <h3>${spec.title}</h3>
+                    <p><i class="far fa-clock" style="margin-left: 5px;"></i> ${spec.duration}</p>
                 </div>
-                <span class="tag">${spec.field[lang]}</span>
+                <span class="tag">${spec.field}</span>
             </div>
         `).join('') + lockedHTML;
         this.navigate('specialties-view');
     },
 
+    openSpecialtyDetails(id) {
+        const spec = this.data.specialties.find(s => s.id === id);
+        const details = this.data.specialtyDetails[id];
+        
+        if (!spec || !details) return;
+
+        document.getElementById('specialty-detail-title').innerText = spec.title;
+        
+        document.getElementById('specialty-detail-tags').innerHTML = `
+            <span class="specialty-tag"><i class="fas fa-book-open" style="margin-left: 5px;"></i> ${spec.field}</span>
+            <span class="specialty-tag"><i class="far fa-clock" style="margin-left: 5px;"></i> ${spec.duration}</span>
+            <span class="specialty-tag"><i class="fas fa-tag" style="margin-left: 5px;"></i> ${this.getCategoryName(spec.category)}</span>
+        `;
+        
+        document.getElementById('specialty-detail-desc').innerText = spec.desc;
+        
+        document.querySelector('#specialty-what p').innerText = details.what;
+        
+        const subjectsContainer = document.getElementById('specialty-subjects');
+        subjectsContainer.innerHTML = details.subjects.map(sub => `
+            <div class="subject-item">${sub}</div>
+        `).join('');
+        
+        const pathContainer = document.getElementById('specialty-path');
+        pathContainer.innerHTML = details.path.map(p => `
+            <div class="path-item">
+                <span class="path-year">${p.year}</span>
+                <span class="path-desc">${p.desc}</span>
+            </div>
+        `).join('');
+        
+        const jobsContainer = document.getElementById('specialty-jobs');
+        jobsContainer.innerHTML = details.jobs.map(job => `
+            <div class="job-item">${job}</div>
+        `).join('');
+        
+        const suitableContainer = document.getElementById('specialty-suitable');
+        suitableContainer.innerHTML = details.suitable.map(item => `
+            <li class="suitable-item">${item}</li>
+        `).join('');
+        
+        const relatedSpecs = this.data.specialties.filter(s => s.category === spec.category && s.id !== id);
+        const relatedContainer = document.getElementById('related-specialties-grid');
+        if (relatedSpecs.length > 0) {
+            relatedContainer.innerHTML = relatedSpecs.map(s => `
+                <div class="related-spec-card" onclick="app.openSpecialtyDetails(${s.id})">
+                    <h3>${s.title}</h3>
+                    <p>${s.field} - ${s.duration}</p>
+                </div>
+            `).join('');
+        } else {
+            relatedContainer.innerHTML = `<p style="color: #5a4e7a;">لا توجد تخصصات مرتبطة حالياً.</p>`;
+        }
+        
+        this.navigate('specialty-details-view');
+    },
+
+    getCategoryName(cat) {
+        const categories = {
+            tech: "التكنولوجيا والهندسة",
+            health: "العلوم الطبية والصحية",
+            business: "الأعمال والتسويق",
+            art: "الفنون والتصميم",
+            humanities: "العلوم الإنسانية والقانونية"
+        };
+        return categories[cat] || cat;
+    },
+
     renderCareers() {
         const container = document.getElementById('careers-grid-container');
-        const lang = this.state.lang;
 
         let displayData = this.data.careers;
         let lockedHTML = '';
@@ -557,9 +513,9 @@ const app = {
             lockedHTML = `
                 <div class="career-card locked-card" onclick="app.openModal('login-modal')">
                     <i class="fas fa-lock" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
-                    <h3>${this.t('modal.careersLocked')}</h3>
-                    <p>${this.t('modal.careersLockedDesc')}</p>
-                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">${this.t('nav.login')}</button>
+                    <h3>المزيد من المهن مقفلة</h3>
+                    <p>سجل الدخول للمقارنة واكتشاف المزيد</p>
+                    <button class="primary-btn" style="margin-top:1rem; padding: 0.5rem 1rem;">تسجيل الدخول</button>
                 </div>
             `;
         }
@@ -567,12 +523,12 @@ const app = {
         container.innerHTML = displayData.map(career => `
             <div class="career-card" tabindex="0">
                 <div class="icon">${career.icon}</div>
-                <h3>${career.title[lang]}</h3>
-                <p style="margin-top: 0.5rem; font-size: 0.95rem">${this.t('careers.demand', { value: career.demand[lang] })}</p>
+                <h3>${career.title}</h3>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem">الطلب في السوق: <strong style="color:var(--text-primary)">${career.demand}</strong></p>
                 <div class="career-footer">
-                    <span class="tag" style="margin-top: 0">${career.salary[lang]}</span>
+                    <span class="tag" style="margin-top: 0">${career.salary}</span>
                     <label class="compare-checkbox-label" onclick="event.stopPropagation()">
-                        <input type="checkbox" onchange="app.toggleCompare(${career.id}, event)"> ${this.t('careers.compare')}
+                        <input type="checkbox" onchange="app.toggleCompare(${career.id}, event)"> قارن
                     </label>
                 </div>
             </div>
@@ -582,7 +538,7 @@ const app = {
     toggleCompare(careerId, event) {
         if (!this.state.isLoggedIn) {
             event.target.checked = false;
-            this.showToast(this.t('toast.loginRequired'));
+            this.showToast('يرجى تسجيل الدخول أولاً لتفعيل خاصية المقارنة.');
             this.openModal('login-modal');
             return;
         }
@@ -590,7 +546,7 @@ const app = {
         const isChecked = event.target.checked;
         if (isChecked) {
             if (this.state.selectedCareersForCompare.length >= 2) {
-                this.showToast(this.t('toast.maxCompare'));
+                this.showToast('يمكنك مقارنة مهنتين فقط في نفس الوقت.');
                 event.target.checked = false;
                 return;
             }
@@ -608,10 +564,10 @@ const app = {
         if (count > 0) {
             btn.classList.add('visible');
             btn.innerHTML = `
-                <span>${this.t('compare.selected', { count: count })}</span>
+                <span>تم تحديد ${count}/2 للمقارنة</span>
                 <button class="primary-btn" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;"
                         ${count !== 2 ? 'disabled' : ''}
-                        onclick="app.showComparison()">${this.t('compare.now')}</button>
+                        onclick="app.showComparison()">قارن الآن</button>
             `;
         } else {
             btn.classList.remove('visible');
@@ -619,25 +575,24 @@ const app = {
     },
 
     showComparison() {
-        const lang = this.state.lang;
         const c1 = this.data.careers.find(c => c.id === this.state.selectedCareersForCompare[0]);
         const c2 = this.data.careers.find(c => c.id === this.state.selectedCareersForCompare[1]);
 
         document.getElementById('compare-content').innerHTML = `
             <div class="compare-grid">
                 <div class="compare-item">
-                    <h4>${c1.icon} ${c1.title[lang]}</h4>
-                    <p class="compare-detail"><strong><i class="fas fa-chart-line"></i> ${this.t('compare.demand')}:</strong> ${c1.demand[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-wallet"></i> ${this.t('compare.salary')}:</strong> ${c1.salary[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-building"></i> ${this.t('compare.environment')}:</strong> ${c1.environment[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-star"></i> ${this.t('compare.skills')}:</strong> ${c1.skills[lang]}</p>
+                    <h4>${c1.icon} ${c1.title}</h4>
+                    <p class="compare-detail"><strong><i class="fas fa-chart-line"></i> الطلب في السوق:</strong> ${c1.demand}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-wallet"></i> مستوى الدخل:</strong> ${c1.salary}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-building"></i> بيئة العمل:</strong> ${c1.environment}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-star"></i> المهارات الأساسية:</strong> ${c1.skills}</p>
                 </div>
                 <div class="compare-item">
-                    <h4>${c2.icon} ${c2.title[lang]}</h4>
-                    <p class="compare-detail"><strong><i class="fas fa-chart-line"></i> ${this.t('compare.demand')}:</strong> ${c2.demand[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-wallet"></i> ${this.t('compare.salary')}:</strong> ${c2.salary[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-building"></i> ${this.t('compare.environment')}:</strong> ${c2.environment[lang]}</p>
-                    <p class="compare-detail"><strong><i class="fas fa-star"></i> ${this.t('compare.skills')}:</strong> ${c2.skills[lang]}</p>
+                    <h4>${c2.icon} ${c2.title}</h4>
+                    <p class="compare-detail"><strong><i class="fas fa-chart-line"></i> الطلب في السوق:</strong> ${c2.demand}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-wallet"></i> مستوى الدخل:</strong> ${c2.salary}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-building"></i> بيئة العمل:</strong> ${c2.environment}</p>
+                    <p class="compare-detail"><strong><i class="fas fa-star"></i> المهارات الأساسية:</strong> ${c2.skills}</p>
                 </div>
             </div>
         `;
@@ -652,7 +607,6 @@ const app = {
     },
 
     renderQuizQuestion() {
-        const lang = this.state.lang;
         const qIndex = this.state.quiz.currentQuestion;
         if (qIndex >= this.data.quizQuestions.length) {
             this.showQuizResults();
@@ -666,10 +620,10 @@ const app = {
             <div class="quiz-progress" role="progressbar" aria-valuenow="${progress}" aria-valuemin="0" aria-valuemax="100">
                 <div class="quiz-progress-fill" style="width: ${progress}%"></div>
             </div>
-            <div class="quiz-question">${q.question[lang]}</div>
+            <div class="quiz-question">${q.question}</div>
             <div class="quiz-options">
                 ${q.options.map(opt => `
-                    <button class="quiz-option" onclick="app.answerQuiz('${opt.category}')">${opt.text[lang]}</button>
+                    <button class="quiz-option" onclick="app.answerQuiz('${opt.category}')">${opt.text}</button>
                 `).join('')}
             </div>
         `;
@@ -684,7 +638,6 @@ const app = {
     },
 
     showQuizResults() {
-        const lang = this.state.lang;
         const scores = this.state.quiz.scores;
         const highestCategory = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
         const recommendedSpecs = this.data.specialties.filter(s => s.category === highestCategory);
@@ -692,23 +645,19 @@ const app = {
         document.getElementById('quiz-container').innerHTML = `
             <div class="quiz-progress"><div class="quiz-progress-fill" style="width: 100%"></div></div>
             <div class="icon" style="font-size: 4.5rem; color: var(--success-color); animation: sectionFadeIn 0.5s ease;">✨</div>
-            <h2 style="margin-bottom: 1rem;">${this.t('quiz.progress')}</h2>
-            <p style="margin-bottom: 2rem; font-size: 1.1rem;">${this.t('quiz.resultText', { category: this.getCategoryName(highestCategory) })}</p>
-            <h3 style="text-align: ${lang === 'ar' ? 'right' : 'left'}; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">${this.t('quiz.suggested')}</h3>
-            <div style="display: grid; gap: 1rem; text-align: ${lang === 'ar' ? 'right' : 'left'}; margin-bottom: 2.5rem;">
+            <h2 style="margin-bottom: 1rem;">اكتمل الاختبار!</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">بناءً على إجاباتك، تميل شخصيتك إلى مجال: <strong style="color: var(--accent-color);">${this.getCategoryName(highestCategory)}</strong></p>
+            <h3 style="text-align: right; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">التخصصات المقترحة لك:</h3>
+            <div style="display: grid; gap: 1rem; text-align: right; margin-bottom: 2.5rem;">
                 ${recommendedSpecs.length ? recommendedSpecs.map(s => `
-                    <div class="compare-item" style="cursor: pointer" onclick="app.openSpecialtyModal(${s.id})">
-                        <strong style="color: var(--accent-color); font-size: 1.15rem;">${s.title[lang]}</strong>
-                        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: var(--text-secondary);">${s.desc[lang]}</p>
+                    <div class="compare-item" style="cursor: pointer" onclick="app.openSpecialtyDetails(${s.id})">
+                        <strong style="color: var(--accent-color); font-size: 1.15rem;">${s.title}</strong>
+                        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: var(--text-secondary);">${s.desc}</p>
                     </div>
-                `).join('') : '<p>' + this.t('quiz.noResults') + '</p>'}
+                `).join('') : '<p>لا توجد تخصصات مطابقة حالياً.</p>'}
             </div>
-            <button class="primary-btn w-100 large" onclick="app.startQuiz()"><i class="fas fa-redo" style="margin-${lang === 'ar' ? 'left' : 'right'}: 8px;"></i> ${this.t('quiz.retry')}</button>
+            <button class="primary-btn w-100 large" onclick="app.startQuiz()"><i class="fas fa-redo" style="margin-left: 8px;"></i> إعادة الاختبار</button>
         `;
-    },
-
-    getCategoryName(cat) {
-        return this.t('category.' + cat);
     },
 
     openModal(modalId) { document.getElementById(modalId).classList.add('active'); },
@@ -716,28 +665,26 @@ const app = {
     closeModalOutside(event, modalId) { if (event.target.id === modalId) this.closeModal(modalId); },
 
     openSpecialtyModal(id) {
-        const lang = this.state.lang;
         const spec = this.data.specialties.find(s => s.id === id);
         if (!spec) return;
-        document.getElementById('modal-spec-title').innerText = spec.title[lang];
-        document.getElementById('modal-spec-desc').innerText = spec.desc[lang];
+        document.getElementById('modal-spec-title').innerText = spec.title;
+        document.getElementById('modal-spec-desc').innerText = spec.desc;
         document.getElementById('modal-spec-tags').innerHTML = `
-            <span class="tag" style="margin-top:0"><i class="fas fa-book-open" style="margin-${lang === 'ar' ? 'left' : 'right'}: 5px;"></i> ${spec.field[lang]}</span>
-            <span class="tag" style="margin-top:0"><i class="far fa-clock" style="margin-${lang === 'ar' ? 'left' : 'right'}: 5px;"></i> ${spec.duration[lang]}</span>
+            <span class="tag" style="margin-top:0"><i class="fas fa-book-open" style="margin-left: 5px;"></i> ${spec.field}</span>
+            <span class="tag" style="margin-top:0"><i class="far fa-clock" style="margin-left: 5px;"></i> ${spec.duration}</span>
         `;
         this.openModal('specialty-modal');
     },
 
     filterData(query, type) {
         const lq = query.toLowerCase().trim();
-        const lang = this.state.lang;
         if (type === 'universities') {
             this.renderUniversities(this.data.universities.filter(u =>
-                u.name[lang].toLowerCase().includes(lq) || u.wilaya[lang].toLowerCase().includes(lq)
+                u.name.toLowerCase().includes(lq) || u.wilaya.toLowerCase().includes(lq)
             ));
         } else if (type === 'schools') {
             this.renderSchools(this.data.schools.filter(s =>
-                s.name[lang].toLowerCase().includes(lq) || s.wilaya[lang].toLowerCase().includes(lq)
+                s.name.toLowerCase().includes(lq) || s.wilaya.toLowerCase().includes(lq)
             ));
         }
     },
@@ -753,9 +700,7 @@ const app = {
         if (dashBtn) dashBtn.classList.remove('hidden');
 
         const dashGreeting = document.getElementById('dashboard-greeting');
-        if (dashGreeting) dashGreeting.innerText = this.state.lang === 'fr'
-            ? `Bienvenue ${name} dans votre espace privé`
-            : `مرحباً بك يا ${name} في مساحتك الخاصة`;
+        if (dashGreeting) dashGreeting.innerText = `مرحباً بك يا ${name} في مساحتك الخاصة`;
 
         this.renderDashboard();
         this.renderUniversities();
@@ -771,22 +716,22 @@ const app = {
 
     simulateLogin(e) {
         e.preventDefault();
-        const name = this.state.lang === 'fr' ? "Étudiant" : "طالب";
+        const name = "طالب";
         this.state.isLoggedIn = true;
         localStorage.setItem('wendo_user', name);
         this.updateAuthUI(name);
         this.closeModal('login-modal');
-        this.showToast(this.t('toast.loginSuccess'));
+        this.showToast('تم تسجيل الدخول بنجاح!');
     },
 
     simulateRegister(e) {
         e.preventDefault();
-        const nameInput = e.target.querySelector('input[type="text"]').value;
+        const nameInput = e.target.querySelector('input[type="text"]').value || "طالب";
         this.state.isLoggedIn = true;
         localStorage.setItem('wendo_user', nameInput);
         this.updateAuthUI(nameInput);
         this.closeModal('register-modal');
-        this.showToast(this.t('toast.registerSuccess'));
+        this.showToast('تم إنشاء الحساب بنجاح!');
     }
 };
 
