@@ -264,6 +264,7 @@ const app = {
         this.renderSchools();
         this.renderCareers();
         this.initMarquees();
+        this.initScrollAnimation();
 
         if (this.state.isLoggedIn) {
             this.updateAuthUI(this.state.userName);
@@ -283,6 +284,24 @@ const app = {
             unisContent += this.data.universities.map(u => `<span class="marquee-item">🏛️ ${u.name}</span>`).join('');
         }
         document.getElementById('marquee-unis').innerHTML = unisContent;
+    },
+
+    initScrollAnimation() {
+        const elements = document.querySelectorAll('.scroll-animate');
+        if (elements.length === 0) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        elements.forEach(el => observer.observe(el));
     },
 
     navigate(viewId) {
@@ -357,7 +376,7 @@ const app = {
         }
 
         grid.innerHTML = displayData.map(u => `
-            <div class="data-card" onclick="app.showSpecialties('جامعة')" tabindex="0" role="button">
+            <div class="data-card scroll-animate" onclick="app.showSpecialties('جامعة')" tabindex="0" role="button">
                 <div>
                     <h3>${u.name}</h3>
                     <p><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> ${u.wilaya}</p>
@@ -365,6 +384,9 @@ const app = {
                 <span class="tag">${u.type}</span>
             </div>
         `).join('') + lockedHTML;
+
+        // إعادة تفعيل الـ observer للكروت الجديدة
+        setTimeout(() => this.initScrollAnimation(), 100);
     },
 
     renderSchools(filtered = this.data.schools) {
@@ -394,7 +416,7 @@ const app = {
         }
 
         grid.innerHTML = displayData.map(s => `
-            <div class="data-card" onclick="app.showSpecialties('مدرسة عليا')" tabindex="0" role="button">
+            <div class="data-card scroll-animate" onclick="app.showSpecialties('مدرسة عليا')" tabindex="0" role="button">
                 <div>
                     <h3>${s.name}</h3>
                     <p><i class="fas fa-map-marker-alt" style="margin-left: 5px;"></i> ${s.wilaya}</p>
@@ -402,6 +424,8 @@ const app = {
                 <span class="tag">${s.type}</span>
             </div>
         `).join('') + lockedHTML;
+
+        setTimeout(() => this.initScrollAnimation(), 100);
     },
 
     showSpecialties(context) {
@@ -423,7 +447,7 @@ const app = {
         }
 
         document.getElementById('specialties-grid').innerHTML = displayData.map(spec => `
-            <div class="data-card" onclick="app.openSpecialtyDetails(${spec.id})" tabindex="0" role="button">
+            <div class="data-card scroll-animate" onclick="app.openSpecialtyDetails(${spec.id})" tabindex="0" role="button">
                 <div>
                     <h3>${spec.title}</h3>
                     <p><i class="far fa-clock" style="margin-left: 5px;"></i> ${spec.duration}</p>
@@ -431,6 +455,8 @@ const app = {
                 <span class="tag">${spec.field}</span>
             </div>
         `).join('') + lockedHTML;
+
+        setTimeout(() => this.initScrollAnimation(), 100);
         this.navigate('specialties-view');
     },
 
@@ -521,7 +547,7 @@ const app = {
         }
 
         container.innerHTML = displayData.map(career => `
-            <div class="career-card" tabindex="0">
+            <div class="career-card scroll-animate" tabindex="0">
                 <div class="icon">${career.icon}</div>
                 <h3>${career.title}</h3>
                 <p style="margin-top: 0.5rem; font-size: 0.95rem">الطلب في السوق: <strong style="color:var(--text-primary)">${career.demand}</strong></p>
@@ -533,6 +559,8 @@ const app = {
                 </div>
             </div>
         `).join('') + lockedHTML;
+
+        setTimeout(() => this.initScrollAnimation(), 100);
     },
 
     toggleCompare(careerId, event) {

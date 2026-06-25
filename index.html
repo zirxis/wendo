@@ -646,6 +646,44 @@
             .footer-feature-item .feature-content strong { font-size: 0.8rem; }
             .footer-feature-item .feature-content .feature-desc { font-size: 0.7rem; }
         }
+
+        /* --- إخفاء محتوى الهيرو بشكل افتراضي --- */
+        .hero {
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(10px);
+            pointer-events: none;
+        }
+
+        /* عند تمرير الماوس على الفيديو */
+        .hero-video-wrapper:hover .hero {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* إظهار الـ scroll-indicator بشكل افتراضي وإخفائه عند hover */
+        .scroll-indicator {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-video-wrapper:hover .scroll-indicator {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* جعل الفيديو يأخذ خلفية داكنة عند hover لتوضيح النص */
+        .hero-video-wrapper:hover .video-overlay {
+            background: linear-gradient(to bottom, rgba(56, 45, 114, 0.4), rgba(56, 45, 114, 0.6));
+            transition: background 0.5s ease;
+        }
+
+        /* عند عدم التمرير - التدرج شفاف */
+        .video-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+            transition: background 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -675,7 +713,6 @@
             <button onclick="window.location.href='mhn.html'; app.toggleMobileMenu()">دليل المهن</button>
             <button onclick="app.startQuiz(); app.toggleMobileMenu()">اختبار الميول</button>
             <button id="nav-dashboard-btn" class="hidden" onclick="app.navigate('dashboard-view'); app.toggleMobileMenu()">مساحتي</button>
-            <button onclick="app.toggleTheme()">🌙 تبديل المظهر</button>
             <button id="menu-login-btn" onclick="app.openModal('login-modal'); app.toggleMobileMenu()">تسجيل الدخول</button>
             <button id="menu-logout-btn" class="hidden" onclick="app.logout(); app.toggleMobileMenu()">تسجيل الخروج</button>
         </div>
@@ -687,13 +724,11 @@
             <source src="vido.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
-        <div class="hero">
+        <div class="hero" id="hero-content">
             <h1>اكتشف مستقبلك <span style="background: linear-gradient(135deg, #e5ccf4, #a080e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مع WENDO</span></h1>
             <p style="color: #e5ccf4;">المنصة الموجهة للطلاب في الجزائر لاكتشاف التخصصات، الجامعات، والمهن الأنسب لميولك.</p>
             <div class="hero-buttons">
-                <button class="primary-btn large" onclick="app.startQuiz()">ابدأ اختبار الميول الآن</button>
                 <button class="secondary-btn large" onclick="app.navigate('explorer-view')">تصفح التخصصات</button>
-                <button class="secondary-btn large" onclick="window.open('https://zirxis.github.io/ichchaghfi/', '_blank')">ايش شغفك</button>
             </div>
         </div>
         <div class="scroll-indicator" onclick="document.querySelector('.features-grid').scrollIntoView({behavior:'smooth'})">
@@ -703,20 +738,49 @@
     </div>
 
     <main class="app-container">
-
         <section id="landing-view" class="view-section active">
+            <!-- ====== من نحن ====== -->
+            <section id="about-us" class="about-section">
+                <div class="about-container scroll-animate">
+                    <div class="about-badge">من نحن</div>
+                    <h2 class="about-title">منصة WENDO ..<br>شريكك في رحلة <span class="highlight">تحديد المستقبل</span></h2>
+                    <p class="about-desc">
+                        WENDO هي منصة توجيهية ذكية صُممت خصيصاً للطالب الجزائري، لتكون دليله الأمين في رحلة اختيار التخصص الجامعي أو المدرسي المناسب لميوله وقدراته. 
+                        نؤمن بأن كل طالب يملك إمكانيات فريدة، وأن الطريق إلى النجاح يبدأ بفهم صحيح للذات، ومن ثم اختيار واعٍ للمسار.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">+10</span>
+                            <span class="stat-label">تخصص مدروس</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">+30</span>
+                            <span class="stat-label">جامعة ومدرسة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">+50</span>
+                            <span class="stat-label">مهنة مستقبلية</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">+1000</span>
+                            <span class="stat-label">طالب استفاد</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <div class="features-grid">
-                <div class="feature-card interactive" onclick="app.startQuiz()" role="button" tabindex="0">
+                <div class="feature-card interactive scroll-animate" onclick="app.startQuiz()" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">🧠</div>
                     <h3>اختبار الميول الذكي</h3>
                     <p>أجب عن بعض الأسئلة وسنقترح لك التخصصات والمهن المناسبة لشخصيتك.</p>
                 </div>
-                <div class="feature-card interactive" onclick="window.location.href='mhn.html'" role="button" tabindex="0">
+                <div class="feature-card interactive scroll-animate" onclick="window.location.href='mhn.html'" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">⚖️</div>
                     <h3>المهن</h3>
                     <p>قارن بين مهنتين مختلفتين من حيث الطلب، الدخل، وبيئة العمل لاختيار الأفضل.</p>
                 </div>
-                <div class="feature-card interactive" onclick="app.navigate('explorer-view')" role="button" tabindex="0">
+                <div class="feature-card interactive scroll-animate" onclick="app.navigate('explorer-view')" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">🏛️</div>
                     <h3>المدارس والجامعات</h3>
                     <p>دليلك الشامل لجامعات ومدارس النخبة في مختلف ولايات الوطن.</p>
@@ -746,11 +810,11 @@
                 <h2>ماذا تريد استكشافه؟</h2>
             </div>
             <div class="explorer-grid">
-                <div class="explorer-card interactive" onclick="app.navigate('universities-view')" role="button" tabindex="0">
+                <div class="explorer-card interactive scroll-animate" onclick="app.navigate('universities-view')" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">🏛️</div>
                     <h3>الجامعات</h3>
                 </div>
-                <div class="explorer-card interactive" onclick="app.navigate('schools-view')" role="button" tabindex="0">
+                <div class="explorer-card interactive scroll-animate" onclick="app.navigate('schools-view')" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">🎓</div>
                     <h3>المدارس العليا</h3>
                 </div>
@@ -853,41 +917,12 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer scroll-animate">
         <div class="footer-content">
             <div class="footer-brand">
                 <h2>WENDO</h2>
                 <p class="tagline">الطريق نحو المستقبل</p>
-                <div class="footer-features">
-                    <div class="footer-feature-item">
-                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                        <div class="feature-content">
-                            <strong>موثوق ومُتحقق</strong>
-                            <span class="feature-desc">معلومات محدثة وموثوقة</span>
-                        </div>
-                    </div>
-                    <div class="footer-feature-item">
-                        <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
-                        <div class="feature-content">
-                            <strong>بسيط وواضح</strong>
-                            <span class="feature-desc">رحلة سلسة وسهلة الفهم</span>
-                        </div>
-                    </div>
-                    <div class="footer-feature-item">
-                        <div class="feature-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                        <div class="feature-content">
-                            <strong>مرافقة</strong>
-                            <span class="feature-desc">لست وحدك في مواجهة مستقبلك</span>
-                        </div>
-                    </div>
-                    <div class="footer-feature-item">
-                        <div class="feature-icon"><i class="fas fa-search"></i></div>
-                        <div class="feature-content">
-                            <strong>استكشاف</strong>
-                            <span class="feature-desc">اكتشف كل إمكانياتك</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="footer-col">

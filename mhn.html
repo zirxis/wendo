@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Wendo - Fullscreen Job Swipe</title>
+    <title>Wendo - دليل المهن</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -25,6 +25,12 @@
             --btn-red: #FF6B6B;
             --btn-yellow: #FFBE1A;
             --btn-green: #2ECC71;
+            --accent-color: #8B71DF;
+            --accent-light: #D5BFF2;
+            --text-primary: #2D3142;
+            --text-secondary: #82869A;
+            --border-color: #E8ECF4;
+            --bg-color: #FFFFFF;
         }
 
         * {
@@ -45,7 +51,6 @@
             overflow: hidden;
         }
 
-        /* حاوية التطبيق أصبحت تملأ الشاشة بالكامل */
         .app-container {
             width: 100vw;
             height: 100vh;
@@ -66,6 +71,7 @@
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            flex-shrink: 0;
         }
 
         .logo {
@@ -94,7 +100,6 @@
             color: var(--primary-purple);
         }
 
-        /* تنسيق زر الرئيسية المضاف */
         .home-btn {
             background: transparent;
             border: 1px solid var(--primary-purple);
@@ -134,7 +139,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- منطقة البطاقات (متجاوبة ومُتمركزة) --- */
+        /* --- منطقة البطاقات --- */
         .main-content {
             flex: 1;
             display: flex;
@@ -142,13 +147,14 @@
             align-items: center;
             padding: 20px;
             position: relative;
+            min-height: 0;
         }
 
         .cards-container {
             width: 100%;
-            max-width: 480px; /* لتجنب التمدد المفرط على شاشات الكمبيوتر */
+            max-width: 480px;
             height: 100%;
-            max-height: 680px;
+            max-height: 720px;
             position: relative;
             perspective: 1500px;
         }
@@ -176,26 +182,26 @@
         }
 
         .card-top {
-            height: 45%;
+            height: 40%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            flex-shrink: 0;
         }
 
         .icon-circle {
-            width: 130px;
-            height: 130px;
+            width: 110px;
+            height: 110px;
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 65px;
+            font-size: 55px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-        /* طوابع السحب (معكوسة حسب طلبك) */
         .card-stamp {
             position: absolute;
             top: 30px;
@@ -211,7 +217,6 @@
             background: rgba(255,255,255,0.9);
         }
 
-        /* الإعجاب (أخضر) يظهر عند السحب لليسار -> الطابع يكون على اليمين */
         .stamp-like {
             right: 30px;
             border: 4px solid var(--btn-green);
@@ -219,7 +224,6 @@
             transform: rotate(-15deg);
         }
 
-        /* التخطي (أحمر) يظهر عند السحب لليمين -> الطابع يكون على اليسار */
         .stamp-dislike {
             left: 30px;
             border: 4px solid var(--btn-red);
@@ -228,75 +232,127 @@
         }
 
         .card-bottom {
-            height: 55%;
-            padding: 30px;
+            height: 60%;
+            padding: 24px 28px 20px;
             display: flex;
             flex-direction: column;
             background: white;
+            overflow: hidden;
         }
 
         .category-badge {
             align-self: flex-start;
             background-color: var(--badge-bg);
             color: var(--primary-purple);
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 12px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .job-title {
             color: var(--text-dark);
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 24px;
+            margin-bottom: 6px;
             font-weight: 700;
         }
 
         .job-desc {
             color: var(--text-gray);
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 10px;
         }
 
         .skill-tag {
             background-color: #F5F3FC;
             color: #6C5A94;
-            padding: 6px 15px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 12px;
             border: 1px solid #EBE7F5;
             font-weight: bold;
         }
 
+        /* --- التخصصات المرتبطة (تحت الوصف مباشرة) --- */
+        .related-specialties {
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .related-specialties-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .related-specialties-label i {
+            color: var(--primary-purple);
+        }
+
+        .specialties-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .specialty-link {
+            display: inline-block;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-light));
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .specialty-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 113, 223, 0.3);
+        }
+
         .salary {
-            margin-top: auto;
             color: var(--text-dark);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 8px;
             background: #F8F9FD;
-            padding: 12px 18px;
-            border-radius: 16px;
+            padding: 10px 16px;
+            border-radius: 14px;
+            margin-top: auto;
+            flex-shrink: 0;
         }
         
         .salary span.estime {
             color: #A5A9B9;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: normal;
         }
 
-        /* --- شاشة سجل الدخول المبتكرة --- */
+        /* --- شاشة سجل الدخول --- */
         .login-prompt {
             display: flex;
             flex-direction: column;
@@ -357,14 +413,15 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* --- الأزرار السفلية (ترتيب جديد حسب عكس الاتجاه) --- */
+        /* --- الأزرار السفلية --- */
         .controls {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 25px;
-            padding: 20px 24px 40px 24px;
+            padding: 16px 24px 30px 24px;
             z-index: 10;
+            flex-shrink: 0;
         }
 
         .control-btn {
@@ -410,19 +467,54 @@
             box-shadow: 0 15px 35px rgba(139, 113, 223, 0.4);
         }
 
-        /* تعديلات للشاشات الصغيرة (الهواتف) */
-        @media (max-width: 600px) {
-            header { padding: 15px 20px; }
-            .header-actions { gap: 10px; }
-            .home-btn { padding: 8px 12px; font-size: 13px; }
-            .login-btn { padding: 8px 15px; font-size: 13px; }
-            .cards-container { max-width: 100%; margin: 0; }
-            .card { border-radius: 24px; }
-            .job-title { font-size: 24px; }
-            .btn-main { width: 70px; height: 70px; font-size: 26px; }
-            .btn-secondary { width: 50px; height: 50px; font-size: 18px; }
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--text-dark);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            z-index: 100;
+            pointer-events: none;
+            white-space: nowrap;
         }
 
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* تعديلات للشاشات الصغيرة */
+        @media (max-width: 600px) {
+            header { padding: 12px 16px; }
+            .header-actions { gap: 8px; }
+            .home-btn { padding: 6px 12px; font-size: 12px; }
+            .home-btn span { display: none; }
+            .login-btn { padding: 6px 12px; font-size: 12px; }
+            .cards-container { max-width: 100%; max-height: 620px; }
+            .card { border-radius: 24px; }
+            .job-title { font-size: 20px; }
+            .card-bottom { padding: 18px 20px 16px; }
+            .btn-main { width: 64px; height: 64px; font-size: 24px; }
+            .btn-secondary { width: 48px; height: 48px; font-size: 16px; }
+            .controls { gap: 16px; padding: 12px 16px 20px; }
+            .specialty-link { font-size: 11px; padding: 15px 20px; }
+            .icon-circle { width: 80px; height: 80px; font-size: 40px; }
+            .toast { bottom: 80px; font-size: 12px; padding: 10px 20px; white-space: normal; max-width: 90%; }
+        }
+
+        @media (max-width: 400px) {
+            .job-desc { font-size: 13px; -webkit-line-clamp: 2; }
+            .salary { font-size: 12px; padding: 8px 12px; }
+            .skill-tag { font-size: 11px; padding: 3px 10px; }
+        }
     </style>
 </head>
 <body>
@@ -432,7 +524,7 @@
         <div class="logo" onclick="window.location.href='index.html'">WENDO</div>
         <div class="header-actions">
             <button class="home-btn" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-house"></i> الرئيسية
+                <i class="fa-solid fa-house"></i> <span>الرئيسية</span>
             </button>
             <i class="fa-solid fa-language lang-icon"></i>
             <button class="login-btn" onclick="window.location.href='index.html?action=login'">تسجيل الدخول</button>
@@ -450,21 +542,183 @@
     </div>
 </div>
 
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
 <script>
+    // ============================================================
+    // قاعدة بيانات المهن الحقيقية مع التخصصات المرتبطة
+    // ============================================================
     const jobsDatabase = [
-        { id: 1, category: "التصميم والتكنولوجيا", title: "مصمم واجهات UX/UI", desc: "تقوم بتصميم واجهات رقمية بديهية وجذابة بناءً على سلوك وأبحاث المستخدمين وسد الفجوة مع المطورين.", skills: ["Figma", "إبداع", "بروتوتايب", "أبحاث المستخدم"], salary: "45,000 – 75,000 د.ج/شهر", emoji: "🎨", bgColor: "#D5BFF2" },
-        { id: 2, category: "البرمجة والتطوير", title: "مطور واجهات أمامية", desc: "تُحول التصاميم الثابتة إلى مواقع حية وتفاعلية سريعة الاستجابة باستخدام أحدث تقنيات الويب الحديثة.", skills: ["React", "JavaScript", "HTML/CSS", "Git"], salary: "50,000 – 90,000 د.ج/شهر", emoji: "💻", bgColor: "#A3D2CA" },
-        { id: 3, category: "البيانات والذكاء الاصطناعي", title: "محلل بيانات", desc: "تستخرج الأنماط وتحول البيانات الضخمة والمعقدة إلى تقارير استراتيجية تدعم اتخاذ القرارات الذكية في الشركة.", skills: ["Python", "SQL", "Tableau", "إحصاء"], salary: "60,000 – 100,000 د.ج/شهر", emoji: "📊", bgColor: "#F1D4D4" },
-        { id: 4, category: "التسويق والنمو", title: "أخصائي تحسين محركات البحث", desc: "تتولى مسؤولية تصدر المواقع للنتائج الأولى في محركات البحث وزيادة الزيارات المجانية بشكل دوري ومستدام.", skills: ["SEO", "Google Analytics", "بناء الروابط"], salary: "40,000 – 80,000 د.ج/شهر", emoji: "📈", bgColor: "#FDE2A6" },
-        { id: 5, category: "تطوير الأنظمة", title: "مطور تطبيقات الهواتف", desc: "تبني وتصمم تطبيقات ذكية متكاملة تعمل بكفاءة عالية على منصات Android و iOS باستخدام أحدث الأطر المتاحة.", skills: ["Flutter", "Dart", "REST API", "Firebase"], salary: "70,000 – 120,000 د.ج/شهر", emoji: "📱", bgColor: "#A0E8AF" }
+        { 
+            id: 1, 
+            category: "الطب والصحة", 
+            title: "طبيب عام", 
+            desc: "يقوم بتشخيص وعلاج الأمراض، ويقدم الرعاية الصحية الأولية للمرضى، ويحيل الحالات المعقدة إلى الاختصاصيين.", 
+            skills: ["تشخيص", "طب بشري", "رعاية صحية", "تواصل مع المرضى"], 
+            emoji: "🩺", 
+            bgColor: "#D5E8F7",
+            specialties: ["طب", "صيدلة", "بيولوجيا"]
+        },
+        { 
+            id: 2, 
+            category: "الهندسة", 
+            title: "مهندس مدني", 
+            desc: "يتولى تصميم وإدارة مشاريع البنية التحتية كالطرق والجسور والمباني، ويشرف على عمليات البناء والتشييد.", 
+            skills: ["تصميم", "إدارة مشاريع", "برامج هندسية", "بناء"], 
+            emoji: "🏗️", 
+            bgColor: "#E8F0E3",
+            specialties: ["هندسة مدنية", "هندسة معمارية", "هندسة طرق"]
+        },
+        { 
+            id: 3, 
+            category: "تكنولوجيا المعلومات", 
+            title: "مهندس برمجيات", 
+            desc: "يقوم بتطوير وصيانة تطبيقات وأنظمة برمجية باستخدام لغات البرمجة المختلفة، وحل المشاكل التقنية.", 
+            skills: ["Java", "Python", "C++", "تطوير تطبيقات"], 
+            emoji: "💻", 
+            bgColor: "#E0E8F5",
+            specialties: ["إعلام آلي", "هندسة برمجيات", "علوم الحاسوب"]
+        },
+        { 
+            id: 4, 
+            category: "المالية والأعمال", 
+            title: "محاسب قانوني", 
+            desc: "يقوم بمراجعة الحسابات المالية للشركات، وإعداد التقارير المالية، وضمان الامتثال للقوانين الضريبية.", 
+            skills: ["محاسبة", "مراجعة", "قوانين ضريبية", "تحليل مالي"],  
+            emoji: "📊", 
+            bgColor: "#F7F0E0",
+            specialties: ["علوم مالية", "محاسبة", "تسيير"]
+        },
+        { 
+            id: 5, 
+            category: "التعليم", 
+            title: "أستاذ جامعي", 
+            desc: "يقوم بتدريس الطلاب في الجامعات، وإجراء البحوث العلمية، ونشر المعرفة في تخصصه الأكاديمي.", 
+            skills: ["تدريس", "بحث علمي", "تخصص أكاديمي", "تواصل"], 
+            emoji: "👨‍🏫", 
+            bgColor: "#F0E8F0",
+            specialties: ["تعليم", "علوم إنسانية", "علوم دقيقة", "لغات"]
+        },
+        { 
+            id: 6, 
+            category: "الإعلام والاتصال", 
+            title: "صحفي", 
+            desc: "يقوم بجمع وتحليل ونشر الأخبار والمعلومات عبر وسائل الإعلام المختلفة، ويسلط الضوء على القضايا المهمة.", 
+            skills: ["تحرير", "تحليل", "إعلام", "تواصل"], 
+            emoji: "🎙️", 
+            bgColor: "#F5E8E0",
+            specialties: ["إعلام واتصال", "صحافة", "علوم إنسانية"]
+        },
+        { 
+            id: 7, 
+            category: "الهندسة", 
+            title: "مهندس كهربائي", 
+            desc: "يتخصص في تصميم وتطوير الأنظمة الكهربائية، من شبكات الطاقة إلى الأجهزة الإلكترونية وأنظمة التحكم.", 
+            skills: ["كهرباء", "طاقة", "أنظمة تحكم", "تصميم"], 
+            emoji: "⚡", 
+            bgColor: "#E8E8F5",
+            specialties: ["هندسة كهربائية", "هندسة طاقة", "الكترونيك"]
+        },
+        { 
+            id: 8, 
+            category: "القانون", 
+            title: "محامي", 
+            desc: "يمثل العملاء في القضايا القانونية، ويقدم الاستشارات القانونية، ويدافع عن حقوق الأفراد والمؤسسات.", 
+            skills: ["قانون", "مرافعة", "تحليل", "دفاع"], 
+            emoji: "⚖️", 
+            bgColor: "#F0F0E8",
+            specialties: ["حقوق", "علوم سياسية", "قضاء"]
+        },
+        { 
+            id: 9, 
+            category: "الفنون والإبداع", 
+            title: "مهندس معماري", 
+            desc: "يقوم بتصميم المباني والمساحات الحضرية، مع مراعاة الجماليات، الوظائف، والمتطلبات البيئية والقانونية.", 
+            skills: ["تصميم معماري", "رسم", "تخطيط", "برامج 3D"], 
+            emoji: "🏛️", 
+            bgColor: "#E8F0E8",
+            specialties: ["هندسة معمارية", "هندسة مدنية", "فنون جميلة"]
+        },
+        { 
+            id: 10, 
+            category: "الزراعة والبيئة", 
+            title: "مهندس زراعي", 
+            desc: "يعمل على تطوير وتحسين الإنتاج الزراعي، وإدارة الموارد الطبيعية، ودراسة التربة والنباتات.", 
+            skills: ["زراعة", "بيئة", "تربة", "نباتات"], 
+            emoji: "🌾", 
+            bgColor: "#E8F5E0",
+            specialties: ["علوم زراعية", "بيولوجيا", "بيئة"]
+        },
+        { 
+            id: 11, 
+            category: "الصيدلة", 
+            title: "صيدلي", 
+            desc: "يقوم بتوزيع الأدوية وتقديم النصائح الصحية للمرضى، ويشرف على سلامة وفعالية الأدوية الموصوفة.", 
+            skills: ["صيدلة", "أدوية", "صحة", "مشورة طبية"], 
+            emoji: "💊", 
+            bgColor: "#E8F5F0",
+            specialties: ["صيدلة", "طب", "بيولوجيا"]
+        },
+        { 
+            id: 12, 
+            category: "التمريض", 
+            title: "ممرض", 
+            desc: "يقدم الرعاية الصحية للمرضى في المستشفيات والمراكز الصحية، ويساعد في عملية التعافي وتحسين جودة الحياة.", 
+            skills: ["رعاية تمريضية", "صحة", "إسعافات", "تواصل"], 
+            emoji: "💉", 
+            bgColor: "#F0F5F5",
+            specialties: ["طب", "صيدلة", "بيولوجيا"]
+        }
     ];
 
+    // ============================================================
+    // البيانات المحلية للتخصصات (لمطابقة أسماء التخصصات)
+    // ============================================================
+    const specialtyMap = {
+        "طب": "طب",
+        "صيدلة": "صيدلة",
+        "بيولوجيا": "بيولوجيا",
+        "هندسة مدنية": "هندسة مدنية",
+        "هندسة معمارية": "هندسة معمارية",
+        "هندسة طرق": "هندسة طرق",
+        "إعلام آلي": "إعلام آلي",
+        "هندسة برمجيات": "هندسة برمجيات",
+        "علوم الحاسوب": "علوم الحاسوب",
+        "علوم مالية": "علوم مالية",
+        "محاسبة": "محاسبة",
+        "تسيير": "تسيير",
+        "تعليم": "تعليم",
+        "علوم إنسانية": "علوم إنسانية",
+        "علوم دقيقة": "علوم دقيقة",
+        "لغات": "لغات",
+        "إعلام واتصال": "إعلام واتصال",
+        "صحافة": "صحافة",
+        "هندسة كهربائية": "هندسة كهربائية",
+        "هندسة طاقة": "هندسة طاقة",
+        "الكترونيك": "الكترونيك",
+        "حقوق": "حقوق",
+        "علوم سياسية": "علوم سياسية",
+        "قضاء": "قضاء",
+        "فنون جميلة": "فنون جميلة",
+        "علوم زراعية": "علوم زراعية",
+        "بيئة": "بيئة"
+    };
+
+    // ============================================================
+    // المتغيرات العامة
+    // ============================================================
     let currentJobs = [...jobsDatabase];
     let swipedHistory = [];
 
     const board = document.getElementById('board');
     const controls = document.getElementById('controls');
+    const toastEl = document.getElementById('toast');
+    let toastTimeout = null;
 
+    // ============================================================
+    // دوال العرض
+    // ============================================================
     function renderCards() {
         board.innerHTML = '';
         if (currentJobs.length === 0) {
@@ -496,6 +750,15 @@
                 card.style.transform = 'translateY(-40px) scale(0.90)';
             }
 
+            // بناء روابط التخصصات
+            let specialtiesHTML = '';
+            if (job.specialties && job.specialties.length > 0) {
+                specialtiesHTML = job.specialties.map(spec => {
+                    const specName = specialtyMap[spec] || spec;
+                    return `<button class="specialty-link" data-specialty="${spec}" onclick="navigateToSpecialty('${spec}')">${specName}</button>`;
+                }).join('');
+            }
+
             card.innerHTML = `
                 <div class="card-top" style="background-color: ${job.bgColor}">
                     <div class="card-stamp stamp-like">إعجاب</div>
@@ -506,11 +769,19 @@
                     <span class="category-badge">${job.category}</span>
                     <h2 class="job-title">${job.title}</h2>
                     <p class="job-desc">${job.desc}</p>
+                    
+                    <!-- التخصصات المرتبطة تحت الوصف مباشرة -->
+                    <div class="related-specialties">
+                        <div class="related-specialties-label">
+                            <i class="fa-solid fa-graduation-cap"></i> التخصصات المرتبطة:
+                        </div>
+                        <div class="specialties-list">
+                            ${specialtiesHTML || '<span style="color: var(--text-gray); font-size: 12px;">لا توجد تخصصات محددة</span>'}
+                        </div>
+                    </div>
+                    
                     <div class="skills">
                         ${job.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
-                    </div>
-                    <div class="salary">
-                        💰 ${job.salary} <span class="estime">· تقريبي</span>
                     </div>
                 </div>
             `;
@@ -534,6 +805,45 @@
         `;
     }
 
+    // ============================================================
+    // دالة الانتقال إلى التخصص
+    // ============================================================
+    function navigateToSpecialty(specialtyKey) {
+        showToast(`جاري التوجيه إلى تخصص: ${specialtyMap[specialtyKey] || specialtyKey}`);
+        
+        try {
+            localStorage.setItem('wendo_selected_specialty', JSON.stringify({
+                name: specialtyMap[specialtyKey] || specialtyKey,
+                key: specialtyKey
+            }));
+            
+            setTimeout(() => {
+                window.location.href = `index.html?action=view-specialty&specialty=${encodeURIComponent(specialtyKey)}`;
+            }, 400);
+        } catch (e) {
+            showToast('يرجى العودة إلى الصفحة الرئيسية واختيار التخصص من قائمة التخصصات');
+        }
+    }
+
+    // ============================================================
+    // دالة عرض الإشعارات
+    // ============================================================
+    function showToast(message) {
+        if (toastTimeout) {
+            clearTimeout(toastTimeout);
+            toastEl.classList.remove('show');
+        }
+        toastEl.textContent = message;
+        toastEl.classList.add('show');
+        toastTimeout = setTimeout(() => {
+            toastEl.classList.remove('show');
+            toastTimeout = null;
+        }, 3000);
+    }
+
+    // ============================================================
+    // نظام السحب (Swipe)
+    // ============================================================
     let carouselInstance = null;
 
     function initSwipe() {
@@ -583,7 +893,6 @@
             const rotate = this.diffX * 0.03;
             this.card.style.transform = `translate(${this.diffX}px, ${this.diffY * 0.15}px) rotate(${rotate}deg)`;
 
-            // الاتجاهات المعكوسة (اليسار إعجاب، اليمين تخطي)
             const ratio = Math.min(Math.abs(this.diffX) / 100, 1);
             if (this.diffX < -10) { 
                 this.stampLike.style.opacity = ratio;
@@ -644,6 +953,9 @@
         }
     }
 
+    // ============================================================
+    // أزرار التحكم
+    // ============================================================
     document.getElementById('undo-btn').addEventListener('click', () => {
         if (swipedHistory.length > 0) {
             const lastJob = swipedHistory.pop();
@@ -678,6 +990,41 @@
         }
     });
 
+    // ============================================================
+    // معالجة المعاملات من الرابط (للتوجيه المباشر)
+    // ============================================================
+    function handleUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        const action = params.get('action');
+        const specialty = params.get('specialty');
+        
+        if (action === 'view-specialty' && specialty) {
+            try {
+                const specialtyData = {
+                    name: specialtyMap[specialty] || specialty,
+                    key: specialty
+                };
+                localStorage.setItem('wendo_selected_specialty', JSON.stringify(specialtyData));
+                window.history.replaceState({}, document.title, window.location.pathname);
+                showToast(`تم التوجيه إلى تخصص: ${specialtyData.name}`);
+            } catch (e) {
+                console.error('Error handling specialty redirect:', e);
+            }
+        }
+        
+        try {
+            const saved = localStorage.getItem('wendo_selected_specialty');
+            if (saved) {
+                const data = JSON.parse(saved);
+                console.log('Specialty saved for redirection:', data);
+            }
+        } catch (e) {}
+    }
+
+    // ============================================================
+    // تهيئة التطبيق
+    // ============================================================
+    handleUrlParams();
     renderCards();
 </script>
 </body>
