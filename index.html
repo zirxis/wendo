@@ -697,7 +697,7 @@
         </div>
         <div class="nav-brand" onclick="app.navigate('landing-view')" role="button" tabindex="0">WENDO</div>
         <div class="nav-right">
-            <button class="program-finder" onclick="app.navigate('explorer-view')">
+            <button class="program-finder" onclick="window.location.href='sp.html'">
                 <span>البحث عن تخصص</span>
                 <i class="fas fa-th"></i>
             </button>
@@ -709,7 +709,7 @@
         <button class="close-btn" onclick="app.toggleMobileMenu()">×</button>
         <div class="mobile-links">
             <button onclick="app.navigate('landing-view'); app.toggleMobileMenu()">🏠 الرئيسية</button>
-            <button onclick="app.navigate('explorer-view'); app.toggleMobileMenu()">الجامعات والمدارس</button>
+            <button onclick="window.location.href='sp.html'; app.toggleMobileMenu()">الجامعات والمدارس</button>
             <button onclick="window.location.href='mhn.html'; app.toggleMobileMenu()">دليل المهن</button>
             <button onclick="app.startQuiz(); app.toggleMobileMenu()">اختبار الميول</button>
             <button id="nav-dashboard-btn" class="hidden" onclick="app.navigate('dashboard-view'); app.toggleMobileMenu()">مساحتي</button>
@@ -740,50 +740,76 @@
     <main class="app-container">
         <section id="landing-view" class="view-section active">
             <!-- ====== من نحن ====== -->
-            <section id="about-us" class="about-section">
-                <div class="about-container scroll-animate">
-                    <div class="about-badge">من نحن</div>
-                    <h2 class="about-title">منصة WENDO ..<br>شريكك في رحلة <span class="highlight">تحديد المستقبل</span></h2>
-                    <p class="about-desc">
-                        WENDO هي منصة توجيهية ذكية صُممت خصيصاً للطالب الجزائري، لتكون دليله الأمين في رحلة اختيار التخصص الجامعي أو المدرسي المناسب لميوله وقدراته. 
-                        نؤمن بأن كل طالب يملك إمكانيات فريدة، وأن الطريق إلى النجاح يبدأ بفهم صحيح للذات، ومن ثم اختيار واعٍ للمسار.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">+10</span>
-                            <span class="stat-label">تخصص مدروس</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">+30</span>
-                            <span class="stat-label">جامعة ومدرسة</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">+50</span>
-                            <span class="stat-label">مهنة مستقبلية</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">+1000</span>
-                            <span class="stat-label">طالب استفاد</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<section id="about-us" class="about-section">
+    <div class="about-container scroll-animate">
+        <!-- شارة صغيرة -->
+        <div class="about-badge">
+            <span class="badge-dot"></span>
+            من نحن
+        </div>
+
+        <!-- العنوان الرئيسي -->
+        <h2 class="about-title">
+            منصة <span class="highlight-gradient">WENDO</span>
+            <br>شريكك في رحلة <span class="highlight">تحديد المستقبل</span>
+        </h2>
+
+        <!-- الوصف -->
+        <p class="about-desc">
+            <span class="quote-mark">“</span>
+            WENDO هي منصة توجيهية ذكية صُممت خصيصاً للطالب الجزائري، لتكون دليله الأمين في رحلة اختيار التخصص الجامعي أو المدرسي المناسب لميوله وقدراته. 
+            نؤمن بأن كل طالب يملك إمكانيات فريدة، وأن الطريق إلى النجاح يبدأ بفهم صحيح للذات، ومن ثم اختيار واعٍ للمسار.
+            <span class="quote-mark">”</span>
+        </p>
+
+        <!-- إحصائيات -->
+        <div class="about-stats">
+            <div class="stat-item">
+                <span class="stat-number" data-count="12">0</span>
+                <span class="stat-label">تخصص مدروس</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-count="35">0</span>
+                <span class="stat-label">جامعة ومدرسة</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-count="50">0</span>
+                <span class="stat-label">مهنة مستقبلية</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-count="1200">0</span>
+                <span class="stat-label">طالب استفاد</span>
+            </div>
+        </div>
+
+        <!-- زر دعوة للتفاعل -->
+        <div class="about-cta">
+            <button class="about-btn primary" onclick="app.startQuiz()">
+                <i class="fas fa-rocket"></i> ابدأ رحلتك الآن
+            </button>
+            <button class="about-btn secondary" onclick="window.location.href='sp.html'">
+                <i class="fas fa-compass"></i> استكشف التخصصات
+            </button>
+        </div>
+    </div>
+</section>
 
             <div class="features-grid">
-                <div class="feature-card interactive scroll-animate" onclick="app.startQuiz()" role="button" tabindex="0">
-                    <div class="icon" style="color: var(--text-primary);">🧠</div>
-                    <h3>اختبار الميول الذكي</h3>
-                    <p>أجب عن بعض الأسئلة وسنقترح لك التخصصات والمهن المناسبة لشخصيتك.</p>
+                <div class="feature-card interactive scroll-animate" onclick="window.location.href='sp.html'" role="button" tabindex="0">
+                    <div class="icon" style="color: var(--text-primary);">🏛️</div>
+                    <h3>المدارس والجامعات</h3>
+                    <p>دليلك الشامل لجامعات ومدارس النخبة في مختلف ولايات الوطن.</p>
                 </div>
                 <div class="feature-card interactive scroll-animate" onclick="window.location.href='mhn.html'" role="button" tabindex="0">
                     <div class="icon" style="color: var(--text-primary);">⚖️</div>
                     <h3>المهن</h3>
                     <p>قارن بين مهنتين مختلفتين من حيث الطلب، الدخل، وبيئة العمل لاختيار الأفضل.</p>
                 </div>
-                <div class="feature-card interactive scroll-animate" onclick="app.navigate('explorer-view')" role="button" tabindex="0">
-                    <div class="icon" style="color: var(--text-primary);">🏛️</div>
-                    <h3>المدارس والجامعات</h3>
-                    <p>دليلك الشامل لجامعات ومدارس النخبة في مختلف ولايات الوطن.</p>
+                
+				<div class="feature-card interactive scroll-animate" onclick="app.startQuiz()" role="button" tabindex="0">
+                    <div class="icon" style="color: var(--text-primary);">🧠</div>
+                    <h3>اختبار الميول الذكي</h3>
+                    <p>أجب عن بعض الأسئلة وسنقترح لك التخصصات والمهن المناسبة لشخصيتك.</p>
                 </div>
             </div>
         </section>

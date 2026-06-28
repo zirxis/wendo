@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WENDO - دليل الجامعات والتخصصات 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- تحميل الخطوط -->
+    <link rel="preload" href="arabic.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Regular.OTF" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Bold.OTF" as="font" type="font/otf" crossorigin>
+    <style>
+        /* --- استيراد المتغيرات من التصميم الأصلي --- */
+        :root {
+            --text-primary: #382D72;
+            --text-secondary: #4a4a6a;
+            --bg-color: #f8f7fc;
+            --surface-color: #ffffff;
+            --surface-hover: #f0edf9;
+            --border-color: #e8e5f2;
+            --accent-color: #6C4E9E;
+            --accent-light: #a080e1;
+            --accent-purple: #8b6bd4;
+            --accent-gradient: linear-gradient(135deg, #382D72, #6C4E9E);
+            --shadow-md: 0 8px 30px rgba(56, 45, 114, 0.12);
+            --shadow-lg: 0 12px 40px rgba(56, 45, 114, 0.2);
+            --error-color: #e74c3c;
+            --success-color: #27ae60;
+            --font-arabic: 'ArabicFont', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-display: 'BebasNeue-Regular', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font-display-bold: 'BebasNeue-Bold', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* تعريف الخطوط */
+        @font-face {
+            font-family: 'ArabicFont';
+            src: url('arabic.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'ArabicFont';
+            src: url('arabic.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BebasNeue-Regular';
+            src: url('BebasNeue-Regular.OTF') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'BebasNeue-Bold';
+            src: url('BebasNeue-Bold.OTF') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-arabic);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        /* --- تنسيقات الناف بار (مطابقة للتصميم الأصلي مع القائمة) --- */
+        .navbar {
+            background: var(--surface-color);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 30px rgba(56, 45, 114, 0.15);
+        }
+
+        .nav-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            letter-spacing: 2px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-brand:hover {
+            transform: scale(1.03);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-left .menu-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-left .menu-text:hover {
+            background: var(--surface-hover);
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .nav-right button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-right button:hover {
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .nav-right .icon-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--surface-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-right .icon-btn:hover {
+            background: var(--accent-light);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* --- القائمة الجانبية (mobile menu) --- */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background: var(--surface-color);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.open {
+            right: 0;
+        }
+
+        .mobile-menu .close-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu .close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--error-color);
+        }
+
+        .mobile-menu .mobile-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 3rem;
+        }
+
+        .mobile-menu .mobile-links button {
+            background: none;
+            border: none;
+            padding: 0.9rem 1.2rem;
+            text-align: right;
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-family: var(--font-arabic);
+            color: var(--text-primary);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            border: 1px solid transparent;
+        }
+
+        .mobile-menu .mobile-links button:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-color);
+            transform: translateX(-4px);
+        }
+
+        .mobile-menu .mobile-links button.hidden {
+            display: none;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- زر العودة للأعلى --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 16px 40px rgba(56, 45, 114, 0.3);
+        }
+
+        /* --- الحاوية الرئيسية --- */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* --- رأس الصفحة المحسن --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: var(--accent-gradient);
+            border-radius: 28px;
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -10%;
+            width: 40%;
+            height: 150%;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+            transform: rotate(10deg);
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            opacity: 0.92;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+            font-family: var(--font-arabic);
+        }
+
+        .page-header .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header .header-stats .stat {
+            text-align: center;
+        }
+
+        .page-header .header-stats .stat .number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .page-header .header-stats .stat .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* --- شريط البحث والفلترة المحسن --- */
+        .filters-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            background: var(--surface-color);
+            padding: 1.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .filters-section:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .filters-section .filter-label {
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .filters-section input,
+        .filters-section select {
+            padding: 0.85rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-arabic);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filters-section input:focus,
+        .filters-section select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(108, 78, 158, 0.15);
+            outline: none;
+            background: var(--surface-color);
+        }
+
+        .filters-section input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .filters-section .results-count {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            background: var(--bg-color);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        /* --- شبكة التخصصات المحسنة --- */
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .specialty-card {
+            background: var(--surface-color);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .specialty-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .specialty-card:hover::before {
+            opacity: 1;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
+        }
+
+        .specialty-card .specialty-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        .specialty-card .specialty-name .badge {
+            font-size: 0.7rem;
+            font-family: var(--font-display-bold);
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .specialty-card .specialty-code {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+            font-weight: 400;
+            font-family: var(--font-arabic);
+        }
+
+        .specialty-card .universities-list {
+            margin-top: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            flex: 1;
+        }
+
+        .specialty-card .uni-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 1rem;
+            background: var(--bg-color);
+            border-radius: 14px;
+            border-right: 4px solid var(--accent-light);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .specialty-card .uni-item:hover {
+            background: var(--surface-hover);
+            transform: translateX(-6px);
+            border-right-color: var(--accent-color);
+        }
+
+        .specialty-card .uni-item .uni-name {
+            font-weight: 600;
+            font-family: var(--font-arabic);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .specialty-card .uni-item .uni-grade {
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--accent-color);
+            background: rgba(108, 78, 158, 0.1);
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .specialty-card .uni-item .uni-grade.nc {
+            color: var(--text-secondary);
+            background: var(--border-color);
+            font-weight: 400;
+            font-family: var(--font-arabic);
+        }
+
+        .specialty-card .uni-item .uni-grade.high {
+            background: rgba(231, 76, 60, 0.12);
+            color: #c0392b;
+        }
+
+        .specialty-card .uni-item .uni-grade.medium {
+            background: rgba(241, 196, 15, 0.15);
+            color: #b7950b;
+        }
+
+        .specialty-card .uni-item .uni-grade.low {
+            background: rgba(39, 174, 96, 0.12);
+            color: #1e8449;
+        }
+
+        .specialty-card .view-details {
+            margin-top: 1.2rem;
+            padding: 0.7rem 1.5rem;
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .specialty-card .view-details:hover {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            transform: scale(1.02);
+        }
+
+        .specialty-card .view-details i {
+            transition: transform 0.3s ease;
+        }
+
+        .specialty-card .view-details:hover i {
+            transform: translateX(-4px);
+        }
+
+        /* --- حالة عدم وجود نتائج --- */
+        .no-results {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .no-results h3 {
+            font-size: 1.4rem;
+            font-family: var(--font-display-bold);
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .no-results p {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* --- شريط التنقل السفلي (فوتر) محسن --- */
+        .footer {
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 4rem 2rem 1.5rem;
+            margin-top: 4rem;
+            border-radius: 40px 40px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 50%;
+            height: 150%;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 2.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            margin-bottom: 0.3rem;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .footer-brand .tagline {
+            font-size: 1rem;
+            color: var(--accent-light);
+            font-style: italic;
+            border-right: 3px solid var(--accent-purple);
+            padding-right: 14px;
+            font-family: var(--font-arabic);
+        }
+
+        .footer-brand .description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            font-family: var(--font-arabic);
+        }
+
+        .footer-col h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: #fff;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 3px;
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: var(--font-arabic);
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(-4px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: var(--font-arabic);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- تحميل متقدم --- */
+        .loading-shimmer {
+            grid-column: 1/-1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .shimmer-card {
+            background: var(--surface-color);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            min-height: 280px;
+        }
+
+        .shimmer-line {
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--border-color) 25%, var(--surface-hover) 50%, var(--border-color) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            margin-bottom: 0.8rem;
+        }
+
+        .shimmer-line.short {
+            width: 60%;
+        }
+
+        .shimmer-line.medium {
+            width: 80%;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* --- استجابة للشاشات الصغيرة --- */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .specialties-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+            .page-header .header-stats { gap: 1.5rem; flex-wrap: wrap; }
+            .page-header .header-stats .stat .number { font-size: 1.4rem; }
+            .filters-section { flex-direction: column; padding: 1.2rem; }
+            .filters-section input,
+            .filters-section select { width: 100%; min-width: auto; }
+            .filters-section .results-count { align-self: flex-start; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .navbar { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .nav-brand { font-size: 1.8rem; }
+            .nav-right button span { display: none; }
+            .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; left: 1.2rem; }
+            .mobile-menu { width: 280px; right: -300px; }
+        }
+
+        @media (max-width: 480px) {
+            .specialty-card { padding: 1.5rem; }
+            .specialty-card .uni-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+            .specialty-card .uni-item .uni-grade { align-self: flex-start; }
+            .page-header h1 { font-size: 1.6rem; }
+            .page-header { padding: 1.5rem 1rem; }
+            .page-header .header-stats .stat .number { font-size: 1.2rem; }
+            .specialty-card .specialty-name { font-size: 1.2rem; flex-wrap: wrap; }
+            .specialty-card .view-details { font-size: 0.8rem; padding: 0.5rem 1rem; }
+            .mobile-menu { width: 260px; right: -280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== شريط التنقل مع القائمة ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <button class="menu-text" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+                <span>القائمة</span>
+            </button>
+        </div>
+        <div class="nav-brand" onclick="window.location.href='index.html'">WENDO</div>
+        <div class="nav-right">
+            <button onclick="window.location.href='index.html'">
+                <span>الرئيسية</span>
+                <i class="fas fa-home"></i>
+            </button>
+            <button class="icon-btn" title="حسابي"><i class="fas fa-user"></i></button>
+        </div>
+    </nav>
+
+    <!-- ===== القائمة الجانبية (Mobile Menu) ===== -->
+    <div id="mobile-menu" class="mobile-menu">
+        <button class="close-btn" onclick="toggleMobileMenu()">×</button>
+        <div class="mobile-links">
+            <button onclick="window.location.href='index.html'; toggleMobileMenu()">🏠 الرئيسية</button>
+            <button onclick="window.location.href='sp.html'; toggleMobileMenu()">🏛️ الجامعات والمدارس</button>
+            <button onclick="window.location.href='mhn.html'; toggleMobileMenu()">💼 دليل المهن</button>
+            <button onclick="alert('سيتم نقلك لاختبار الميول'); toggleMobileMenu()">🧠 اختبار الميول</button>
+            <button id="nav-dashboard-btn" class="hidden" onclick="alert('مساحتي الشخصية'); toggleMobileMenu()">📊 مساحتي</button>
+            <button id="menu-login-btn" onclick="alert('تسجيل الدخول'); toggleMobileMenu()">🔑 تسجيل الدخول</button>
+            <button id="menu-logout-btn" class="hidden" onclick="alert('تسجيل الخروج'); toggleMobileMenu()">🚪 تسجيل الخروج</button>
+        </div>
+    </div>
+    <div id="menu-overlay" class="menu-overlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- ===== زر العودة للأعلى ===== -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== المحتوى الرئيسي ===== -->
+    <div class="container">
+
+        <!-- رأس الصفحة المحسن -->
+        <div class="page-header">
+            <h1>🏛️ دليل الجامعات والتخصصات 2025</h1>
+            <p>استعرض جميع التخصصات المتاحة في الجامعات الجزائرية مع معدلات القبول حسب بيانات الوزارة</p>
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="number" id="totalSpecialties">0</span>
+                    <span class="label">تخصص</span>
+                </div>
+                <div class="stat">
+                    <span class="number" id="totalUniversities">0</span>
+                    <span class="label">جامعة ومدرسة</span>
+                </div>
+                <div class="stat">
+                    <span class="number" id="totalCategories">0</span>
+                    <span class="label">تصنيف</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- شريط البحث والفلترة المحسن -->
+        <div class="filters-section">
+            <div class="filter-label"><i class="fas fa-search"></i> بحث:</div>
+            <input type="text" id="searchInput" placeholder="ابحث عن تخصص أو جامعة..." onkeyup="filterSpecialties()">
+            
+            <div class="filter-label"><i class="fas fa-filter"></i> فلتر:</div>
+            <select id="filterSelect" onchange="filterSpecialties()">
+                <option value="all">جميع التخصصات</option>
+                <option value="طب">⚕️ طب</option>
+                <option value="هندسة">⚙️ هندسة</option>
+                <option value="علوم">🔬 علوم</option>
+                <option value="اقتصاد">💰 اقتصاد وإدارة</option>
+                <option value="لغات">🌐 لغات وآداب</option>
+                <option value="حقوق">⚖️ حقوق</option>
+                <option value="علوم إنسانية">🧠 علوم إنسانية</option>
+                <option value="فنون">🎨 فنون</option>
+                <option value="مدارس عليا">🏫 مدارس عليا</option>
+            </select>
+
+            <span class="results-count" id="resultsCount">0 تخصص</span>
+        </div>
+
+        <!-- شبكة التخصصات -->
+        <div id="specialtiesContainer" class="specialties-grid">
+            <!-- سيتم ملؤها بواسطة JavaScript -->
+        </div>
+
+    </div>
+
+    <!-- ===== الفوتر المحسن ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>WENDO</h2>
+                <p class="tagline">الطريق نحو المستقبل</p>
+                <p class="description">
+                    منصتك التوجيهية الذكية لاختيار التخصص الجامعي المناسب. 
+                    نقدم لك دليلاً شاملاً لمؤسسات التعليم العالي في الجزائر مع معدلات القبول.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>التنقل</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">اختبار الميول</a></li>
+                    <li><a href="sp.html">المؤسسات</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>الموارد</h4>
+                <ul>
+                    <li><a href="#">الأدلة</a></li>
+                    <li><a href="#">المدونة</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>من نحن</h4>
+                <ul>
+                    <li><a href="#">من نحن؟</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">الخصوصية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات مأخوذة من وزارة التعليم العالي والبحث العلمي الجزائرية.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ====================================================
+        // دوال القائمة الجانبية (mobile menu)
+        // ====================================================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('menu-overlay');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        // إغلاق القائمة عند تغيير حجم النافذة إلى عرض أكبر
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                const menu = document.getElementById('mobile-menu');
+                const overlay = document.getElementById('menu-overlay');
+                if (menu.classList.contains('open')) {
+                    menu.classList.remove('open');
+                    overlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+
+        // ====================================================
+        // البيانات المستخرجة من ملف BAC-2025-Moyennes-minimales
+        // ====================================================
+        const specialtiesData = [
+            // ---- التخصصات الطبية ----
+            {
+                name: "الطب",
+                code: "MAL01",
+                category: "طب",
+                universities: [
+                    { name: "جامعة الجزائر للعلوم الطبية", grade: "18.19" },
+                    { name: "جامعة باتنة 1", grade: "16.81" },
+                    { name: "جامعة بجاية", grade: "16.66" },
+                    { name: "جامعة قسنطينة 3", grade: "16.68" },
+                    { name: "جامعة ورقلة", grade: "16.66" },
+                    { name: "جامعة سطيف 1", grade: "17.09" }
+                ]
+            },
+            {
+                name: "الصيدلة",
+                code: "MAL02",
+                category: "طب",
+                universities: [
+                    { name: "جامعة الجزائر للعلوم الطبية", grade: "16.19" },
+                    { name: "جامعة باتنة 1", grade: "16.26" }
+                ]
+            },
+            {
+                name: "طب الأسنان",
+                code: "MAL03",
+                category: "طب",
+                universities: [
+                    { name: "جامعة الجزائر للعلوم الطبية", grade: "16.99" }
+                ]
+            },
+            {
+                name: "البيطرة",
+                code: "VAN01",
+                category: "طب",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للبيطرة - الجزائر", grade: "15.30" },
+                    { name: "معهد البيطرة - جامعة باتنة 1", grade: "13.12" },
+                    { name: "معهد البيطرة - جامعة قسنطينة 1", grade: "14.02" },
+                    { name: "جامعة الجلفة", grade: "13.01" }
+                ]
+            },
+
+            // ---- تخصصات الهندسة ----
+            {
+                name: "هندسة مدنية",
+                code: "TCL01",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة البليدة 1", grade: "12.58" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "12.78" },
+                    { name: "جامعة وهران للعلوم والتكنولوجيا", grade: "11.28" },
+                    { name: "جامعة سطيف 1", grade: "12.46" },
+                    { name: "جامعة بومرداس", grade: "13.28" },
+                    { name: "جامعة تيزي وزو", grade: "12.70" },
+                    { name: "جامعة البويرة", grade: "12.62" }
+                ]
+            },
+            {
+                name: "هندسة كهربائية",
+                code: "TCL16",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة البليدة 1", grade: "11.16" },
+                    { name: "جامعة سطيف 1", grade: "10.29" },
+                    { name: "جامعة تيزي وزو", grade: "NC" },
+                    { name: "جامعة بجاية", grade: "13.02" }
+                ]
+            },
+            {
+                name: "هندسة ميكانيكية",
+                code: "TCL19",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة البليدة 1", grade: "12.04" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "11.11" },
+                    { name: "جامعة باتنة 2", grade: "NC" },
+                    { name: "جامعة تيزي وزو", grade: "10.64" }
+                ]
+            },
+            {
+                name: "هندسة الطرائق (الكيمياء الصناعية)",
+                code: "TCL08",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة البليدة 1", grade: "NC" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "NC" }
+                ]
+            },
+            {
+                name: "الإلكترونيك",
+                code: "TCL17",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة بومرداس", grade: "16.85" },
+                    { name: "جامعة سيدي بلعباس", grade: "15.28" }
+                ]
+            },
+            {
+                name: "الإعلام الآلي (المعلوماتية)",
+                code: "C01",
+                category: "هندسة",
+                universities: [
+                    { name: "جامعة البليدة 1", grade: "14.01" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "15.14" },
+                    { name: "جامعة سطيف 1", grade: "14.00" },
+                    { name: "جامعة بجاية", grade: "14.99" },
+                    { name: "جامعة تيزي وزو", grade: "14.35" },
+                    { name: "جامعة قسنطينة 2", grade: "13.81" },
+                    { name: "جامعة وهران للعلوم والتكنولوجيا", grade: "12.71" },
+                    { name: "جامعة بومرداس", grade: "13.99" },
+                    { name: "جامعة الشلف", grade: "13.67" }
+                ]
+            },
+
+            // ---- تخصصات العلوم ----
+            {
+                name: "علوم الطبيعة والحياة",
+                code: "D00",
+                category: "علوم",
+                universities: [
+                    { name: "جامعة الجزائر 1", grade: "12.56" },
+                    { name: "جامعة البليدة 1", grade: "10.86" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "11.00" },
+                    { name: "جامعة قسنطينة 1", grade: "11.99" },
+                    { name: "جامعة سطيف 1", grade: "11.80" },
+                    { name: "جامعة باتنة 1", grade: "10.53" }
+                ]
+            },
+            {
+                name: "الرياضيات",
+                code: "C02",
+                category: "علوم",
+                universities: [
+                    { name: "جامعة الجزائر 1", grade: "10.42" },
+                    { name: "جامعة البليدة 1", grade: "10.97" },
+                    { name: "جامعة تيزي وزو", grade: "12.02" },
+                    { name: "جامعة سطيف 1", grade: "NC" }
+                ]
+            },
+            {
+                name: "الفيزياء",
+                code: "B00",
+                category: "علوم",
+                universities: [
+                    { name: "جامعة الجزائر 1", grade: "10.93" },
+                    { name: "جامعة البليدة 1", grade: "10.40" },
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "10.72" }
+                ]
+            },
+            {
+                name: "الكيمياء",
+                code: "B01",
+                category: "علوم",
+                universities: [
+                    { name: "جامعة الأغواط", grade: "11.18" },
+                    { name: "جامعة سطيف 1", grade: "10.02" }
+                ]
+            },
+            {
+                name: "الجيولوجيا",
+                code: "E03",
+                category: "علوم",
+                universities: [
+                    { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "10.00" },
+                    { name: "جامعة سطيف 1", grade: "NC" }
+                ]
+            },
+
+            // ---- تخصصات الاقتصاد والإدارة ----
+            {
+                name: "العلوم الاقتصادية والتجارية وعلوم التسيير",
+                code: "F00",
+                category: "اقتصاد",
+                universities: [
+                    { name: "جامعة الجزائر 3", grade: "10.00" },
+                    { name: "جامعة البليدة 2", grade: "NC" },
+                    { name: "جامعة سطيف 1", grade: "10.00" },
+                    { name: "جامعة بجاية", grade: "10.19" },
+                    { name: "جامعة وهران 2", grade: "10.40" },
+                    { name: "جامعة قسنطينة 2", grade: "10.88" }
+                ]
+            },
+            {
+                name: "المالية والمحاسبة",
+                code: "F04",
+                category: "اقتصاد",
+                universities: [
+                    { name: "جامعة سطيف 1", grade: "10.87" },
+                    { name: "جامعة البويرة", grade: "10.09" }
+                ]
+            },
+            {
+                name: "علوم التسيير",
+                code: "F01",
+                category: "اقتصاد",
+                universities: [
+                    { name: "جامعة ورقلة", grade: "11.75" }
+                ]
+            },
+
+            // ---- تخصصات اللغات والآداب ----
+            {
+                name: "اللغة العربية وآدابها",
+                code: "L00",
+                category: "لغات",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "NC" },
+                    { name: "جامعة باتنة 1", grade: "NC" },
+                    { name: "جامعة تيزي وزو", grade: "NC" }
+                ]
+            },
+            {
+                name: "اللغة الفرنسية",
+                code: "H01",
+                category: "لغات",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "11.00" },
+                    { name: "جامعة البليدة 2", grade: "11.09" },
+                    { name: "جامعة بجاية", grade: "12.92" },
+                    { name: "جامعة وهران 2", grade: "11.87" },
+                    { name: "جامعة قسنطينة 1", grade: "11.00" }
+                ]
+            },
+            {
+                name: "اللغة الإنجليزية",
+                code: "H06",
+                category: "لغات",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "12.73" },
+                    { name: "جامعة البليدة 2", grade: "12.31" },
+                    { name: "جامعة بجاية", grade: "13.59" },
+                    { name: "جامعة وهران 2", grade: "12.57" },
+                    { name: "جامعة قسنطينة 1", grade: "12.63" },
+                    { name: "جامعة سطيف 2", grade: "12.74" }
+                ]
+            },
+            {
+                name: "الترجمة (عربي-فرنسي-إنجليزي)",
+                code: "H03",
+                category: "لغات",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "13.74" },
+                    { name: "جامعة قسنطينة 1", grade: "13.25" },
+                    { name: "جامعة وهران 2", grade: "NC" }
+                ]
+            },
+
+            // ---- تخصصات الحقوق ----
+            {
+                name: "الحقوق",
+                code: "G02",
+                category: "حقوق",
+                universities: [
+                    { name: "جامعة الجزائر 1", grade: "10.00" },
+                    { name: "جامعة البليدة 2", grade: "NC" },
+                    { name: "جامعة سطيف 2", grade: "NC" },
+                    { name: "جامعة قسنطينة 1", grade: "10.00" }
+                ]
+            },
+
+            // ---- تخصصات العلوم الإنسانية والاجتماعية ----
+            {
+                name: "العلوم الإنسانية",
+                code: "I17",
+                category: "علوم إنسانية",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "NC" },
+                    { name: "جامعة بجاية", grade: "10.23" }
+                ]
+            },
+            {
+                name: "العلوم الاجتماعية",
+                code: "I19",
+                category: "علوم إنسانية",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "NC" },
+                    { name: "جامعة بجاية", grade: "10.52" }
+                ]
+            },
+            {
+                name: "علم النفس",
+                code: "I10",
+                category: "علوم إنسانية",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "NC" },
+                    { name: "جامعة ورقلة", grade: "NC" }
+                ]
+            },
+
+            // ---- تخصصات الفنون ----
+            {
+                name: "الفنون",
+                code: "K00",
+                category: "فنون",
+                universities: [
+                    { name: "جامعة الجزائر 2", grade: "10.02" },
+                    { name: "جامعة سطيف 2", grade: "NC" }
+                ]
+            },
+
+            // ---- تخصصات المدارس العليا ----
+            {
+                name: "المدرسة الوطنية متعددة التقنيات - الجزائر",
+                code: "ENS",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية متعددة التقنيات بالجزائر", grade: "17.73" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للإعلام الآلي - الجزائر",
+                code: "ESI",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للإعلام الآلي - الجزائر", grade: "18.19" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للذكاء الاصطناعي - الجزائر",
+                code: "ENSIA",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للذكاء الاصطناعي - الجزائر", grade: "18.59" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للأمن السيبراني - الجزائر",
+                code: "ENSC",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للأمن السيبراني - الجزائر", grade: "18.34" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للرياضيات - الجزائر",
+                code: "ENSM",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للرياضيات - الجزائر", grade: "17.43" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للنانوتكنولوجيا - الجزائر",
+                code: "ENSN",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للنانوتكنولوجيا - الجزائر", grade: "17.96" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للأنظمة الذاتية - الجزائر",
+                code: "ENSA",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للأنظمة الذاتية - الجزائر", grade: "18.21" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للتكنولوجيات المتقدمة - الجزائر",
+                code: "ENSTA",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للتكنولوجيات المتقدمة - الجزائر", grade: "17.15" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للأشغال العمومية - الجزائر",
+                code: "ENSTP",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للأشغال العمومية - الجزائر", grade: "16.12" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للفلاحة - الجزائر",
+                code: "ENSAg",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للفلاحة - الجزائر", grade: "14.91" }
+                ]
+            },
+            {
+                name: "المدرسة الوطنية العليا للفلاحة الصحراوية - أدرار",
+                code: "ENSA SAH",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة الوطنية العليا للفلاحة الصحراوية - أدرار", grade: "12.29" }
+                ]
+            },
+            {
+                name: "المدرسة العليا للإقتصاد - وهران",
+                code: "ESE ORAN",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة العليا للإقتصاد - وهران", grade: "14.63" }
+                ]
+            },
+            {
+                name: "المدرسة العليا للتجارة - القليعة",
+                code: "ESC KOLEA",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة العليا للتجارة - القليعة", grade: "16.02" }
+                ]
+            },
+            {
+                name: "المدرسة العليا للدراسات التجارية - القليعة",
+                code: "EHEC KOLEA",
+                category: "مدارس عليا",
+                universities: [
+                    { name: "المدرسة العليا للدراسات التجارية - القليعة", grade: "15.78" }
+                ]
+            }
+        ];
+
+        // ====================================================
+        // دوال العرض والفلترة
+        // ====================================================
+
+        // حساب الإحصائيات
+        function calculateStats(data) {
+            const totalSpecialties = data.length;
+            const uniSet = new Set();
+            data.forEach(spec => {
+                spec.universities.forEach(uni => uniSet.add(uni.name));
+            });
+            const catSet = new Set(data.map(spec => spec.category));
+            return {
+                totalSpecialties,
+                totalUniversities: uniSet.size,
+                totalCategories: catSet.size
+            };
+        }
+
+        // دالة لتحديد لون المعدل
+        function getGradeClass(grade) {
+            if (grade === 'NC') return 'nc';
+            const num = parseFloat(grade);
+            if (num >= 16) return 'high';
+            if (num >= 14) return 'medium';
+            return 'low';
+        }
+
+        function renderSpecialties(data) {
+            const container = document.getElementById('specialtiesContainer');
+            container.innerHTML = '';
+
+            // تحديث الإحصائيات
+            const stats = calculateStats(data);
+            document.getElementById('totalSpecialties').textContent = stats.totalSpecialties;
+            document.getElementById('totalUniversities').textContent = stats.totalUniversities;
+            document.getElementById('totalCategories').textContent = stats.totalCategories;
+            document.getElementById('resultsCount').textContent = `${data.length} تخصص`;
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>لا توجد نتائج</h3>
+                        <p>لم نجد أي تخصص يطابق بحثك. حاول تعديل كلمات البحث أو اختيار تصنيف آخر.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(spec => {
+                const card = document.createElement('div');
+                card.className = 'specialty-card';
+
+                // إنشاء قائمة الجامعات
+                let uniHtml = '';
+                spec.universities.forEach(uni => {
+                    const gradeClass = getGradeClass(uni.grade);
+                    uniHtml += `
+                        <div class="uni-item">
+                            <span class="uni-name">${uni.name}</span>
+                            <span class="uni-grade ${gradeClass}">${uni.grade === 'NC' ? 'غير محسوب' : uni.grade}</span>
+                        </div>
+                    `;
+                });
+
+                // تحديد رمز التصنيف
+                let icon = '📚';
+                switch(spec.category) {
+                    case 'طب': icon = '⚕️'; break;
+                    case 'هندسة': icon = '⚙️'; break;
+                    case 'علوم': icon = '🔬'; break;
+                    case 'اقتصاد': icon = '💰'; break;
+                    case 'لغات': icon = '🌐'; break;
+                    case 'حقوق': icon = '⚖️'; break;
+                    case 'علوم إنسانية': icon = '🧠'; break;
+                    case 'فنون': icon = '🎨'; break;
+                    case 'مدارس عليا': icon = '🏫'; break;
+                    default: icon = '📖';
+                }
+
+                card.innerHTML = `
+                    <div class="specialty-name">
+                        ${icon} ${spec.name}
+                        <span class="badge">${spec.code}</span>
+                    </div>
+                    <div class="specialty-code">${spec.category}</div>
+                    <div class="universities-list">
+                        ${uniHtml}
+                    </div>
+                    <button class="view-details" onclick="showSpecialtyDetails('${spec.name}')">
+                        <i class="fas fa-arrow-left"></i> عرض التفاصيل
+                    </button>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // دالة الفلترة
+        function filterSpecialties() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filterCategory = document.getElementById('filterSelect').value;
+
+            let filtered = specialtiesData.filter(spec => {
+                if (filterCategory !== 'all' && spec.category !== filterCategory) {
+                    return false;
+                }
+                if (searchTerm === '') return true;
+                const nameMatch = spec.name.toLowerCase().includes(searchTerm);
+                const uniMatch = spec.universities.some(uni => 
+                    uni.name.toLowerCase().includes(searchTerm)
+                );
+                return nameMatch || uniMatch;
+            });
+
+            renderSpecialties(filtered);
+        }
+
+        // عرض تفاصيل التخصص
+        function showSpecialtyDetails(name) {
+            const spec = specialtiesData.find(s => s.name === name);
+            if (spec) {
+                const uniList = spec.universities.map(u => `${u.name} (${u.grade})`).join('\n');
+                alert(`📚 تفاصيل تخصص: ${spec.name}\n\n📌 الكود: ${spec.code}\n📂 التصنيف: ${spec.category}\n\n🏛️ الجامعات المتاحة:\n${uniList}`);
+            }
+        }
+
+        // ====================================================
+        // تشغيل التطبيق
+        // ====================================================
+
+        // عرض جميع التخصصات عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSpecialties(specialtiesData);
+        });
+
+        // جعل الدوال متاحة عالمياً
+        window.filterSpecialties = filterSpecialties;
+        window.showSpecialtyDetails = showSpecialtyDetails;
+        window.toggleMobileMenu = toggleMobileMenu;
+
+        // ====================================================
+        // إضافات متقدمة
+        // ====================================================
+
+        // تأثير التمرير على الناف بار
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // اختصار لوحة المفاتيح للبحث (Ctrl + /)
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // إغلاق القائمة عند الضغط على Esc
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                if (menu.classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+            }
+        });
+
+        console.log('🔍 WENDO - دليل الجامعات والتخصصات 2025');
+        console.log(`📊 تم تحميل ${specialtiesData.length} تخصص`);
+        console.log('📱 القائمة الجانبية مفعلة');
+    </script>
+
+</body>
+</html>
