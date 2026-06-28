@@ -388,30 +388,88 @@
             font-family: var(--font-arabic);
         }
 
-        .page-header .header-stats {
+        /* --- بطاقات الاختيار (الجامعات، المدارس العليا، المعاهد الطبية) --- */
+        .category-cards {
             display: flex;
             justify-content: center;
-            gap: 3rem;
-            margin-top: 1.5rem;
-            position: relative;
-            z-index: 1;
+            gap: 2rem;
+            margin: 2rem 0 3rem 0;
+            flex-wrap: wrap;
         }
 
-        .page-header .header-stats .stat {
+        .category-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-md);
+            padding: 2.5rem 2rem;
             text-align: center;
+            flex: 1;
+            min-width: 220px;
+            max-width: 300px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
         }
 
-        .page-header .header-stats .stat .number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            font-family: var(--font-display-bold);
+        .category-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .category-card.active {
+            border-color: var(--accent-color);
+            background: var(--surface-hover);
+            box-shadow: 0 0 0 4px rgba(91, 60, 138, 0.15);
+        }
+
+        .category-card .icon {
+            font-size: 3.5rem;
             display: block;
-            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
         }
 
-        .page-header .header-stats .stat .label {
-            font-size: 0.85rem;
-            opacity: 0.8;
+        .category-card h3 {
+            font-size: 1.4rem;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .category-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+        }
+
+        .category-card .count-badge {
+            display: inline-block;
+            margin-top: 0.8rem;
+            background: var(--bg-color);
+            padding: 0.2rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
         }
 
         /* --- شريط البحث والفلترة --- */
@@ -485,7 +543,7 @@
         /* --- شبكة التخصصات المحسنة --- */
         .specialties-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 2rem;
         }
 
@@ -532,7 +590,7 @@
         }
 
         .specialty-card .specialty-name {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             font-family: var(--font-display-bold);
             color: var(--text-primary);
@@ -543,42 +601,41 @@
         }
 
         .specialty-card .specialty-name .badge {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-family: var(--font-display-bold);
             background: var(--accent-gradient);
             color: #fff;
-            padding: 0.15rem 0.8rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 20px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
 
         .specialty-card .category-tag {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             background: var(--bg-color);
-            padding: 0.2rem 1rem;
+            padding: 0.2rem 0.9rem;
             border-radius: 20px;
             border: 1px solid var(--border-color);
             font-weight: 600;
             display: inline-block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .specialty-card .specialty-code {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             opacity: 0.6;
             font-weight: 400;
         }
 
-        /* --- تفاصيل إضافية بجانب كل تخصص --- */
         .specialty-card .specialty-details {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem 1.2rem;
-            margin: 0.8rem 0 1.2rem 0;
-            padding: 0.8rem 1rem;
+            gap: 0.6rem 1rem;
+            margin: 0.6rem 0 1rem 0;
+            padding: 0.6rem 0.8rem;
             background: var(--bg-color);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
@@ -587,14 +644,14 @@
         .specialty-card .specialty-details .detail-item {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
+            gap: 0.3rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
         }
 
         .specialty-card .specialty-details .detail-item i {
             color: var(--accent-color);
-            width: 1.1rem;
+            width: 1rem;
             text-align: center;
         }
 
@@ -607,7 +664,6 @@
             color: var(--accent-color);
         }
 
-        /* --- قائمة الجامعات --- */
         .specialty-card .universities-list {
             margin-top: 0.5rem;
             display: flex;
@@ -620,7 +676,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.65rem 1rem;
+            padding: 0.5rem 0.8rem;
             background: var(--bg-color);
             border-radius: var(--radius-sm);
             border-right: 4px solid var(--accent-light);
@@ -630,7 +686,7 @@
 
         .specialty-card .uni-item:hover {
             background: var(--surface-hover);
-            transform: translateX(-6px);
+            transform: translateX(-4px);
             border-right-color: var(--accent-color);
         }
 
@@ -638,7 +694,7 @@
             font-weight: 600;
             font-family: var(--font-arabic);
             color: var(--text-primary);
-            font-size: 0.92rem;
+            font-size: 0.85rem;
         }
 
         .specialty-card .uni-item .uni-grade {
@@ -646,9 +702,9 @@
             font-family: var(--font-display-bold);
             color: var(--accent-color);
             background: rgba(91, 60, 138, 0.08);
-            padding: 0.15rem 0.9rem;
+            padding: 0.1rem 0.7rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 0.5px;
         }
 
@@ -674,12 +730,11 @@
             color: #1e8449;
         }
 
-        /* --- شريط التقدم للمعدل --- */
         .specialty-card .grade-bar-container {
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            margin-top: 0.3rem;
+            margin-top: 0.2rem;
         }
 
         .specialty-card .grade-bar-track {
@@ -697,10 +752,9 @@
             transition: width 0.8s ease;
         }
 
-        /* --- زر التفاصيل --- */
         .specialty-card .view-details {
-            margin-top: 1.2rem;
-            padding: 0.7rem 1.5rem;
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
             background: none;
             border: 2px solid var(--border-color);
             border-radius: 30px;
@@ -710,7 +764,7 @@
             cursor: pointer;
             transition: var(--transition);
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
@@ -733,7 +787,6 @@
             transform: translateX(-4px);
         }
 
-        /* --- حالة عدم وجود نتائج --- */
         .no-results {
             grid-column: 1/-1;
             text-align: center;
@@ -876,44 +929,6 @@
             z-index: 1;
         }
 
-        /* --- تحميل متقدم --- */
-        .loading-shimmer {
-            grid-column: 1/-1;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 1.8rem;
-        }
-
-        .shimmer-card {
-            background: var(--surface-color);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-color);
-            padding: 2rem;
-            min-height: 280px;
-        }
-
-        .shimmer-line {
-            height: 20px;
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--border-color) 25%, var(--surface-hover) 50%, var(--border-color) 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            margin-bottom: 0.8rem;
-        }
-
-        .shimmer-line.short {
-            width: 60%;
-        }
-
-        .shimmer-line.medium {
-            width: 80%;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
         /* --- استجابة للشاشات --- */
         @media (max-width: 992px) {
             .footer-content {
@@ -921,7 +936,14 @@
                 gap: 2rem;
             }
             .specialties-grid {
-                grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            .category-cards {
+                gap: 1.2rem;
+            }
+            .category-card {
+                min-width: 180px;
+                padding: 1.8rem 1.2rem;
             }
         }
 
@@ -929,8 +951,6 @@
             .container { padding: 0 1rem; }
             .specialties-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 2rem; }
-            .page-header .header-stats { gap: 1.5rem; flex-wrap: wrap; }
-            .page-header .header-stats .stat .number { font-size: 1.4rem; }
             .filters-section { flex-direction: column; padding: 1.2rem; }
             .filters-section input,
             .filters-section select { width: 100%; min-width: auto; }
@@ -941,20 +961,21 @@
             .nav-right button span { display: none; }
             .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; left: 1.2rem; }
             .mobile-menu { width: 280px; right: -300px; }
-            .specialty-card .specialty-details { flex-direction: column; gap: 0.4rem; }
+            .category-cards { flex-direction: column; align-items: center; }
+            .category-card { max-width: 100%; width: 100%; }
+            .specialty-card .specialty-details { flex-direction: column; gap: 0.3rem; }
         }
 
         @media (max-width: 480px) {
-            .specialty-card { padding: 1.5rem; }
-            .specialty-card .uni-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+            .specialty-card { padding: 1.2rem; }
+            .specialty-card .uni-item { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
             .specialty-card .uni-item .uni-grade { align-self: flex-start; }
             .page-header h1 { font-size: 1.6rem; }
             .page-header { padding: 1.5rem 1rem; }
-            .page-header .header-stats .stat .number { font-size: 1.2rem; }
-            .specialty-card .specialty-name { font-size: 1.2rem; flex-wrap: wrap; }
-            .specialty-card .view-details { font-size: 0.8rem; padding: 0.5rem 1rem; }
+            .specialty-card .specialty-name { font-size: 1.1rem; flex-wrap: wrap; }
+            .specialty-card .view-details { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
             .mobile-menu { width: 260px; right: -280px; }
-            .specialties-grid { gap: 1.2rem; }
+            .specialties-grid { gap: 1rem; }
         }
     </style>
 </head>
@@ -1004,20 +1025,28 @@
         <!-- رأس الصفحة -->
         <div class="page-header">
             <h1>🏛️ دليل الجامعات والتخصصات 2025</h1>
-            <p>استعرض جميع التخصصات المتاحة في الجامعات الجزائرية مع معدلات القبول حسب بيانات الوزارة</p>
-            <div class="header-stats">
-                <div class="stat">
-                    <span class="number" id="totalSpecialties">0</span>
-                    <span class="label">تخصص</span>
-                </div>
-                <div class="stat">
-                    <span class="number" id="totalUniversities">0</span>
-                    <span class="label">جامعة ومدرسة</span>
-                </div>
-                <div class="stat">
-                    <span class="number" id="totalCategories">0</span>
-                    <span class="label">تصنيف</span>
-                </div>
+            <p>استعرض جميع التخصصات المتاحة في الجامعات الجزائرية، المدارس العليا، والمعاهد الطبية مع معدلات القبول</p>
+        </div>
+
+        <!-- ===== بطاقات الاختيار (الجامعات، المدارس العليا، المعاهد الطبية) ===== -->
+        <div class="category-cards" id="categoryCards">
+            <div class="category-card active" data-type="universities" onclick="selectCategory('universities')">
+                <span class="icon">🏛️</span>
+                <h3>الجامعات</h3>
+                <p>جميع التخصصات الجامعية</p>
+                <span class="count-badge" id="uniCountBadge">0 تخصص</span>
+            </div>
+            <div class="category-card" data-type="ecoles" onclick="selectCategory('ecoles')">
+                <span class="icon">🎓</span>
+                <h3>المدارس العليا</h3>
+                <p>المدارس الوطنية العليا</p>
+                <span class="count-badge" id="ecoleCountBadge">0 تخصص</span>
+            </div>
+            <div class="category-card" data-type="instituts" onclick="selectCategory('instituts')">
+                <span class="icon">⚕️</span>
+                <h3>المعاهد الطبية</h3>
+                <p>الطب، الصيدلة، طب الأسنان</p>
+                <span class="count-badge" id="institutCountBadge">0 تخصص</span>
             </div>
         </div>
 
@@ -1028,7 +1057,7 @@
             
             <div class="filter-label"><i class="fas fa-filter"></i> فلتر:</div>
             <select id="filterSelect" onchange="filterSpecialties()">
-                <option value="all">جميع التخصصات</option>
+                <option value="all">جميع التصنيفات</option>
                 <option value="طب">⚕️ طب</option>
                 <option value="هندسة">⚙️ هندسة</option>
                 <option value="علوم">🔬 علوم</option>
@@ -1119,7 +1148,7 @@
         // البيانات الموسعة مع تفاصيل إضافية
         // ====================================================
         const specialtiesData = [
-            // ---- التخصصات الطبية ----
+            // ---- التخصصات الطبية (المعاهد الطبية) ----
             {
                 name: "الطب",
                 code: "MAL01",
@@ -1127,6 +1156,7 @@
                 field: "العلوم الطبية",
                 duration: "7 سنوات",
                 degree: "دكتور في الطب",
+                type: "instituts",
                 description: "تخصص يهدف إلى تكوين أطباء قادرين على تشخيص وعلاج الأمراض، مع التركيز على الجوانب السريرية والبحثية.",
                 universities: [
                     { name: "جامعة الجزائر للعلوم الطبية", grade: "18.19" },
@@ -1144,6 +1174,7 @@
                 field: "العلوم الطبية",
                 duration: "6 سنوات",
                 degree: "دكتور في الصيدلة",
+                type: "instituts",
                 description: "تخصص يهتم بدراسة الأدوية وتأثيراتها، وتطويرها، وتوزيعها، مع التركيز على سلامة الدواء وفعالية العلاج.",
                 universities: [
                     { name: "جامعة الجزائر للعلوم الطبية", grade: "16.19" },
@@ -1157,6 +1188,7 @@
                 field: "العلوم الطبية",
                 duration: "6 سنوات",
                 degree: "دكتور في طب الأسنان",
+                type: "instituts",
                 description: "تخصص يهتم بتشخيص وعلاج أمراض الفم والأسنان، مع التركيز على الجراحة الفموية والتركيبات السنية.",
                 universities: [
                     { name: "جامعة الجزائر للعلوم الطبية", grade: "16.99" }
@@ -1169,6 +1201,7 @@
                 field: "العلوم البيطرية",
                 duration: "5 سنوات",
                 degree: "دكتور في الطب البيطري",
+                type: "instituts",
                 description: "تخصص يهتم بصحة الحيوانات، وعلاج أمراضها، والوقاية منها، مع التركيز على الصحة العامة والأمراض المشتركة.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للبيطرة - الجزائر", grade: "15.30" },
@@ -1178,7 +1211,7 @@
                 ]
             },
 
-            // ---- تخصصات الهندسة ----
+            // ---- تخصصات الهندسة (الجامعات) ----
             {
                 name: "هندسة مدنية",
                 code: "TCL01",
@@ -1186,6 +1219,7 @@
                 field: "الهندسة المدنية",
                 duration: "5 سنوات",
                 degree: "مهندس مدني",
+                type: "universities",
                 description: "تخصص يهتم بتصميم وإنشاء البنية التحتية مثل المباني والجسور والطرق، مع التركيز على السلامة والاستدامة.",
                 universities: [
                     { name: "جامعة البليدة 1", grade: "12.58" },
@@ -1204,6 +1238,7 @@
                 field: "الهندسة الكهربائية",
                 duration: "5 سنوات",
                 degree: "مهندس كهربائي",
+                type: "universities",
                 description: "تخصص يهتم بتوليد ونقل وتوزيع الطاقة الكهربائية، وأنظمة التحكم، والإلكترونيات، مع التركيز على الطاقة المتجددة.",
                 universities: [
                     { name: "جامعة البليدة 1", grade: "11.16" },
@@ -1219,6 +1254,7 @@
                 field: "الهندسة الميكانيكية",
                 duration: "5 سنوات",
                 degree: "مهندس ميكانيكي",
+                type: "universities",
                 description: "تخصص يهتم بتصميم وتصنيع الآلات والمعدات، مع التركيز على الديناميكا الحرارية، والمواد، والميكانيكا.",
                 universities: [
                     { name: "جامعة البليدة 1", grade: "12.04" },
@@ -1234,6 +1270,7 @@
                 field: "الهندسة الكيميائية",
                 duration: "5 سنوات",
                 degree: "مهندس كيميائي",
+                type: "universities",
                 description: "تخصص يهتم بتحويل المواد الخام إلى منتجات مفيدة من خلال العمليات الكيميائية والفيزيائية، مع التركيز على الصناعات البتروكيماوية.",
                 universities: [
                     { name: "جامعة البليدة 1", grade: "NC" },
@@ -1247,6 +1284,7 @@
                 field: "الإلكترونيك",
                 duration: "5 سنوات",
                 degree: "مهندس إلكتروني",
+                type: "universities",
                 description: "تخصص يهتم بتصميم وتطوير الدوائر الإلكترونية، وأنظمة الاتصالات، والأجهزة الذكية، مع التركيز على التكنولوجيا الحديثة.",
                 universities: [
                     { name: "جامعة بومرداس", grade: "16.85" },
@@ -1260,6 +1298,7 @@
                 field: "علوم الحاسوب",
                 duration: "5 سنوات",
                 degree: "مهندس في الإعلام الآلي",
+                type: "universities",
                 description: "تخصص يهتم بتطوير البرمجيات، وأنظمة المعلومات، والذكاء الاصطناعي، مع التركيز على حل المشكلات وتطوير التطبيقات.",
                 universities: [
                     { name: "جامعة البليدة 1", grade: "14.01" },
@@ -1274,7 +1313,7 @@
                 ]
             },
 
-            // ---- تخصصات العلوم ----
+            // ---- تخصصات العلوم (الجامعات) ----
             {
                 name: "علوم الطبيعة والحياة",
                 code: "D00",
@@ -1282,6 +1321,7 @@
                 field: "العلوم الطبيعية",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في علوم الطبيعة والحياة",
+                type: "universities",
                 description: "تخصص يهتم بدراسة الكائنات الحية وتفاعلاتها مع البيئة، مع التركيز على البيولوجيا والبيئة والوراثة.",
                 universities: [
                     { name: "جامعة الجزائر 1", grade: "12.56" },
@@ -1299,6 +1339,7 @@
                 field: "الرياضيات",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الرياضيات",
+                type: "universities",
                 description: "تخصص يهتم بدراسة النماذج الرياضية والتحليل والإحصاء، مع التركيز على التطبيقات في العلوم والهندسة والاقتصاد.",
                 universities: [
                     { name: "جامعة الجزائر 1", grade: "10.42" },
@@ -1314,6 +1355,7 @@
                 field: "الفيزياء",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الفيزياء",
+                type: "universities",
                 description: "تخصص يهتم بدراسة القوانين الأساسية للطبيعة، من الجسيمات الأولية إلى الكون، مع التركيز على الميكانيكا والكهرباء والبصريات.",
                 universities: [
                     { name: "جامعة الجزائر 1", grade: "10.93" },
@@ -1328,6 +1370,7 @@
                 field: "الكيمياء",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الكيمياء",
+                type: "universities",
                 description: "تخصص يهتم بدراسة التركيب الكيميائي للمواد وتفاعلاتها، مع التركيز على التحليل الكيميائي والمواد الجديدة.",
                 universities: [
                     { name: "جامعة الأغواط", grade: "11.18" },
@@ -1341,6 +1384,7 @@
                 field: "الجيولوجيا",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الجيولوجيا",
+                type: "universities",
                 description: "تخصص يهتم بدراسة طبقات الأرض وتكويناتها، مع التركيز على الموارد الطبيعية والمخاطر الجيولوجية.",
                 universities: [
                     { name: "جامعة هواري بومدين للعلوم والتكنولوجيا", grade: "10.00" },
@@ -1348,7 +1392,7 @@
                 ]
             },
 
-            // ---- تخصصات الاقتصاد والإدارة ----
+            // ---- تخصصات الاقتصاد والإدارة (الجامعات) ----
             {
                 name: "العلوم الاقتصادية والتجارية وعلوم التسيير",
                 code: "F00",
@@ -1356,6 +1400,7 @@
                 field: "الاقتصاد والإدارة",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في العلوم الاقتصادية",
+                type: "universities",
                 description: "تخصص يهتم بدراسة الظواهر الاقتصادية، وإدارة المؤسسات، والتسويق، مع التركيز على التحليل المالي والتخطيط الاستراتيجي.",
                 universities: [
                     { name: "جامعة الجزائر 3", grade: "10.00" },
@@ -1373,6 +1418,7 @@
                 field: "المالية والمحاسبة",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في المالية والمحاسبة",
+                type: "universities",
                 description: "تخصص يهتم بتحليل البيانات المالية، وإعداد الميزانيات، والتدقيق المحاسبي، مع التركيز على الشفافية والامتثال.",
                 universities: [
                     { name: "جامعة سطيف 1", grade: "10.87" },
@@ -1386,13 +1432,14 @@
                 field: "علوم التسيير",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في علوم التسيير",
+                type: "universities",
                 description: "تخصص يهتم بتطوير مهارات الإدارة والقيادة، مع التركيز على إدارة الموارد البشرية والتسويق وريادة الأعمال.",
                 universities: [
                     { name: "جامعة ورقلة", grade: "11.75" }
                 ]
             },
 
-            // ---- تخصصات اللغات والآداب ----
+            // ---- تخصصات اللغات والآداب (الجامعات) ----
             {
                 name: "اللغة العربية وآدابها",
                 code: "L00",
@@ -1400,6 +1447,7 @@
                 field: "اللغات والآداب",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في اللغة العربية وآدابها",
+                type: "universities",
                 description: "تخصص يهتم بدراسة اللغة العربية، ونحوها، وأدبها القديم والحديث، مع التركيز على البلاغة والنقد الأدبي.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "NC" },
@@ -1414,6 +1462,7 @@
                 field: "اللغات والآداب",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في اللغة الفرنسية",
+                type: "universities",
                 description: "تخصص يهتم بدراسة اللغة الفرنسية وآدابها، مع التركيز على الترجمة واللسانيات والأدب الفرنسي.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "11.00" },
@@ -1430,6 +1479,7 @@
                 field: "اللغات والآداب",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في اللغة الإنجليزية",
+                type: "universities",
                 description: "تخصص يهتم بدراسة اللغة الإنجليزية وآدابها، مع التركيز على الترجمة واللسانيات والأدب الإنجليزي والأمريكي.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "12.73" },
@@ -1447,6 +1497,7 @@
                 field: "اللغات والآداب",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الترجمة",
+                type: "universities",
                 description: "تخصص يهتم بتطوير مهارات الترجمة بين العربية والفرنسية والإنجليزية، مع التركيز على الترجمة التحريرية والفورية.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "13.74" },
@@ -1455,7 +1506,7 @@
                 ]
             },
 
-            // ---- تخصصات الحقوق ----
+            // ---- تخصصات الحقوق (الجامعات) ----
             {
                 name: "الحقوق",
                 code: "G02",
@@ -1463,6 +1514,7 @@
                 field: "العلوم القانونية",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الحقوق",
+                type: "universities",
                 description: "تخصص يهتم بدراسة النظم القانونية، والقانون المدني والجنائي، مع التركيز على القضاء وحماية الحقوق.",
                 universities: [
                     { name: "جامعة الجزائر 1", grade: "10.00" },
@@ -1472,7 +1524,7 @@
                 ]
             },
 
-            // ---- تخصصات العلوم الإنسانية والاجتماعية ----
+            // ---- تخصصات العلوم الإنسانية والاجتماعية (الجامعات) ----
             {
                 name: "العلوم الإنسانية",
                 code: "I17",
@@ -1480,6 +1532,7 @@
                 field: "العلوم الإنسانية",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في العلوم الإنسانية",
+                type: "universities",
                 description: "تخصص يهتم بدراسة الإنسان في جوانبه النفسية والاجتماعية والتاريخية، مع التركيز على الفلسفة وعلم الاجتماع.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "NC" },
@@ -1493,6 +1546,7 @@
                 field: "العلوم الاجتماعية",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في العلوم الاجتماعية",
+                type: "universities",
                 description: "تخصص يهتم بدراسة المجتمعات والعلاقات الاجتماعية، مع التركيز على الأنثروبولوجيا وعلم الاجتماع والاقتصاد الاجتماعي.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "NC" },
@@ -1506,6 +1560,7 @@
                 field: "علم النفس",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في علم النفس",
+                type: "universities",
                 description: "تخصص يهتم بدراسة السلوك البشري والعمليات العقلية، مع التركيز على علم النفس العيادي والاجتماعي والنمو.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "NC" },
@@ -1513,7 +1568,7 @@
                 ]
             },
 
-            // ---- تخصصات الفنون ----
+            // ---- تخصصات الفنون (الجامعات) ----
             {
                 name: "الفنون",
                 code: "K00",
@@ -1521,6 +1576,7 @@
                 field: "الفنون الجميلة",
                 duration: "3 سنوات (ليسانس)",
                 degree: "ليسانس في الفنون",
+                type: "universities",
                 description: "تخصص يهتم بتطوير المهارات الفنية، مع التركيز على الرسم والنحت والتصميم والفنون التشكيلية.",
                 universities: [
                     { name: "جامعة الجزائر 2", grade: "10.02" },
@@ -1530,132 +1586,143 @@
 
             // ---- تخصصات المدارس العليا ----
             {
-                name: "المدرسة الوطنية متعددة التقنيات - الجزائر",
+                name: "المدرسة الوطنية متعددة التقنيات",
                 code: "ENS",
                 category: "مدارس عليا",
                 field: "الهندسة متعددة التقنيات",
                 duration: "5 سنوات",
                 degree: "مهندس في التكنولوجيا المتقدمة",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين متميزين في مختلف مجالات الهندسة، مع تركيز قوي على البحث العلمي والابتكار.",
                 universities: [
                     { name: "المدرسة الوطنية متعددة التقنيات بالجزائر", grade: "17.73" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للإعلام الآلي - الجزائر",
+                name: "المدرسة الوطنية العليا للإعلام الآلي",
                 code: "ESI",
                 category: "مدارس عليا",
                 field: "الإعلام الآلي",
                 duration: "5 سنوات",
                 degree: "مهندس في الإعلام الآلي",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال علوم الحاسوب، مع التركيز على تطوير البرمجيات والأنظمة المعلوماتية.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للإعلام الآلي - الجزائر", grade: "18.19" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للذكاء الاصطناعي - الجزائر",
+                name: "المدرسة الوطنية العليا للذكاء الاصطناعي",
                 code: "ENSIA",
                 category: "مدارس عليا",
                 field: "الذكاء الاصطناعي",
                 duration: "5 سنوات",
                 degree: "مهندس في الذكاء الاصطناعي",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين خبراء في مجال الذكاء الاصطناعي، مع التركيز على تعلم الآلة والشبكات العصبية ومعالجة اللغة الطبيعية.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للذكاء الاصطناعي - الجزائر", grade: "18.59" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للأمن السيبراني - الجزائر",
+                name: "المدرسة الوطنية العليا للأمن السيبراني",
                 code: "ENSC",
                 category: "مدارس عليا",
                 field: "الأمن السيبراني",
                 duration: "5 سنوات",
                 degree: "مهندس في الأمن السيبراني",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين خبراء في مجال أمن المعلومات، مع التركيز على حماية الأنظمة والشبكات والبيانات.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للأمن السيبراني - الجزائر", grade: "18.34" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للرياضيات - الجزائر",
+                name: "المدرسة الوطنية العليا للرياضيات",
                 code: "ENSM",
                 category: "مدارس عليا",
                 field: "الرياضيات التطبيقية",
                 duration: "5 سنوات",
                 degree: "مهندس في الرياضيات التطبيقية",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في الرياضيات التطبيقية، مع التركيز على النمذجة الرياضية والتحليل العددي.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للرياضيات - الجزائر", grade: "17.43" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للنانوتكنولوجيا - الجزائر",
+                name: "المدرسة الوطنية العليا للنانوتكنولوجيا",
                 code: "ENSN",
                 category: "مدارس عليا",
                 field: "النانوتكنولوجيا",
                 duration: "5 سنوات",
                 degree: "مهندس في النانوتكنولوجيا",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال النانوتكنولوجيا، مع التركيز على المواد النانوية وتطبيقاتها في الطب والصناعة.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للنانوتكنولوجيا - الجزائر", grade: "17.96" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للأنظمة الذاتية - الجزائر",
+                name: "المدرسة الوطنية العليا للأنظمة الذاتية",
                 code: "ENSA",
                 category: "مدارس عليا",
                 field: "الأنظمة الذاتية",
                 duration: "5 سنوات",
                 degree: "مهندس في الأنظمة الذاتية",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الأنظمة الذاتية، مع التركيز على الروبوتات والأتمتة والأنظمة المدمجة.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للأنظمة الذاتية - الجزائر", grade: "18.21" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للتكنولوجيات المتقدمة - الجزائر",
+                name: "المدرسة الوطنية العليا للتكنولوجيات المتقدمة",
                 code: "ENSTA",
                 category: "مدارس عليا",
                 field: "التكنولوجيات المتقدمة",
                 duration: "5 سنوات",
                 degree: "مهندس في التكنولوجيات المتقدمة",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجالات التكنولوجيا الحديثة، مع التركيز على الأنظمة الذكية والطاقة المتجددة.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للتكنولوجيات المتقدمة - الجزائر", grade: "17.15" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للأشغال العمومية - الجزائر",
+                name: "المدرسة الوطنية العليا للأشغال العمومية",
                 code: "ENSTP",
                 category: "مدارس عليا",
                 field: "الأشغال العمومية",
                 duration: "5 سنوات",
                 degree: "مهندس في الأشغال العمومية",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الهندسة المدنية، مع التركيز على البنية التحتية والهندسة المائية والنقل.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للأشغال العمومية - الجزائر", grade: "16.12" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للفلاحة - الجزائر",
+                name: "المدرسة الوطنية العليا للفلاحة",
                 code: "ENSAg",
                 category: "مدارس عليا",
                 field: "الفلاحة",
                 duration: "5 سنوات",
                 degree: "مهندس في الفلاحة",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الفلاحة، مع التركيز على الإنتاج الزراعي والحيواني وإدارة الموارد الطبيعية.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للفلاحة - الجزائر", grade: "14.91" }
                 ]
             },
             {
-                name: "المدرسة الوطنية العليا للفلاحة الصحراوية - أدرار",
+                name: "المدرسة الوطنية العليا للفلاحة الصحراوية",
                 code: "ENSA SAH",
                 category: "مدارس عليا",
                 field: "الفلاحة الصحراوية",
                 duration: "5 سنوات",
                 degree: "مهندس في الفلاحة الصحراوية",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الفلاحة الصحراوية، مع التركيز على الزراعة في المناطق الجافة وإدارة المياه.",
                 universities: [
                     { name: "المدرسة الوطنية العليا للفلاحة الصحراوية - أدرار", grade: "12.29" }
@@ -1668,6 +1735,7 @@
                 field: "الاقتصاد",
                 duration: "5 سنوات",
                 degree: "مهندس في الاقتصاد",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الاقتصاد، مع التركيز على التحليل الاقتصادي والتخطيط وإدارة المشاريع.",
                 universities: [
                     { name: "المدرسة العليا للإقتصاد - وهران", grade: "14.63" }
@@ -1680,6 +1748,7 @@
                 field: "التجارة",
                 duration: "5 سنوات",
                 degree: "مهندس في التجارة",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال التجارة، مع التركيز على التسويق وإدارة الأعمال والتجارة الدولية.",
                 universities: [
                     { name: "المدرسة العليا للتجارة - القليعة", grade: "16.02" }
@@ -1692,6 +1761,7 @@
                 field: "الدراسات التجارية",
                 duration: "5 سنوات",
                 degree: "مهندس في الدراسات التجارية",
+                type: "ecoles",
                 description: "تخصص يهدف إلى تكوين مهندسين في مجال الدراسات التجارية، مع التركيز على الإدارة المالية والمحاسبة والتدقيق.",
                 universities: [
                     { name: "المدرسة العليا للدراسات التجارية - القليعة", grade: "15.78" }
@@ -1702,6 +1772,8 @@
         // ====================================================
         // دوال العرض والفلترة
         // ====================================================
+
+        let currentCategory = 'universities'; // 'universities', 'ecoles', 'instituts'
 
         function calculateStats(data) {
             const totalSpecialties = data.length;
@@ -1725,7 +1797,6 @@
             return 'low';
         }
 
-        // حساب متوسط المعدلات للتخصص
         function getAverageGrade(spec) {
             const grades = spec.universities
                 .map(u => u.grade)
@@ -1736,12 +1807,10 @@
             return avg.toFixed(2);
         }
 
-        // عدد الجامعات التي تقدم التخصص
         function getUniversityCount(spec) {
             return spec.universities.length;
         }
 
-        // إيجاد أعلى وأدنى معدل
         function getGradeRange(spec) {
             const grades = spec.universities
                 .map(u => u.grade)
@@ -1751,15 +1820,35 @@
             return { min: Math.min(...grades).toFixed(2), max: Math.max(...grades).toFixed(2) };
         }
 
+        function getCategoryIcon(category) {
+            switch(category) {
+                case 'طب': return '⚕️';
+                case 'هندسة': return '⚙️';
+                case 'علوم': return '🔬';
+                case 'اقتصاد': return '💰';
+                case 'لغات': return '🌐';
+                case 'حقوق': return '⚖️';
+                case 'علوم إنسانية': return '🧠';
+                case 'فنون': return '🎨';
+                case 'مدارس عليا': return '🏫';
+                default: return '📖';
+            }
+        }
+
         function renderSpecialties(data) {
             const container = document.getElementById('specialtiesContainer');
             container.innerHTML = '';
 
             const stats = calculateStats(data);
-            document.getElementById('totalSpecialties').textContent = stats.totalSpecialties;
-            document.getElementById('totalUniversities').textContent = stats.totalUniversities;
-            document.getElementById('totalCategories').textContent = stats.totalCategories;
             document.getElementById('resultsCount').textContent = `${data.length} تخصص`;
+
+            // تحديث العدادات في البطاقات
+            const uniCount = specialtiesData.filter(s => s.type === 'universities').length;
+            const ecoleCount = specialtiesData.filter(s => s.type === 'ecoles').length;
+            const institutCount = specialtiesData.filter(s => s.type === 'instituts').length;
+            document.getElementById('uniCountBadge').textContent = `${uniCount} تخصص`;
+            document.getElementById('ecoleCountBadge').textContent = `${ecoleCount} تخصص`;
+            document.getElementById('institutCountBadge').textContent = `${institutCount} تخصص`;
 
             if (data.length === 0) {
                 container.innerHTML = `
@@ -1780,7 +1869,6 @@
                 const avgGrade = getAverageGrade(spec);
                 const uniCount = getUniversityCount(spec);
 
-                // إنشاء قائمة الجامعات
                 let uniHtml = '';
                 spec.universities.forEach(uni => {
                     const gradeClass = getGradeClass(uni.grade);
@@ -1792,22 +1880,8 @@
                     `;
                 });
 
-                // تحديد رمز التصنيف
-                let icon = '📚';
-                switch(spec.category) {
-                    case 'طب': icon = '⚕️'; break;
-                    case 'هندسة': icon = '⚙️'; break;
-                    case 'علوم': icon = '🔬'; break;
-                    case 'اقتصاد': icon = '💰'; break;
-                    case 'لغات': icon = '🌐'; break;
-                    case 'حقوق': icon = '⚖️'; break;
-                    case 'علوم إنسانية': icon = '🧠'; break;
-                    case 'فنون': icon = '🎨'; break;
-                    case 'مدارس عليا': icon = '🏫'; break;
-                    default: icon = '📖';
-                }
+                const icon = getCategoryIcon(spec.category);
 
-                // حساب نسبة القبول التقريبية للمتوسط
                 const avgNum = parseFloat(avgGrade);
                 let barPercent = 0;
                 if (!isNaN(avgNum)) {
@@ -1827,7 +1901,6 @@
                         <span style="font-size:0.75rem; color:var(--text-secondary);">${spec.duration}</span>
                     </div>
                     
-                    <!-- تفاصيل إضافية بجانب التخصص -->
                     <div class="specialty-details">
                         <div class="detail-item">
                             <i class="fas fa-graduation-cap"></i>
@@ -1835,7 +1908,7 @@
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-university"></i>
-                            <span>الجامعات: <span class="detail-value">${uniCount}</span></span>
+                            <span>المؤسسات: <span class="detail-value">${uniCount}</span></span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-chart-line"></i>
@@ -1851,7 +1924,6 @@
                         </div>
                     </div>
 
-                    <!-- شريط التقدم للمعدل -->
                     ${!isNaN(avgNum) ? `
                     <div class="grade-bar-container">
                         <span style="font-size:0.75rem; color:var(--text-secondary);">معدل القبول</span>
@@ -1862,8 +1934,7 @@
                     </div>
                     ` : ''}
 
-                    <!-- وصف التخصص -->
-                    <p style="font-size:0.9rem; color:var(--text-secondary); margin:0.8rem 0 0.5rem 0; line-height:1.7; border-right:3px solid var(--accent-light); padding-right:0.8rem;">
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin:0.6rem 0 0.4rem 0; line-height:1.6; border-right:3px solid var(--accent-light); padding-right:0.8rem;">
                         ${spec.description}
                     </p>
 
@@ -1884,6 +1955,10 @@
             const filterCategory = document.getElementById('filterSelect').value;
 
             let filtered = specialtiesData.filter(spec => {
+                // فلترة حسب النوع المختار (الجامعات، المدارس العليا، المعاهد الطبية)
+                if (spec.type !== currentCategory) {
+                    return false;
+                }
                 if (filterCategory !== 'all' && spec.category !== filterCategory) {
                     return false;
                 }
@@ -1900,6 +1975,21 @@
             renderSpecialties(filtered);
         }
 
+        function selectCategory(type) {
+            currentCategory = type;
+            // تحديث البطاقات النشطة
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.toggle('active', card.dataset.type === type);
+            });
+            // إعادة تعيين البحث والفلتر
+            document.getElementById('searchInput').value = '';
+            document.getElementById('filterSelect').value = 'all';
+            filterSpecialties();
+            
+            // تمرير سلس إلى قسم النتائج
+            document.getElementById('specialtiesContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
         function showSpecialtyDetails(name) {
             const spec = specialtiesData.find(s => s.name === name);
             if (spec) {
@@ -1914,7 +2004,7 @@
                     `🎓 الشهادة: ${spec.degree}\n` +
                     `📝 الوصف: ${spec.description}\n` +
                     `━━━━━━━━━━━━━━━━━━━\n` +
-                    `🏛️ الجامعات المتاحة (${spec.universities.length}):\n` +
+                    `🏛️ المؤسسات المتاحة (${spec.universities.length}):\n` +
                     `${uniList}`
                 );
             }
@@ -1925,12 +2015,14 @@
         // ====================================================
 
         document.addEventListener('DOMContentLoaded', function() {
-            renderSpecialties(specialtiesData);
+            // عرض التخصصات الأولية (الجامعات)
+            selectCategory('universities');
         });
 
         window.filterSpecialties = filterSpecialties;
         window.showSpecialtyDetails = showSpecialtyDetails;
         window.toggleMobileMenu = toggleMobileMenu;
+        window.selectCategory = selectCategory;
 
         // تأثير التمرير
         window.addEventListener('scroll', function() {
@@ -1966,6 +2058,9 @@
 
         console.log('🔍 WENDO - دليل الجامعات والتخصصات 2025 (مطور)');
         console.log(`📊 تم تحميل ${specialtiesData.length} تخصص مع تفاصيل غنية`);
+        console.log(`🏛️ الجامعات: ${specialtiesData.filter(s => s.type === 'universities').length}`);
+        console.log(`🎓 المدارس العليا: ${specialtiesData.filter(s => s.type === 'ecoles').length}`);
+        console.log(`⚕️ المعاهد الطبية: ${specialtiesData.filter(s => s.type === 'instituts').length}`);
     </script>
 </body>
 </html>
