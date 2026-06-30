@@ -457,6 +457,14 @@
             color: #fff;
             letter-spacing: -0.5px;
         }
+        
+        /* --- تنسيق شعار WENDO في الفوتر --- */
+        .footer .footer-brand .logo-img {
+            height: 68px;
+            width: auto;
+            margin-bottom: 0.5rem;
+            filter: brightness(0) invert(1); /* ليتناسب مع خلفية الفوتر الداكنة */
+        }
 
         .footer .footer-brand .tagline {
             font-size: 0.95rem;
@@ -684,6 +692,18 @@
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
             transition: background 0.5s ease;
         }
+        
+        /* --- تنسيق شعار WENDO في شريط التنقل --- */
+        .navbar .nav-brand .logo-img {
+            height: 100px;
+            width: auto;
+            display: block;
+        }
+        .navbar .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 0; /* لإخفاء النص الاحتياطي */
+        }
     </style>
 </head>
 <body>
@@ -695,7 +715,9 @@
                 <span>القائمة</span>
             </button>
         </div>
-        <div class="nav-brand" onclick="app.navigate('landing-view')" role="button" tabindex="0">WENDO</div>
+        <div class="nav-brand" onclick="app.navigate('landing-view')" role="button" tabindex="2">
+            <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
+        </div>
         <div class="nav-right">
             <button class="program-finder" onclick="window.location.href='sp.html'">
                 <span>البحث عن تخصص</span>
@@ -711,6 +733,7 @@
             <button onclick="app.navigate('landing-view'); app.toggleMobileMenu()">🏠 الرئيسية</button>
             <button onclick="window.location.href='sp.html'; app.toggleMobileMenu()">الجامعات والمدارس</button>
             <button onclick="window.location.href='mhn.html'; app.toggleMobileMenu()">دليل المهن</button>
+			<button onclick="window.location.href='nd.html'; app.toggleMobileMenu()">دليل النظام الجامعي</button>
             <button onclick="app.startQuiz(); app.toggleMobileMenu()">اختبار الميول</button>
             <button id="nav-dashboard-btn" class="hidden" onclick="app.navigate('dashboard-view'); app.toggleMobileMenu()">مساحتي</button>
             <button id="menu-login-btn" onclick="app.openModal('login-modal'); app.toggleMobileMenu()">تسجيل الدخول</button>
@@ -728,7 +751,7 @@
             <h1>اكتشف مستقبلك <span style="background: linear-gradient(135deg, #e5ccf4, #a080e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">مع WENDO</span></h1>
             <p style="color: #e5ccf4;">المنصة الموجهة للطلاب في الجزائر لاكتشاف التخصصات، الجامعات، والمهن الأنسب لميولك.</p>
             <div class="hero-buttons">
-                <button class="secondary-btn large" onclick="app.navigate('explorer-view')">تصفح التخصصات</button>
+                <button class="secondary-btn large" onclick="window.location.href='sp.html'">تصفح التخصصات</button>
             </div>
         </div>
         <div class="scroll-indicator" onclick="document.querySelector('.features-grid').scrollIntoView({behavior:'smooth'})">
@@ -946,7 +969,7 @@
     <footer class="footer scroll-animate">
         <div class="footer-content">
             <div class="footer-brand">
-                <h2>WENDO</h2>
+                <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
                 <p class="tagline">الطريق نحو المستقبل</p>
                 
             </div>

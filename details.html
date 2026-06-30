@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المدرسة - WENDO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="arabic.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Regular.OTF" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Bold.OTF" as="font" type="font/otf" crossorigin>
+    <style>
+        :root {
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --bg-color: #f0edf7;
+            --surface-color: #ffffff;
+            --surface-hover: #f5f3ff;
+            --border-color: #e2ddf5;
+            --accent-color: #5b3c8a;
+            --accent-light: #9b7fd4;
+            --accent-purple: #7b5cb8;
+            --accent-gradient: linear-gradient(135deg, #2d1b69, #5b3c8a);
+            --shadow-md: 0 8px 30px rgba(43, 27, 102, 0.12);
+            --shadow-lg: 0 12px 45px rgba(43, 27, 102, 0.2);
+            --font-arabic: 'ArabicFont', 'Segoe UI', system-ui, sans-serif;
+            --font-display: 'BebasNeue-Regular', 'Segoe UI', sans-serif;
+            --font-display-bold: 'BebasNeue-Bold', 'Segoe UI', sans-serif;
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 26px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @font-face {
+            font-family: 'ArabicFont';
+            src: url('arabic.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'BebasNeue-Regular';
+            src: url('BebasNeue-Regular.OTF') format('opentype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'BebasNeue-Bold';
+            src: url('BebasNeue-Bold.OTF') format('opentype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-arabic);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* ----- navbar ----- */
+        .navbar {
+            background: var(--surface-color);
+            padding: 0.7rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            flex-wrap: wrap;
+        }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(43,27,102,0.15); }
+        .nav-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            cursor: pointer;
+            letter-spacing: 2px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+        .nav-brand:hover { transform: scale(1.03); }
+        .nav-left { display: flex; align-items: center; gap: 1rem; }
+        .nav-left .menu-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+        .nav-left .menu-text:hover { background: var(--surface-hover); }
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .nav-right button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        .nav-right button:hover {
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ----- container ----- */
+        .container { max-width: 1200px; margin: 2rem auto; padding: 0 2rem; }
+
+        /* ----- detail card ----- */
+        .detail-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            padding: 2.5rem 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 100%; height: 6px;
+            background: var(--accent-gradient);
+        }
+        .detail-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .detail-header .icon { font-size: 4rem; }
+        .detail-header .title-group {
+            flex: 1;
+        }
+        .detail-header .title-group h1 {
+            font-size: 2.2rem;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+        .detail-header .title-group .code {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            font-weight: 400;
+            margin-top: 0.2rem;
+        }
+        .detail-header .grade-badge {
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 0.6rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+        }
+        .detail-header .grade-badge small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        /* ----- info grid ----- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+        .info-item {
+            background: var(--bg-color);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+        .info-item:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent-light);
+        }
+        .info-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .info-item .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .info-item .value i { color: var(--accent-color); margin-left: 0.4rem; }
+
+        /* ----- sections ----- */
+        .detail-section {
+            margin: 2rem 0;
+            padding: 1.5rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        .detail-section:first-of-type { border-top: none; padding-top: 0; }
+        .detail-section h3 {
+            font-size: 1.3rem;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .detail-section h3 i { color: var(--accent-color); }
+        .detail-section p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .specialties-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 0.5rem;
+        }
+        .specialties-grid .tag {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        .specialties-grid .tag:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+        .requirements-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border-radius: var(--radius-sm);
+            border-right: 4px solid var(--accent-color);
+            color: var(--text-secondary);
+        }
+        .requirements-list li i {
+            color: var(--accent-color);
+            width: 1.5rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border-color);
+        }
+        .action-buttons .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+        .btn-outline:hover {
+            background: var(--surface-hover);
+            border-color: var(--accent-light);
+            transform: translateY(-3px);
+        }
+        .btn-website {
+            background: #1a73e8;
+            color: #fff;
+            box-shadow: var(--shadow-md);
+        }
+        .btn-website:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: #1557b0;
+        }
+
+        /* ----- back to top ----- */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem; left: 2rem;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 16px 40px rgba(43,27,102,0.35);
+        }
+
+        /* ----- footer ----- */
+        .footer {
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 3rem;
+            border-radius: 40px 40px 0 0;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 2.8rem;
+        }
+        .footer-brand h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .footer-brand .tagline {
+            color: var(--accent-light);
+            font-style: italic;
+            border-right: 3px solid var(--accent-purple);
+            padding-right: 14px;
+        }
+        .footer-brand .description {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+        }
+        .footer-col h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: #fff;
+            margin-bottom: 1.2rem;
+            padding-bottom: 10px;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 32px; height: 3px;
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 0.6rem; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(-4px);
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .detail-card { padding: 1.5rem; }
+            .detail-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .detail-header .grade-badge { align-self: flex-start; }
+            .info-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .navbar { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .nav-brand { font-size: 1.8rem; }
+            .nav-right button span { display: none; }
+            .action-buttons { flex-direction: column; }
+            .action-buttons .btn { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .detail-header .title-group h1 { font-size: 1.5rem; }
+            .detail-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <a href="s.html" class="menu-text">
+                <i class="fas fa-arrow-right"></i>
+                <span>رجوع إلى القائمة</span>
+            </a>
+        </div>
+        <div class="nav-brand" onclick="window.location.href='index.html'">
+    <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="شعار WENDO" style="height: 50px; vertical-align: middle;">
+</div>
+    </nav>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <div class="container" id="detailContainer">
+        <!-- سيتم ملء المحتوى بواسطة JavaScript -->
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>WENDO</h2>
+                <p class="tagline">الطريق نحو المستقبل</p>
+                <p class="description">
+                    منصتك التوجيهية الذكية لاختيار التخصص الجامعي المناسب.
+                    نقدم لك دليلاً شاملاً لمؤسسات التعليم العالي في الجزائر مع معدلات القبول.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>التنقل</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">اختبار الميول</a></li>
+                    <li><a href="s.html">المؤسسات</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>الموارد</h4>
+                <ul>
+                    <li><a href="#">الأدلة</a></li>
+                    <li><a href="#">المدونة</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>من نحن</h4>
+                <ul>
+                    <li><a href="#">من نحن؟</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">الخصوصية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات مأخوذة من وزارة التعليم العالي والبحث العلمي الجزائرية.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --------------------------------------------------------------
+        // البيانات الكاملة للمدارس (نفس البيانات من s.html)
+        // --------------------------------------------------------------
+        const ecolesData = [
+            // --- Économie, Gestion & Commerce ---
+            {
+                name: "المدرسة العليا للدراسات التجارية",
+                code: "EHEC",
+                icon: "🏛️",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التجارية",
+                grade: "15.78",
+                description: "تكوين مهندسين في مجال الاقتصاد والتسيير مع تركيز على التحليل المالي والتسويق.",
+                specialties: ["اقتصاد", "تسيير", "تجارة", "مالية"],
+                location: "القليعة، الجزائر",
+                website: "https://hec.dz/newsite/?cat=115",
+                // معلومات إضافية للصفحة التفصيلية
+                admission: "معدل البكالوريا 15.78 فما فوق، مع اختبار قدرات ومقابلة شخصية.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد أو رياضيات", "معدل عام 15.78 فما فوق", "اجتياز اختبار اللغة الإنجليزية", "اجتياز المقابلة الشخصية"],
+                prospects: "التوظيف في البنوك، المؤسسات المالية، الشركات الاستشارية، الإدارة العمومية، المنظمات الدولية."
+            },
+            {
+                name: "المدرسة العليا للتجارة",
+                code: "ESC",
+                icon: "🏪",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التجارة",
+                grade: "16.02",
+                description: "تكوين مهندسين في مجال التجارة والتسويق وإدارة الأعمال.",
+                specialties: ["تجارة", "تسويق", "إدارة أعمال", "تجارة دولية"],
+                location: "القليعة، الجزائر",
+                website: "https://www.esc-alger.dz/",
+                admission: "معدل البكالوريا 16.02 فما فوق، اختبار كفاءة في اللغة الفرنسية والرياضيات.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد أو لغات", "معدل عام 16.02 فما فوق", "اختبار في الرياضيات واللغة الفرنسية", "مقابلة شخصية"],
+                prospects: "التوظيف في الشركات التجارية، مؤسسات التسويق، إدارة الأعمال، التجارة الدولية."
+            },
+            {
+                name: "المدرسة العليا للتسيير و الاقتصاد الرقمي",
+                code: "ESGEN",
+                icon: "📊",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التسيير و الاقتصاد الرقمي",
+                grade: "15.20",
+                description: "تكوين مهندسين في مجالات التسيير والاقتصاد الرقمي والتكنولوجيا المالية.",
+                specialties: ["اقتصاد رقمي", "تسيير", "مالية", "تكنولوجيا"],
+                location: "القليعة، الجزائر",
+                website: "https://www.esgen.edu.dz/",
+                admission: "معدل البكالوريا 15.20 فما فوق مع ميول للرقمنة.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو تسيير", "معدل عام 15.20 فما فوق", "اختبار في الرياضيات والاقتصاد", "مقابلة شخصية"],
+                prospects: "التوظيف في البنوك الرقمية، الشركات الناشئة، الوزارات، المؤسسات المالية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للإحصاء و الاقتصاد التطبيقي",
+                code: "ENSSEA",
+                icon: "📈",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإحصاء و الاقتصاد",
+                grade: "14.85",
+                description: "تكوين مهندسين في الإحصاء والاقتصاد التطبيقي مع تركيز على تحليل البيانات.",
+                specialties: ["إحصاء", "اقتصاد", "تحليل بيانات", "نمذجة"],
+                location: "القليعة، الجزائر",
+                website: "https://test.enssea.edu.dz/index.php/fr/",
+                admission: "معدل البكالوريا 14.85 فما فوق مع تفوق في الرياضيات.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 14.85 فما فوق", "اختبار في الإحصاء والرياضيات", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز الإحصاء، البنوك، مؤسسات التأمين، مراكز البحث."
+            },
+            {
+                name: "المدرسة الوطنية العليا للتسيير",
+                code: "ENSM",
+                icon: "📋",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التسيير",
+                grade: "14.92",
+                description: "تكوين مهندسين في مجالات التسيير وإدارة المؤسسات والموارد البشرية.",
+                specialties: ["تسيير", "موارد بشرية", "إدارة", "مالية"],
+                location: "القليعة، الجزائر",
+                website: "https://www.ensmanagement.dz/",
+                admission: "معدل البكالوريا 14.92 فما فوق مع ميول للإدارة.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد", "معدل عام 14.92 فما فوق", "اختبار في التسيير والمحاسبة", "مقابلة شخصية"],
+                prospects: "التوظيف في المؤسسات العمومية والخاصة، إدارة الموارد البشرية، الاستشارات."
+            },
+            {
+                name: "المدرسة الوطنية العليا للاقتصاد - وهران",
+                code: "ESE ORAN",
+                icon: "📉",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في الاقتصاد",
+                grade: "14.63",
+                description: "تكوين مهندسين في الاقتصاد الكلي والجزئي والتحليل المالي.",
+                specialties: ["اقتصاد", "تحليل مالي", "تخطيط", "إدارة"],
+                location: "وهران",
+                website: "https://ese-oran.dz/",
+                admission: "معدل البكالوريا 14.63 فما فوق مع تفوق في المواد الاقتصادية.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد", "معدل عام 14.63 فما فوق", "اختبار في الاقتصاد والرياضيات", "مقابلة شخصية"],
+                prospects: "التوظيف في البنوك، المؤسسات المالية، وزارة المالية، المنظمات الدولية."
+            },
+            {
+                name: "المدرسة الوطنية العليا لعلوم التسيير",
+                code: "ESSG",
+                icon: "📂",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم التسيير",
+                grade: "14.10",
+                description: "تكوين مهندسين في علوم التسيير والمحاسبة والتدقيق.",
+                specialties: ["تسيير", "محاسبة", "تدقيق", "مالية"],
+                location: "عنابة",
+                website: "https://essg-annaba.dz/fr/accueil/",
+                admission: "معدل البكالوريا 14.10 فما فوق مع ميول للمحاسبة.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد", "معدل عام 14.10 فما فوق", "اختبار في المحاسبة والرياضيات", "مقابلة شخصية"],
+                prospects: "التوظيف في مكاتب المحاسبة، شركات التدقيق، المؤسسات المالية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للمحاسبة و المالية",
+                code: "ENSCF",
+                icon: "🧾",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في المحاسبة و المالية",
+                grade: "14.45",
+                description: "تكوين مهندسين في المحاسبة والمالية والتدقيق المالي.",
+                specialties: ["محاسبة", "مالية", "تدقيق", "ضرائب"],
+                location: "قسنطينة",
+                website: "",
+                admission: "معدل البكالوريا 14.45 فما فوق مع تفوق في المحاسبة.",
+                requirements: ["شهادة البكالوريا شعبة تسيير واقتصاد", "معدل عام 14.45 فما فوق", "اختبار في المحاسبة والمالية", "مقابلة شخصية"],
+                prospects: "التوظيف في مكاتب المحاسبة، شركات التدقيق، البنوك، وزارة المالية."
+            },
+
+            // --- Sciences & Technologies de l’Ingénieur ---
+            {
+                name: "المدرسة الوطنية متعددة التقنيات",
+                code: "ENP",
+                icon: "⚙️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا المتقدمة",
+                grade: "17.73",
+                description: "تكوين مهندسين متميزين في مختلف مجالات الهندسة مع تركيز قوي على البحث العلمي.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enp.edu.dz/ar/",
+                admission: "معدل البكالوريا 17.73 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 17.73 فما فوق", "اختبار كتابي في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة، البناء، الصناعة، البحث العلمي، الشركات الكبرى."
+            },
+            {
+                name: "المدرسة الوطنية العليا للنانوتكنولوجيا",
+                code: "ENSN",
+                icon: "🔬",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في النانوتكنولوجيا",
+                grade: "17.96",
+                description: "تكوين مهندسين في مجال النانوتكنولوجيا والمواد النانوية.",
+                specialties: ["نانوتكنولوجيا", "مواد نانوية", "تطبيقات طبية", "صناعة"],
+                location: "الجزائر العاصمة",
+                website: "https://www.nsnn.edu.dz/",
+                admission: "معدل البكالوريا 17.96 فما فوق مع تفوق في العلوم الفيزيائية والكيميائية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية أو رياضيات", "معدل عام 17.96 فما فوق", "اختبار في الفيزياء والكيمياء", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز البحث، الصناعات الدوائية، الإلكترونيات، الطاقات المتجددة."
+            },
+            {
+                name: "المدرسة الوطنية العليا للأنظمة الذاتية",
+                code: "ENSTSA",
+                icon: "🤖",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في الأنظمة الذاتية",
+                grade: "18.21",
+                description: "تكوين مهندسين في الروبوتات والأتمتة والأنظمة المدمجة.",
+                specialties: ["روبوتات", "أتمتة", "أنظمة مدمجة", "تحكم"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enstsa.edu.dz/fr/index.php",
+                admission: "معدل البكالوريا 18.21 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 18.21 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في صناعة الروبوتات، الأتمتة الصناعية، الذكاء الاصطناعي، الطيران."
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم التطبيقية - الجزائر",
+                code: "ENSSA",
+                icon: "🧪",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التطبيقية",
+                grade: "17.20",
+                description: "تكوين مهندسين في العلوم التطبيقية والفيزياء والكيمياء.",
+                specialties: ["فيزياء", "كيمياء", "مواد", "طاقة"],
+                location: "الجزائر العاصمة",
+                website: "",
+                admission: "معدل البكالوريا 17.20 فما فوق مع تفوق في العلوم.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 17.20 فما فوق", "اختبار في الفيزياء والكيمياء", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز البحث، الصناعة، الطاقة، التعليم العالي."
+            },
+            {
+                name: "المدرسة العليا للعلوم و التكنولوجيا",
+                code: "ESST",
+                icon: "🧬",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم و التكنولوجيا",
+                grade: "16.85",
+                description: "تكوين مهندسين في مجالات العلوم والتكنولوجيا والهندسة.",
+                specialties: ["علوم", "تكنولوجيا", "هندسة", "طاقة"],
+                location: "الجزائر العاصمة",
+                website: "https://www.esst-sup.com/",
+                admission: "معدل البكالوريا 16.85 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 16.85 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة، الصناعة، التكنولوجيا، البحث العلمي."
+            },
+            {
+                name: "المدرسة الوطنية العليا للتكنولوجيا",
+                code: "ENST",
+                icon: "🏭",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.15",
+                description: "تكوين مهندسين في مجالات التكنولوجيا الصناعية والطاقة المتجددة.",
+                specialties: ["طاقة متجددة", "أنظمة ذكية", "إلكترونيك", "اتصالات"],
+                location: "الجزائر العاصمة",
+                website: "https://ensta.edu.dz/",
+                admission: "معدل البكالوريا 17.15 فما فوق مع تفوق في المواد العلمية.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 17.15 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة المتجددة، الصناعة، الاتصالات، الشركات الناشئة."
+            },
+            {
+                name: "المدرسة الوطنية متعددة التقنيات - قسنطينة",
+                code: "ENP CONST",
+                icon: "🏛️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.50",
+                description: "تكوين مهندسين في مختلف مجالات الهندسة مع تركيز على التكنولوجيا والابتكار.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "قسنطينة",
+                website: "https://enp-constantine.dz/",
+                admission: "معدل البكالوريا 17.50 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 17.50 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع البناء، الطاقة، الصناعة، البحث العلمي."
+            },
+            {
+                name: "المدرسة الوطنية العليا للتكنولوجيات الصناعية",
+                code: "ENSTI",
+                icon: "🏗️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيات الصناعية",
+                grade: "16.90",
+                description: "تكوين مهندسين في التكنولوجيات الصناعية والإنتاج.",
+                specialties: ["صناعة", "إنتاج", "ميكانيك", "طاقة"],
+                location: "عنابة",
+                website: "https://ensti-annaba.dz/",
+                admission: "معدل البكالوريا 16.90 فما فوق مع تفوق في المواد العلمية.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 16.90 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الصناعة، الإنتاج، الطاقة، الصيانة."
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم التطبيقية - تلمسان",
+                code: "ESSA TLEM",
+                icon: "🧪",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التطبيقية",
+                grade: "16.60",
+                description: "تكوين مهندسين في العلوم التطبيقية والهندسة.",
+                specialties: ["فيزياء", "كيمياء", "مواد", "إلكترونيك"],
+                location: "تلمسان",
+                website: "https://www.essa-tlemcen.dz/",
+                admission: "معدل البكالوريا 16.60 فما فوق مع تفوق في العلوم.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 16.60 فما فوق", "اختبار في الفيزياء والكيمياء", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز البحث، الصناعة، الطاقة، التعليم."
+            },
+            {
+                name: "المدرسة الوطنية متعددة التقنيات - وهران",
+                code: "ENP ORAN",
+                icon: "⚙️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.35",
+                description: "تكوين مهندسين في مختلف مجالات الهندسة والتكنولوجيا.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "وهران",
+                website: "https://www.enp-oran.dz/",
+                admission: "معدل البكالوريا 17.35 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 17.35 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة، البناء، الصناعة، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للهندسة الكهربائية و الطاقوية - وهران",
+                code: "ESGEE",
+                icon: "⚡",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في الهندسة الكهربائية و الطاقوية",
+                grade: "17.10",
+                description: "تكوين مهندسين في الهندسة الكهربائية والطاقوية.",
+                specialties: ["هندسة كهربائية", "طاقة", "تحكم", "إلكترونيك"],
+                location: "وهران",
+                website: "https://esgee-oran.dz/new/",
+                admission: "معدل البكالوريا 17.10 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 17.10 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة، الكهرباء، الصناعة، التحكم الآلي."
+            },
+
+            // --- Génie Civil, Architecture & Urbanisme ---
+            {
+                name: "المدرسة الوطنية العليا للأشغال العمومية",
+                code: "ENSTP",
+                icon: "🏗️",
+                field: "هندسة مدنية، عمارة و تهيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في الأشغال العمومية",
+                grade: "16.12",
+                description: "تكوين مهندسين في مجال الهندسة المدنية والبنية التحتية.",
+                specialties: ["هندسة مدنية", "هندسة مائية", "نقل", "بنية تحتية"],
+                location: "الجزائر العاصمة",
+                website: "https://enstp.edu.dz/",
+                admission: "معدل البكالوريا 16.12 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 16.12 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع البناء، الأشغال العمومية، التهيئة العمرانية، الاستشارات الهندسية."
+            },
+            {
+                name: "المدرسة المتعددة التقنيات للعمارة و التهيئة العمرانية",
+                code: "EPAU",
+                icon: "🏙️",
+                field: "هندسة مدنية، عمارة و تهيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في العمارة و التهيئة",
+                grade: "15.80",
+                description: "تكوين مهندسين معماريين ومختصين في التهيئة العمرانية.",
+                specialties: ["عمارة", "تهيئة عمرانية", "تصميم", "مدن"],
+                location: "الجزائر العاصمة",
+                website: "https://www.epau-alger.edu.dz/",
+                admission: "معدل البكالوريا 15.80 فما فوق مع موهبة في الرسم والتصميم.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 15.80 فما فوق", "اختبار في الرسم والتصميم", "مقابلة شخصية"],
+                prospects: "التوظيف في مكاتب الهندسة المعمارية، التهيئة العمرانية، البلديات، الاستشارات."
+            },
+
+            // --- Agriculture ---
+            {
+                name: "المدرسة الوطنية العليا للفلاحة",
+                code: "ENSA",
+                icon: "🌾",
+                field: "فلاحة",
+                duration: "5 سنوات",
+                degree: "مهندس في الفلاحة",
+                grade: "14.91",
+                description: "تكوين مهندسين في مجال الفلاحة والإنتاج الزراعي والحيواني.",
+                specialties: ["إنتاج زراعي", "إنتاج حيواني", "موارد طبيعية", "تغذية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.ensa.dz/fr/",
+                admission: "معدل البكالوريا 14.91 فما فوق مع ميول للعلوم الزراعية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 14.91 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الفلاحة، الشركات الزراعية، مراكز البحث، التنمية الريفية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للفلاحة - مستغانم",
+                code: "ENSA MOSTA",
+                icon: "🌿",
+                field: "فلاحة",
+                duration: "5 سنوات",
+                degree: "مهندس في الفلاحة",
+                grade: "13.20",
+                description: "تكوين مهندسين في الفلاحة والتنمية الريفية.",
+                specialties: ["فلاحة", "تنمية ريفية", "موارد", "بيئة"],
+                location: "مستغانم",
+                website: "https://www.esa-mosta.dz/",
+                admission: "معدل البكالوريا 13.20 فما فوق مع ميول للتنمية الريفية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 13.20 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الفلاحة، التنمية الريفية، المنظمات غير الحكومية."
+            },
+
+            // --- Sciences Vétérinaires ---
+            {
+                name: "المدرسة الوطنية العليا للبيطرة",
+                code: "ENSV",
+                icon: "🐄",
+                field: "علوم بيطرية",
+                duration: "6 سنوات",
+                degree: "طبيب بيطري",
+                grade: "15.30",
+                description: "تكوين أطباء بيطريين في مجالات الصحة الحيوانية والوقاية.",
+                specialties: ["بيطرة", "صحة حيوانية", "وقاية", "تغذية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.ensv.dz/",
+                admission: "معدل البكالوريا 15.30 فما فوق مع تفوق في العلوم الطبيعية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 15.30 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في القطاع البيطري، مراكز الصحة الحيوانية، المزارع، البحث العلمي."
+            },
+
+            // --- Informatique, Mathématiques & Nouvelles Technologies ---
+            {
+                name: "المدرسة الوطنية العليا للإعلام الآلي",
+                code: "ESI",
+                icon: "💻",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإعلام الآلي",
+                grade: "18.19",
+                description: "تكوين مهندسين في علوم الحاسوب وتطوير البرمجيات.",
+                specialties: ["إعلام آلي", "تطوير برمجيات", "أنظمة معلومات", "شبكات"],
+                location: "الجزائر العاصمة",
+                website: "https://www.esi.dz/",
+                admission: "معدل البكالوريا 18.19 فما فوق مع تفوق في الرياضيات.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 18.19 فما فوق", "اختبار في الرياضيات والمعلوماتية", "مقابلة شخصية"],
+                prospects: "التوظيف في شركات التكنولوجيا، تطوير البرمجيات، الذكاء الاصطناعي، الأمن السيبراني."
+            },
+            {
+                name: "المدرسة الوطنية العليا للإعلام الآلي - سيدي بلعباس",
+                code: "ESI SBA",
+                icon: "💻",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإعلام الآلي",
+                grade: "17.80",
+                description: "تكوين مهندسين في الإعلام الآلي والأنظمة المعلوماتية.",
+                specialties: ["إعلام آلي", "أنظمة", "شبكات", "قواعد بيانات"],
+                location: "سيدي بلعباس",
+                website: "https://www.esi-sba.dz/fr/",
+                admission: "معدل البكالوريا 17.80 فما فوق مع تفوق في الرياضيات.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 17.80 فما فوق", "اختبار في الرياضيات والمعلوماتية", "مقابلة شخصية"],
+                prospects: "التوظيف في شركات التكنولوجيا، تطوير البرمجيات، الأنظمة المعلوماتية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للذكاء الاصطناعي",
+                code: "ENSIA",
+                icon: "🧠",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الذكاء الاصطناعي",
+                grade: "18.59",
+                description: "تكوين خبراء في الذكاء الاصطناعي وتعلم الآلة.",
+                specialties: ["ذكاء اصطناعي", "تعلم آلة", "معالجة لغة طبيعية", "رؤية حاسوبية"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://www.ensia.edu.dz/fr/",
+                admission: "معدل البكالوريا 18.59 فما فوق مع تفوق في الرياضيات والمعلوماتية.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 18.59 فما فوق", "اختبار في الرياضيات والمعلوماتية", "مقابلة شخصية"],
+                prospects: "التوظيف في شركات الذكاء الاصطناعي، البحث العلمي، تطوير التطبيقات الذكية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للرياضيات",
+                code: "ENSM",
+                icon: "📐",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الرياضيات التطبيقية",
+                grade: "17.43",
+                description: "تكوين مهندسين في الرياضيات التطبيقية والنمذجة.",
+                specialties: ["رياضيات", "نمذجة", "تحليل عددي", "إحصاء"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://nhsm.dz/",
+                admission: "معدل البكالوريا 17.43 فما فوق مع تفوق في الرياضيات.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 17.43 فما فوق", "اختبار في الرياضيات", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز البحث، البنوك، التأمين، التعليم العالي."
+            },
+            {
+                name: "المدرسة الوطنية العليا للأمن السيبراني",
+                code: "ENSCS",
+                icon: "🔒",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الأمن السيبراني",
+                grade: "18.34",
+                description: "تكوين خبراء في أمن المعلومات والسيبرانية.",
+                specialties: ["أمن سيبراني", "أمن شبكات", "تشفير", "أمن تطبيقات"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://www.enscs.edu.dz/",
+                admission: "معدل البكالوريا 18.34 فما فوق مع تفوق في الرياضيات والمعلوماتية.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات", "معدل عام 18.34 فما فوق", "اختبار في الرياضيات والمعلوماتية", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز الأمن السيبراني، البنوك، المؤسسات الحكومية، الشركات التكنولوجية."
+            },
+            {
+                name: "المدرسة الوطنية العليا لتكنولوجيات الإعلام و البريد",
+                code: "ENSTICP",
+                icon: "📡",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في تكنولوجيات الإعلام",
+                specialties: ["اتصالات", "شبكات", "بريد", "تكنولوجيا"],
+                location: "الجزائر العاصمة",
+                website: "https://inptic.edu.dz/",
+                admission: "معدل البكالوريا 16.50 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 16.50 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الاتصالات، شركات البريد، التكنولوجيا، الشبكات."
+            },
+            {
+                name: "المدرسة الوطنية العليا للاتصالات و تكنولوجيات الإعلام - وهران",
+                code: "ENSTTIC",
+                icon: "📶",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الاتصالات",
+                grade: "17.00",
+                description: "تكوين مهندسين في الاتصالات وتكنولوجيات الإعلام.",
+                specialties: ["اتصالات", "شبكات", "تكنولوجيا", "أنظمة"],
+                location: "وهران",
+                website: "https://www.ensttic.dz/",
+                admission: "معدل البكالوريا 17.00 فما فوق مع تفوق في الرياضيات والفيزياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 17.00 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الاتصالات، شركات التكنولوجيا، الشبكات، الأنظمة."
+            },
+
+            // --- Sciences de la Nature, de la Mer & de l’Environnement ---
+            {
+                name: "المدرسة الوطنية العليا لعلوم البحر و تهيئة الساحل",
+                code: "ENSSMAL",
+                icon: "🌊",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم البحر",
+                grade: "14.75",
+                description: "تكوين مهندسين في علوم البحر وتهيئة السواحل.",
+                specialties: ["علوم بحر", "بيئة", "تهيئة ساحلية", "موارد"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enssmal.edu.dz/",
+                admission: "معدل البكالوريا 14.75 فما فوق مع ميول للعلوم البحرية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 14.75 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الصيد البحري، البيئة، تهيئة السواحل، البحث العلمي."
+            },
+            {
+                name: "المدرسة الوطنية العليا لعلوم الغذاء و الصناعات الغذائية",
+                code: "ENSSAIA",
+                icon: "🍎",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم الغذاء",
+                grade: "14.40",
+                description: "تكوين مهندسين في علوم الغذاء والصناعات الغذائية.",
+                specialties: ["غذاء", "صناعات غذائية", "تغذية", "مراقبة جودة"],
+                location: "الجزائر العاصمة",
+                website: "https://essaia.dz/presentation-de-lecole/",
+                admission: "معدل البكالوريا 14.40 فما فوق مع ميول لعلوم الغذاء.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 14.40 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في صناعات الغذاء، مراقبة الجودة، البحث العلمي، التغذية."
+            },
+            {
+                name: "المدرسة الوطنية العليا للطاقات المتجددة، البيئة و التنمية المستدامة",
+                code: "ENS RE2SD",
+                icon: "☀️",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في الطاقات المتجددة",
+                grade: "16.00",
+                description: "تكوين مهندسين في الطاقات المتجددة والتنمية المستدامة.",
+                specialties: ["طاقة متجددة", "بيئة", "تنمية مستدامة", "كفاءة طاقوية"],
+                location: "باتنة",
+                website: "http://www.hns-re2sd.dz/ar/",
+                admission: "معدل البكالوريا 16.00 فما فوق مع تفوق في الفيزياء والكيمياء.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 16.00 فما فوق", "اختبار في الفيزياء والكيمياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع الطاقة المتجددة، البيئة، التنمية المستدامة، البحث العلمي."
+            },
+
+            // --- autres écoles ---
+            {
+                name: "المدرسة الوطنية العليا للمناجم و علم المعادن",
+                code: "ENSM",
+                icon: "⛏️",
+                field: "هندسة المناجم",
+                duration: "5 سنوات",
+                degree: "مهندس في المناجم و علم المعادن",
+                grade: "15.20",
+                description: "تكوين مهندسين في المناجم وعلم المعادن والجيولوجيا.",
+                specialties: ["مناجم", "معادن", "جيولوجيا", "استخراج"],
+                location: "عنابة",
+                website: "https://ensti-annaba.dz/presentation-de-lecole/",
+                admission: "معدل البكالوريا 15.20 فما فوق مع تفوق في العلوم.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم تجريبية", "معدل عام 15.20 فما فوق", "اختبار في الرياضيات والفيزياء", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع المناجم، الصناعات المعدنية، الجيولوجيا، البحث العلمي."
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم البيولوجية - وهران",
+                code: "ESSB",
+                icon: "🧬",
+                field: "علوم بيولوجية",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم البيولوجية",
+                grade: "14.80",
+                description: "تكوين مهندسين في العلوم البيولوجية والتكنولوجيا الحيوية.",
+                specialties: ["بيولوجيا", "كيمياء حيوية", "ميكروبيولوجيا", "بيوتكنولوجيا"],
+                location: "وهران",
+                website: "https://essb-oran.edu.dz/index.php/fr/",
+                admission: "معدل البكالوريا 14.80 فما فوق مع تفوق في العلوم الطبيعية.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 14.80 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في مراكز البحث، الصناعات الدوائية، التحاليل الطبية، البيئة."
+            },
+            {
+                name: "المدرسة الوطنية العليا للبيوتكنولوجيا",
+                code: "ENSB",
+                icon: "🧫",
+                field: "بيوتكنولوجيا",
+                duration: "5 سنوات",
+                degree: "مهندس في البيوتكنولوجيا",
+                grade: "15.50",
+                description: "تكوين مهندسين في البيوتكنولوجيا والتطبيقات الحيوية.",
+                specialties: ["بيوتكنولوجيا", "هندسة وراثية", "صناعات حيوية", "صيدلة"],
+                location: "قسنطينة",
+                website: "https://wp.ensbiotech.edu.dz/fr/",
+                admission: "معدل البكالوريا 15.50 فما فوق مع تفوق في العلوم.",
+                requirements: ["شهادة البكالوريا شعبة علوم تجريبية", "معدل عام 15.50 فما فوق", "اختبار في العلوم الطبيعية", "مقابلة شخصية"],
+                prospects: "التوظيف في الصناعات الدوائية، مراكز البحث، التحاليل الطبية، البيئة."
+            },
+            {
+                name: "المدرسة الوطنية العليا للصحافة و علوم الإعلام",
+                code: "ENSJSI",
+                icon: "📰",
+                field: "علوم إنسانية و اجتماعية",
+                duration: "5 سنوات",
+                degree: "مهندس في الصحافة و الإعلام",
+                grade: "13.80",
+                description: "تكوين مهندسين في الصحافة وعلوم الإعلام والاتصال.",
+                specialties: ["صحافة", "إعلام", "اتصال", "إخراج"],
+                location: "الجزائر العاصمة",
+                website: "",
+                admission: "معدل البكالوريا 13.80 فما فوق مع ميول للصحافة والإعلام.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو لغات", "معدل عام 13.80 فما فوق", "اختبار في اللغة العربية والفرنسية", "مقابلة شخصية"],
+                prospects: "التوظيف في وسائل الإعلام، الصحافة، الإذاعة، التلفزيون، العلاقات العامة."
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم السياسية",
+                code: "ENSSP",
+                icon: "🏛️",
+                field: "علوم إنسانية و اجتماعية",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم السياسية",
+                grade: "14.20",
+                description: "تكوين مهندسين في العلوم السياسية والعلاقات الدولية.",
+                specialties: ["علوم سياسية", "علاقات دولية", "دبلوماسية", "قانون"],
+                location: "الجزائر العاصمة",
+                website: "https://enssp.dz/",
+                admission: "معدل البكالوريا 14.20 فما فوق مع ميول للعلوم السياسية.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو لغات", "معدل عام 14.20 فما فوق", "اختبار في العلوم السياسية", "مقابلة شخصية"],
+                prospects: "التوظيف في وزارة الخارجية، المنظمات الدولية، الدبلوماسية، البحث العلمي."
+            },
+
+            // --- Écoles Normales Supérieures (ENS) ---
+            {
+                name: "المدرسة العليا للأساتذة - بوزريعة",
+                code: "ENS Bouzaréah",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.50",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "بيداغوجيا", "علوم", "آداب"],
+                location: "بوزريعة، الجزائر",
+                website: "https://ensb.dz/en/",
+                admission: "معدل البكالوريا 14.50 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 14.50 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - القبة",
+                code: "ENS Kouba",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.30",
+                description: "تكوين أساتذة التعليم العالي في التخصصات العلمية والأدبية.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "القبة، الجزائر",
+                website: "https://www.ens-kouba.dz/arabic/index.php",
+                admission: "معدل البكالوريا 14.30 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 14.30 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - الأغواط",
+                code: "ENS Laghouat",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.80",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "الأغواط",
+                website: "https://www.ens-lagh.dz/fr/",
+                admission: "معدل البكالوريا 13.80 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.80 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - الصم و البكم",
+                code: "ENS Sourds-Muets",
+                icon: "🤟",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم الخاص",
+                grade: "13.00",
+                description: "تكوين أساتذة متخصصين في تعليم الصم والبكم.",
+                specialties: ["تعليم خاص", "لغة إشارة", "بيداغوجيا", "إعاقة"],
+                location: "الجزائر العاصمة",
+                website: "",
+                admission: "معدل البكالوريا 13.00 فما فوق مع ميول للتربية الخاصة.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.00 فما فوق", "اختبار في لغة الإشارة", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التربية الخاصة، مراكز تعليم الصم والبكم."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - قسنطينة",
+                code: "ENS Constantine",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.10",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "قسنطينة",
+                website: "https://www.ensc.dz/index.php/ar/",
+                admission: "معدل البكالوريا 14.10 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 14.10 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة للتكنولوجيا - سكيكدة",
+                code: "ENSET Skikda",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم التكنولوجي",
+                grade: "13.50",
+                description: "تكوين أساتذة التعليم التكنولوجي والمهني.",
+                specialties: ["تعليم تكنولوجي", "هندسة", "صناعة", "بيداغوجيا"],
+                location: "سكيكدة",
+                website: "https://www.enset-skikda.dz/index.php/fr/",
+                admission: "معدل البكالوريا 13.50 فما فوق مع ميول للتعليم التكنولوجي.",
+                requirements: ["شهادة البكالوريا شعبة رياضيات أو علوم", "معدل عام 13.50 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم التقني والمهني."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - سطيف",
+                code: "ENS Sétif",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.90",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "سطيف",
+                website: "https://www.ens-setif.dz/",
+                admission: "معدل البكالوريا 13.90 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.90 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - بوسعادة",
+                code: "ENS Bou Saâda",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.20",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "بوسعادة",
+                website: "https://www.ens-bousaada.dz/ar/",
+                admission: "معدل البكالوريا 13.20 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.20 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - ورقلة",
+                code: "ENS Ouargla",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "12.80",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "ورقلة",
+                website: "https://www.ens-ouargla.dz/",
+                admission: "معدل البكالوريا 12.80 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 12.80 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - مستغانم",
+                code: "ENS Mostaganem",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.60",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "مستغانم",
+                website: "",
+                admission: "معدل البكالوريا 13.60 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.60 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - وهران",
+                code: "ENS Oran",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.00",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "وهران",
+                website: "https://www.ens-oran.dz/index.php/fr/",
+                admission: "معدل البكالوريا 14.00 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 14.00 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            },
+            {
+                name: "المدرسة العليا للأساتذة - بشار",
+                code: "ENS Béchar",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.00",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "بشار",
+                website: "https://www.ens-bechar.dz/",
+                admission: "معدل البكالوريا 13.00 فما فوق مع ميول للتدريس.",
+                requirements: ["شهادة البكالوريا شعبة آداب أو علوم", "معدل عام 13.00 فما فوق", "اختبار في التخصص المطلوب", "مقابلة شخصية"],
+                prospects: "التوظيف في قطاع التعليم العالي، التدريس، البحث العلمي."
+            }
+        ];
+
+        // --------------------------------------------------------------
+        // عرض تفاصيل المدرسة بناءً على الاسم من URL
+        // --------------------------------------------------------------
+        function renderSchoolDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name');
+            const container = document.getElementById('detailContainer');
+
+            if (!name) {
+                container.innerHTML = `
+                    <div class="detail-card" style="text-align:center;padding:4rem 2rem;">
+                        <i class="fas fa-exclamation-circle" style="font-size:3rem;color:var(--accent-light);margin-bottom:1rem;"></i>
+                        <h2 style="font-family:var(--font-display-bold);">لم يتم تحديد المدرسة</h2>
+                        <p style="color:var(--text-secondary);">الرجاء العودة إلى القائمة واختيار مدرسة.</p>
+                        <a href="s.html" class="btn btn-primary" style="margin-top:1.5rem;display:inline-block;">
+                            <i class="fas fa-arrow-right"></i> العودة إلى القائمة
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // البحث عن المدرسة
+            const ecole = ecolesData.find(e => e.name === name);
+
+            if (!ecole) {
+                container.innerHTML = `
+                    <div class="detail-card" style="text-align:center;padding:4rem 2rem;">
+                        <i class="fas fa-search" style="font-size:3rem;color:var(--accent-light);margin-bottom:1rem;"></i>
+                        <h2 style="font-family:var(--font-display-bold);">المدرسة غير موجودة</h2>
+                        <p style="color:var(--text-secondary);">لم نتمكن من العثور على المدرسة المطلوبة.</p>
+                        <a href="s.html" class="btn btn-primary" style="margin-top:1.5rem;display:inline-block;">
+                            <i class="fas fa-arrow-right"></i> العودة إلى القائمة
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // بناء الصفحة التفصيلية
+            const specialtiesHtml = ecole.specialties.map(s =>
+                `<span class="tag">${s}</span>`
+            ).join('');
+
+            const requirementsHtml = ecole.requirements ? ecole.requirements.map(req =>
+                `<li><i class="fas fa-check-circle"></i> ${req}</li>`
+            ).join('') : '';
+
+            const websiteBtn = ecole.website && ecole.website.trim() !== '' ?
+                `<a href="${ecole.website}" target="_blank" class="btn btn-website"><i class="fas fa-external-link-alt"></i> زيارة الموقع الرسمي</a>` :
+                '';
+
+            container.innerHTML = `
+                <div class="detail-card">
+                    <div class="detail-header">
+                        <div class="icon">${ecole.icon}</div>
+                        <div class="title-group">
+                            <h1>${ecole.name}</h1>
+                            <div class="code">${ecole.code} • ${ecole.location}</div>
+                        </div>
+                        <div class="grade-badge">
+                            ${ecole.grade} <small>/20</small>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label"><i class="fas fa-graduation-cap"></i> الشهادة</span>
+                            <span class="value">${ecole.degree}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label"><i class="fas fa-clock"></i> مدة الدراسة</span>
+                            <span class="value">${ecole.duration}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label"><i class="fas fa-tag"></i> المجال</span>
+                            <span class="value">${ecole.field}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label"><i class="fas fa-map-marker-alt"></i> الموقع</span>
+                            <span class="value">${ecole.location}</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3><i class="fas fa-info-circle"></i> نبذة عن المدرسة</h3>
+                        <p>${ecole.description}</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h3><i class="fas fa-book-open"></i> التخصصات المتاحة</h3>
+                        <div class="specialties-grid">${specialtiesHtml}</div>
+                    </div>
+
+                    ${ecole.admission ? `
+                    <div class="detail-section">
+                        <h3><i class="fas fa-door-open"></i> شروط القبول</h3>
+                        <p style="margin-bottom:0.8rem;">${ecole.admission}</p>
+                        ${requirementsHtml ? `<ul class="requirements-list">${requirementsHtml}</ul>` : ''}
+                    </div>
+                    ` : ''}
+
+                    ${ecole.prospects ? `
+                    <div class="detail-section">
+                        <h3><i class="fas fa-briefcase"></i> آفاق التخرج</h3>
+                        <p>${ecole.prospects}</p>
+                    </div>
+                    ` : ''}
+
+                    <div class="action-buttons">
+                        ${websiteBtn}
+                        <a href="s.html" class="btn btn-outline"><i class="fas fa-arrow-right"></i> العودة إلى القائمة</a>
+                        <button class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> طباعة التفاصيل</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ----------------------------------------------
+        // التشغيل عند تحميل الصفحة
+        // ----------------------------------------------
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSchoolDetails();
+        });
+
+        // إظهار / إخفاء زر العودة للأعلى
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // جعل الدالة عامة
+        window.renderSchoolDetails = renderSchoolDetails;
+    </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الطالب للنظام الجامعي في الجزائر | WENDO</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* نفس متغيرات الألوان المستوحاة من WENDO */
+            --text-primary: #2c205c;
+            --text-secondary: #5a5a7a;
+            --accent-color: #a080e1;
+            --accent-purple: #7854c4;
+            --accent-light: #e5ccf4;
+            --bg-color: #f9f9fb;
+            --surface-color: #ffffff;
+            --border-color: #e5e5eb;
+            --surface-hover: #f3effc;
+            --shadow-md: 0 8px 24px rgba(56, 45, 114, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* --- Header / Hero Section --- */
+        .page-header {
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-purple));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(56, 45, 114, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--accent-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--text-primary));
+            border-radius: 2px;
+        }
+
+        /* --- Cards Grid --- */
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .system-card {
+            background: var(--surface-color);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-color), var(--text-primary));
+            opacity: 0;
+            transition: 0.3s ease;
+        }
+
+        .system-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(56, 45, 114, 0.15);
+        }
+
+        .system-card:hover::before {
+            opacity: 1;
+        }
+
+        .system-card .icon {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            padding: 1rem;
+            background: var(--surface-hover);
+            border-radius: 16px;
+        }
+
+        .system-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .system-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Timeline / Steps --- */
+        .steps {
+            list-style: none;
+        }
+
+        .steps li {
+            position: relative;
+            padding-right: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .steps li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 2px;
+            color: var(--accent-color);
+        }
+        
+        .steps li span {
+            color: var(--text-secondary);
+            font-weight: 400;
+            display: block;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        /* --- Dictionary / Glossary Section --- */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .glossary-item {
+            background: var(--surface-color);
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-right: 4px solid var(--accent-purple);
+            transition: 0.3s ease;
+        }
+
+        .glossary-item:hover {
+            background: var(--surface-hover);
+            transform: translateX(-5px);
+        }
+
+        .glossary-item strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .glossary-item span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .page-header { padding: 3rem 1.5rem; }
+            .page-header h1 { font-size: 2rem; }
+            .systems-grid { grid-template-columns: 1fr; }
+        }
+		.user-icon {
+            color: var(--primary-purple);
+            font-size: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .user-icon:active {
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="page-header">
+        <h1>مرحباً بك في الحياة الجامعية</h1>
+        <p>دليلك الشامل لفهم أنظمة الدراسة والمصطلحات الجامعية في الجزائر لتنطلق في مسارك بثقة.</p>
+		<div class="header-actions">
+            <a href="index.html" class="user-icon" title="الرئيسية"><i class="fa-solid fa-house"></i></a>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <h2 class="section-title">أنظمة الدراسة في الجامعة الجزائرية</h2>
+        
+        <div class="systems-grid">
+            <div class="system-card">
+                <i class="fas fa-layer-group icon"></i>
+                <h3>نظام LMD (ليسانس، ماستر، دكتوراه)</h3>
+                <p>هو النظام الأكثر شيوعاً في الجامعات، يعتمد على تقسيم الدراسة إلى سداسيات وتجميع الأرصدة (Crédits).</p>
+                <ul class="steps">
+                    <li>ليسانس (Licence) <span>3 سنوات دراسية (6 سداسيات). الطور الأول الذي يمنحك القاعدة الأساسية.</span></li>
+                    <li>ماستر (Master) <span>سنتان إضافيتان (4 سداسيات) بعد الليسانس للتخصص الدقيق.</span></li>
+                    <li>دكتوراه (Doctorat) <span>3 سنوات فما فوق، تعتمد على البحث العلمي والمشاركة في المسابقة الوطنية.</span></li>
+                </ul>
+            </div>
+
+            <div class="system-card">
+                <i class="fas fa-graduation-cap icon"></i>
+                <h3>المدارس العليا ونظام المهندس</h3>
+                <p>نظام كلاسيكي يتميز بالتأطير العالي والانتقاء الصارم، يوفر تكويناً عالي الجودة في الهندسة أو التعليم أو الإدارة.</p>
+                <ul class="steps">
+                    <li>الأقسام التحضيرية <span>سنتان من الدراسة المكثفة للمواد الأساسية، تختتم بمسابقة وطنية للعبور.</span></li>
+                    <li>الطور الثاني (تخصص) <span>3 سنوات دراسة في التخصص المختار.</span></li>
+                    <li>الشهادة الممنوحة <span>شهادة "مهندس دولة" أو "ماستر" (إجمالي 5 سنوات دراسية).</span></li>
+                </ul>
+            </div>
+
+            <div class="system-card">
+                <i class="fas fa-user-md icon"></i>
+                <h3>نظام العلوم الطبية</h3>
+                <p>نظام كلاسيكي خاص بكليات الطب، يعتمد على السنوات بدل السداسيات، يمزج بين النظري والتطبيقي الميداني في المستشفيات.</p>
+                <ul class="steps">
+                    <li>الطب العام (Médecine) <span>7 سنوات دراسية وتدريب ميداني مكثف.</span></li>
+                    <li>صيدلة (Pharmacie) <span>6 سنوات دراسية.</span></li>
+                    <li>طب الأسنان (Médecine Dentaire) <span>6 سنوات دراسية.</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">قاموس الطالب الجامعي الجديد (مصطلحات هامة)</h2>
+        
+        <div class="glossary-grid">
+            <div class="glossary-item">
+                <strong>المحاضرة (Cours)</strong>
+                <span>حصة نظرية تقدم في المدرج (Amphi) لجميع طلبة الدفعة، ويكون الحضور فيها غالباً غير إجباري لكنه جد مهم.</span>
+            </div>
+            <div class="glossary-item">
+                <strong>الأعمال الموجهة (TD)</strong>
+                <span>Travaux Dirigés: حصص تطبيقية تُقدم في أقسام صغيرة (أفواج)، تُحل فيها التمارين والحضور فيها إجباري.</span>
+            </div>
+            <div class="glossary-item">
+                <strong>الأعمال التطبيقية (TP)</strong>
+                <span>Travaux Pratiques: حصص تجريبية في المخابر (كالفيزياء، الكيمياء، الإعلام الآلي)، الحضور فيها إجباري ومهمة للتقييم.</span>
+            </div>
+            <div class="glossary-item">
+                <strong>الرصيد (Crédit)</strong>
+                <span>وحدة قياس الجهد الدراسي. في نظام LMD، يجب جمع 30 رصيداً في كل سداسي (60 رصيد في السنة) للنجاح.</span>
+            </div>
+            <div class="glossary-item">
+                <strong>السداسي (Semestre)</strong>
+                <span>الفصل الدراسي، وتقسم السنة الجامعية إلى سداسيين (S1 و S2)، كل سداسي ينتهي بفترة امتحانات.</span>
+            </div>
+            <div class="glossary-item">
+                <strong>الامتحان الاستدراكي (Rattrapage)</strong>
+                <span>فرصة ثانية تُمنح للطالب الذي لم يوفق في اجتياز الامتحانات العادية للحصول على المعدل المطلوب.</span>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WENDO - المدارس العليا 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="arabic.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Regular.OTF" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Bold.OTF" as="font" type="font/otf" crossorigin>
+    <style>
+        /* ----- reset & base ----- */
+        :root {
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --bg-color: #f0edf7;
+            --surface-color: #ffffff;
+            --surface-hover: #f5f3ff;
+            --border-color: #e2ddf5;
+            --accent-color: #5b3c8a;
+            --accent-light: #9b7fd4;
+            --accent-purple: #7b5cb8;
+            --accent-gradient: linear-gradient(135deg, #2d1b69, #5b3c8a);
+            --shadow-md: 0 8px 30px rgba(43, 27, 102, 0.12);
+            --shadow-lg: 0 12px 45px rgba(43, 27, 102, 0.2);
+            --font-arabic: 'ArabicFont', 'Segoe UI', system-ui, sans-serif;
+            --font-display: 'BebasNeue-Regular', 'Segoe UI', sans-serif;
+            --font-display-bold: 'BebasNeue-Bold', 'Segoe UI', sans-serif;
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 26px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @font-face {
+            font-family: 'ArabicFont';
+            src: url('arabic.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'BebasNeue-Regular';
+            src: url('BebasNeue-Regular.OTF') format('opentype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'BebasNeue-Bold';
+            src: url('BebasNeue-Bold.OTF') format('opentype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-arabic);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.8;
+        }
+
+        /* ----- navbar ----- */
+        .navbar {
+            background: var(--surface-color);
+            padding: 0.7rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            flex-wrap: wrap;
+        }
+        .navbar.scrolled { box-shadow: 0 4px 30px rgba(43,27,102,0.15); }
+        .nav-brand {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            cursor: pointer;
+            letter-spacing: 2px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease;
+        }
+        .nav-brand:hover { transform: scale(1.03); }
+        .nav-left { display: flex; align-items: center; }
+        .nav-left .menu-text {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+        }
+        .nav-left .menu-text:hover { background: var(--surface-hover); }
+        .nav-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .nav-right button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        .nav-right button:hover {
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ----- container & header ----- */
+        .container { max-width: 1440px; margin: 2rem auto; padding: 0 2rem; }
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: var(--accent-gradient);
+            border-radius: var(--radius-lg);
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 60%; height: 200%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+        .page-header h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .page-header p {
+            font-size: 1.15rem;
+            opacity: 0.92;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ----- filters ----- */
+        .filters-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            background: var(--surface-color);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+            align-items: center;
+        }
+        .filters-section input,
+        .filters-section select {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-family: var(--font-arabic);
+            background: var(--bg-color);
+            color: var(--text-primary);
+            transition: var(--transition);
+            flex: 1;
+            min-width: 200px;
+        }
+        .filters-section input:focus,
+        .filters-section select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(91,60,138,0.15);
+            outline: none;
+            background: var(--surface-color);
+        }
+        .filters-section .results-count {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.3rem 1.2rem;
+            background: var(--bg-color);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        /* ----- grid & cards ----- */
+        .ecoles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+        .ecole-card {
+            background: var(--surface-color);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            transition: var(--transition-bounce);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .ecole-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 100%; height: 4px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .ecole-card:hover::before { opacity: 1; }
+        .ecole-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-light);
+        }
+        .ecole-card .ecole-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .ecole-card .ecole-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+        .ecole-card .ecole-code {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .ecole-card .ecole-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1rem;
+            margin: 0.6rem 0 1rem 0;
+            padding: 0.6rem 0.8rem;
+            background: var(--bg-color);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+        .ecole-card .ecole-details .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .ecole-card .ecole-details .detail-item i { color: var(--accent-color); width: 1rem; text-align: center; }
+        .ecole-card .ecole-details .detail-item .detail-value { font-weight: 600; color: var(--text-primary); }
+        .ecole-card .ecole-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0.6rem 0;
+            line-height: 1.6;
+            border-right: 3px solid var(--accent-light);
+            padding-right: 0.8rem;
+        }
+        .ecole-card .specialties-list {
+            margin-top: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .ecole-card .specialty-tag {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        .ecole-card .specialty-tag:hover {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        .ecole-card .grade-info {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            background: var(--bg-color);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ecole-card .grade-info .grade-value {
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+        .ecole-card .view-details {
+            margin-top: 1rem;
+            padding: 0.5rem 1.2rem;
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        .ecole-card .view-details:hover {
+            background: var(--accent-gradient);
+            color: #fff;
+            border-color: transparent;
+            transform: scale(1.02);
+        }
+        .no-results {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        .no-results i { font-size: 4rem; display: block; margin-bottom: 1rem; opacity: 0.3; }
+
+        /* ----- footer ----- */
+        .footer {
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 4rem 2rem 1.5rem;
+            margin-top: 4rem;
+            border-radius: 40px 40px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            gap: 2.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        .footer-brand h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            margin-bottom: 0.3rem;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+        .footer-brand .tagline {
+            font-size: 1rem;
+            color: var(--accent-light);
+            font-style: italic;
+            border-right: 3px solid var(--accent-purple);
+            padding-right: 14px;
+        }
+        .footer-brand .description {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+        }
+        .footer-col h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: var(--font-display-bold);
+            color: #fff;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 32px; height: 3px;
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+        .footer-col ul { list-style: none; padding: 0; }
+        .footer-col ul li { margin-bottom: 0.6rem; }
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(-4px);
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            position: relative;
+            z-index: 1;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem; left: 2rem;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #fff;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 16px 40px rgba(43,27,102,0.35);
+        }
+
+        /* ----- responsive ----- */
+        @media (max-width: 768px) {
+            .container { padding: 0 1rem; }
+            .ecoles-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+            .filters-section { flex-direction: column; }
+            .filters-section input,
+            .filters-section select { width: 100%; min-width: auto; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .navbar { padding: 0.6rem 1rem; gap: 0.5rem; }
+            .nav-brand { font-size: 1.8rem; }
+            .nav-right button span { display: none; }
+        }
+        @media (max-width: 480px) {
+            .ecole-card { padding: 1.2rem; }
+            .page-header h1 { font-size: 1.6rem; }
+            .page-header { padding: 1.5rem 1rem; }
+            .ecole-card .ecole-name { font-size: 1.2rem; }
+            .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; left: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-left">
+            <button class="menu-text" onclick="history.back()">
+                <i class="fas fa-arrow-right"></i>
+                <span>رجوع</span>
+            </button>
+        </div>
+        <<div class="nav-brand" onclick="window.location.href='index.html'">
+    <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="شعار WENDO" style="height: 50px; vertical-align: middle;">
+</div>
+    </nav>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>🎓 المدارس العليا في الجزائر 2025</h1>
+            <p>استعرض جميع المدارس الوطنية العليا، التخصصات المتاحة، ومعدلات القبول</p>
+        </div>
+
+        <div class="filters-section">
+            <input type="text" id="searchInput" placeholder="ابحث عن مدرسة أو تخصص..." onkeyup="filterEcoles()">
+            <select id="filterSelect" onchange="filterEcoles()">
+                <option value="all">جميع التخصصات</option>
+                <option value="هندسة">هندسة</option>
+                <option value="إعلام آلي">إعلام آلي</option>
+                <option value="ذكاء اصطناعي">ذكاء اصطناعي</option>
+                <option value="أمن سيبراني">أمن سيبراني</option>
+                <option value="رياضيات">رياضيات</option>
+                <option value="اقتصاد">اقتصاد</option>
+                <option value="تجارة">تجارة</option>
+                <option value="فلاحة">فلاحة</option>
+            </select>
+            <span class="results-count" id="resultsCount">0 مدرسة</span>
+        </div>
+
+        <div id="ecolesContainer" class="ecoles-grid"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>WENDO</h2>
+                <p class="tagline">الطريق نحو المستقبل</p>
+                <p class="description">
+                    منصتك التوجيهية الذكية لاختيار التخصص الجامعي المناسب.
+                    نقدم لك دليلاً شاملاً لمؤسسات التعليم العالي في الجزائر مع معدلات القبول.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>التنقل</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">اختبار الميول</a></li>
+                    <li><a href="sp.html">المؤسسات</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>الموارد</h4>
+                <ul>
+                    <li><a href="#">الأدلة</a></li>
+                    <li><a href="#">المدونة</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>من نحن</h4>
+                <ul>
+                    <li><a href="#">من نحن؟</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">الخصوصية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات مأخوذة من وزارة التعليم العالي والبحث العلمي الجزائرية.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --------------------------------------------------------------
+        // البيانات الكاملة للمدارس العليا (مأخوذة من ملف Excel المرفق)
+        // --------------------------------------------------------------
+        const ecolesData = [
+            // --- Économie, Gestion & Commerce ---
+            {
+                name: "المدرسة العليا للدراسات التجارية",
+                code: "EHEC",
+                icon: "🏛️",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التجارية",
+                grade: "15.78",
+                description: "تكوين مهندسين في مجال الاقتصاد والتسيير مع تركيز على التحليل المالي والتسويق.",
+                specialties: ["اقتصاد", "تسيير", "تجارة", "مالية"],
+                location: "القليعة، الجزائر",
+                website: "https://hec.dz/newsite/?cat=115"
+            },
+            {
+                name: "المدرسة العليا للتجارة",
+                code: "ESC",
+                icon: "🏪",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التجارة",
+                grade: "16.02",
+                description: "تكوين مهندسين في مجال التجارة والتسويق وإدارة الأعمال.",
+                specialties: ["تجارة", "تسويق", "إدارة أعمال", "تجارة دولية"],
+                location: "القليعة، الجزائر",
+                website: "https://www.esc-alger.dz/"
+            },
+            {
+                name: "المدرسة العليا للتسيير و الاقتصاد الرقمي",
+                code: "ESGEN",
+                icon: "📊",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التسيير و الاقتصاد الرقمي",
+                grade: "15.20",
+                description: "تكوين مهندسين في مجالات التسيير والاقتصاد الرقمي والتكنولوجيا المالية.",
+                specialties: ["اقتصاد رقمي", "تسيير", "مالية", "تكنولوجيا"],
+                location: "القليعة، الجزائر",
+                website: "https://www.esgen.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للإحصاء و الاقتصاد التطبيقي",
+                code: "ENSSEA",
+                icon: "📈",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإحصاء و الاقتصاد",
+                grade: "14.85",
+                description: "تكوين مهندسين في الإحصاء والاقتصاد التطبيقي مع تركيز على تحليل البيانات.",
+                specialties: ["إحصاء", "اقتصاد", "تحليل بيانات", "نمذجة"],
+                location: "القليعة، الجزائر",
+                website: "https://test.enssea.edu.dz/index.php/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للتسيير",
+                code: "ENSM",
+                icon: "📋",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في التسيير",
+                grade: "14.92",
+                description: "تكوين مهندسين في مجالات التسيير وإدارة المؤسسات والموارد البشرية.",
+                specialties: ["تسيير", "موارد بشرية", "إدارة", "مالية"],
+                location: "القليعة، الجزائر",
+                website: "https://www.ensmanagement.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للاقتصاد - وهران",
+                code: "ESE ORAN",
+                icon: "📉",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في الاقتصاد",
+                grade: "14.63",
+                description: "تكوين مهندسين في الاقتصاد الكلي والجزئي والتحليل المالي.",
+                specialties: ["اقتصاد", "تحليل مالي", "تخطيط", "إدارة"],
+                location: "وهران",
+                website: "https://ese-oran.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا لعلوم التسيير",
+                code: "ESSG",
+                icon: "📂",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم التسيير",
+                grade: "14.10",
+                description: "تكوين مهندسين في علوم التسيير والمحاسبة والتدقيق.",
+                specialties: ["تسيير", "محاسبة", "تدقيق", "مالية"],
+                location: "عنابة",
+                website: "https://essg-annaba.dz/fr/accueil/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للمحاسبة و المالية",
+                code: "ENSCF",
+                icon: "🧾",
+                field: "اقتصاد، تسيير و تجارة",
+                duration: "5 سنوات",
+                degree: "مهندس في المحاسبة و المالية",
+                grade: "14.45",
+                description: "تكوين مهندسين في المحاسبة والمالية والتدقيق المالي.",
+                specialties: ["محاسبة", "مالية", "تدقيق", "ضرائب"],
+                location: "قسنطينة",
+                website: ""
+            },
+
+            // --- Sciences & Technologies de l’Ingénieur ---
+            {
+                name: "المدرسة الوطنية متعددة التقنيات",
+                code: "ENP",
+                icon: "⚙️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا المتقدمة",
+                grade: "17.73",
+                description: "تكوين مهندسين متميزين في مختلف مجالات الهندسة مع تركيز قوي على البحث العلمي.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enp.edu.dz/ar/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للنانوتكنولوجيا",
+                code: "ENSN",
+                icon: "🔬",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في النانوتكنولوجيا",
+                grade: "17.96",
+                description: "تكوين مهندسين في مجال النانوتكنولوجيا والمواد النانوية.",
+                specialties: ["نانوتكنولوجيا", "مواد نانوية", "تطبيقات طبية", "صناعة"],
+                location: "الجزائر العاصمة",
+                website: "https://www.nsnn.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للأنظمة الذاتية",
+                code: "ENSTSA",
+                icon: "🤖",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في الأنظمة الذاتية",
+                grade: "18.21",
+                description: "تكوين مهندسين في الروبوتات والأتمتة والأنظمة المدمجة.",
+                specialties: ["روبوتات", "أتمتة", "أنظمة مدمجة", "تحكم"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enstsa.edu.dz/fr/index.php"
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم التطبيقية - الجزائر",
+                code: "ENSSA",
+                icon: "🧪",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التطبيقية",
+                grade: "17.20",
+                description: "تكوين مهندسين في العلوم التطبيقية والفيزياء والكيمياء.",
+                specialties: ["فيزياء", "كيمياء", "مواد", "طاقة"],
+                location: "الجزائر العاصمة",
+                website: ""
+            },
+            {
+                name: "المدرسة العليا للعلوم و التكنولوجيا",
+                code: "ESST",
+                icon: "🧬",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم و التكنولوجيا",
+                grade: "16.85",
+                description: "تكوين مهندسين في مجالات العلوم والتكنولوجيا والهندسة.",
+                specialties: ["علوم", "تكنولوجيا", "هندسة", "طاقة"],
+                location: "الجزائر العاصمة",
+                website: "https://www.esst-sup.com/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للتكنولوجيا",
+                code: "ENST",
+                icon: "🏭",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.15",
+                description: "تكوين مهندسين في مجالات التكنولوجيا الصناعية والطاقة المتجددة.",
+                specialties: ["طاقة متجددة", "أنظمة ذكية", "إلكترونيك", "اتصالات"],
+                location: "الجزائر العاصمة",
+                website: "https://ensta.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية متعددة التقنيات - قسنطينة",
+                code: "ENP CONST",
+                icon: "🏛️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.50",
+                description: "تكوين مهندسين في مختلف مجالات الهندسة مع تركيز على التكنولوجيا والابتكار.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "قسنطينة",
+                website: "https://enp-constantine.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للتكنولوجيات الصناعية",
+                code: "ENSTI",
+                icon: "🏗️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيات الصناعية",
+                grade: "16.90",
+                description: "تكوين مهندسين في التكنولوجيات الصناعية والإنتاج.",
+                specialties: ["صناعة", "إنتاج", "ميكانيك", "طاقة"],
+                location: "عنابة",
+                website: "https://ensti-annaba.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم التطبيقية - تلمسان",
+                code: "ESSA TLEM",
+                icon: "🧪",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم التطبيقية",
+                grade: "16.60",
+                description: "تكوين مهندسين في العلوم التطبيقية والهندسة.",
+                specialties: ["فيزياء", "كيمياء", "مواد", "إلكترونيك"],
+                location: "تلمسان",
+                website: "https://www.essa-tlemcen.dz/"
+            },
+            {
+                name: "المدرسة الوطنية متعددة التقنيات - وهران",
+                code: "ENP ORAN",
+                icon: "⚙️",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في التكنولوجيا",
+                grade: "17.35",
+                description: "تكوين مهندسين في مختلف مجالات الهندسة والتكنولوجيا.",
+                specialties: ["هندسة مدنية", "هندسة كهربائية", "هندسة ميكانيكية", "هندسة كيميائية"],
+                location: "وهران",
+                website: "https://www.enp-oran.dz/"
+            },
+            {
+                name: "المدرسة العليا للهندسة الكهربائية و الطاقوية - وهران",
+                code: "ESGEE",
+                icon: "⚡",
+                field: "الهندسة متعددة التقنيات",
+                duration: "5 سنوات",
+                degree: "مهندس في الهندسة الكهربائية و الطاقوية",
+                grade: "17.10",
+                description: "تكوين مهندسين في الهندسة الكهربائية والطاقوية.",
+                specialties: ["هندسة كهربائية", "طاقة", "تحكم", "إلكترونيك"],
+                location: "وهران",
+                website: "https://esgee-oran.dz/new/"
+            },
+
+            // --- Génie Civil, Architecture & Urbanisme ---
+            {
+                name: "المدرسة الوطنية العليا للأشغال العمومية",
+                code: "ENSTP",
+                icon: "🏗️",
+                field: "هندسة مدنية، عمارة و تهيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في الأشغال العمومية",
+                grade: "16.12",
+                description: "تكوين مهندسين في مجال الهندسة المدنية والبنية التحتية.",
+                specialties: ["هندسة مدنية", "هندسة مائية", "نقل", "بنية تحتية"],
+                location: "الجزائر العاصمة",
+                website: "https://enstp.edu.dz/"
+            },
+            {
+                name: "المدرسة المتعددة التقنيات للعمارة و التهيئة العمرانية",
+                code: "EPAU",
+                icon: "🏙️",
+                field: "هندسة مدنية، عمارة و تهيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في العمارة و التهيئة",
+                grade: "15.80",
+                description: "تكوين مهندسين معماريين ومختصين في التهيئة العمرانية.",
+                specialties: ["عمارة", "تهيئة عمرانية", "تصميم", "مدن"],
+                location: "الجزائر العاصمة",
+                website: "https://www.epau-alger.edu.dz/"
+            },
+
+            // --- Agriculture ---
+            {
+                name: "المدرسة الوطنية العليا للفلاحة",
+                code: "ENSA",
+                icon: "🌾",
+                field: "فلاحة",
+                duration: "5 سنوات",
+                degree: "مهندس في الفلاحة",
+                grade: "14.91",
+                description: "تكوين مهندسين في مجال الفلاحة والإنتاج الزراعي والحيواني.",
+                specialties: ["إنتاج زراعي", "إنتاج حيواني", "موارد طبيعية", "تغذية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.ensa.dz/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للفلاحة - مستغانم",
+                code: "ENSA MOSTA",
+                icon: "🌿",
+                field: "فلاحة",
+                duration: "5 سنوات",
+                degree: "مهندس في الفلاحة",
+                grade: "13.20",
+                description: "تكوين مهندسين في الفلاحة والتنمية الريفية.",
+                specialties: ["فلاحة", "تنمية ريفية", "موارد", "بيئة"],
+                location: "مستغانم",
+                website: "https://www.esa-mosta.dz/"
+            },
+
+            // --- Sciences Vétérinaires ---
+            {
+                name: "المدرسة الوطنية العليا للبيطرة",
+                code: "ENSV",
+                icon: "🐄",
+                field: "علوم بيطرية",
+                duration: "6 سنوات",
+                degree: "طبيب بيطري",
+                grade: "15.30",
+                description: "تكوين أطباء بيطريين في مجالات الصحة الحيوانية والوقاية.",
+                specialties: ["بيطرة", "صحة حيوانية", "وقاية", "تغذية"],
+                location: "الجزائر العاصمة",
+                website: "https://www.ensv.dz/"
+            },
+
+            // --- Informatique, Mathématiques & Nouvelles Technologies ---
+            {
+                name: "المدرسة الوطنية العليا للإعلام الآلي",
+                code: "ESI",
+                icon: "💻",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإعلام الآلي",
+                grade: "18.19",
+                description: "تكوين مهندسين في علوم الحاسوب وتطوير البرمجيات.",
+                specialties: ["إعلام آلي", "تطوير برمجيات", "أنظمة معلومات", "شبكات"],
+                location: "الجزائر العاصمة",
+                website: "https://www.esi.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للإعلام الآلي - سيدي بلعباس",
+                code: "ESI SBA",
+                icon: "💻",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الإعلام الآلي",
+                grade: "17.80",
+                description: "تكوين مهندسين في الإعلام الآلي والأنظمة المعلوماتية.",
+                specialties: ["إعلام آلي", "أنظمة", "شبكات", "قواعد بيانات"],
+                location: "سيدي بلعباس",
+                website: "https://www.esi-sba.dz/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للذكاء الاصطناعي",
+                code: "ENSIA",
+                icon: "🧠",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الذكاء الاصطناعي",
+                grade: "18.59",
+                description: "تكوين خبراء في الذكاء الاصطناعي وتعلم الآلة.",
+                specialties: ["ذكاء اصطناعي", "تعلم آلة", "معالجة لغة طبيعية", "رؤية حاسوبية"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://www.ensia.edu.dz/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للرياضيات",
+                code: "ENSM",
+                icon: "📐",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الرياضيات التطبيقية",
+                grade: "17.43",
+                description: "تكوين مهندسين في الرياضيات التطبيقية والنمذجة.",
+                specialties: ["رياضيات", "نمذجة", "تحليل عددي", "إحصاء"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://nhsm.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للأمن السيبراني",
+                code: "ENSCS",
+                icon: "🔒",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الأمن السيبراني",
+                grade: "18.34",
+                description: "تكوين خبراء في أمن المعلومات والسيبرانية.",
+                specialties: ["أمن سيبراني", "أمن شبكات", "تشفير", "أمن تطبيقات"],
+                location: "سيدي عبد الله، الجزائر",
+                website: "https://www.enscs.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا لتكنولوجيات الإعلام و البريد",
+                code: "ENSTICP",
+                icon: "📡",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في تكنولوجيات الإعلام",
+                specialties: ["اتصالات", "شبكات", "بريد", "تكنولوجيا"],
+                location: "الجزائر العاصمة",
+                website: "https://inptic.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للاتصالات و تكنولوجيات الإعلام - وهران",
+                code: "ENSTTIC",
+                icon: "📶",
+                field: "إعلام آلي، رياضيات و تكنولوجيات حديثة",
+                duration: "5 سنوات",
+                degree: "مهندس في الاتصالات",
+                grade: "17.00",
+                description: "تكوين مهندسين في الاتصالات وتكنولوجيات الإعلام.",
+                specialties: ["اتصالات", "شبكات", "تكنولوجيا", "أنظمة"],
+                location: "وهران",
+                website: "https://www.ensttic.dz/"
+            },
+
+            // --- Sciences de la Nature, de la Mer & de l’Environnement ---
+            {
+                name: "المدرسة الوطنية العليا لعلوم البحر و تهيئة الساحل",
+                code: "ENSSMAL",
+                icon: "🌊",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم البحر",
+                grade: "14.75",
+                description: "تكوين مهندسين في علوم البحر وتهيئة السواحل.",
+                specialties: ["علوم بحر", "بيئة", "تهيئة ساحلية", "موارد"],
+                location: "الجزائر العاصمة",
+                website: "https://www.enssmal.edu.dz/"
+            },
+            {
+                name: "المدرسة الوطنية العليا لعلوم الغذاء و الصناعات الغذائية",
+                code: "ENSSAIA",
+                icon: "🍎",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في علوم الغذاء",
+                grade: "14.40",
+                description: "تكوين مهندسين في علوم الغذاء والصناعات الغذائية.",
+                specialties: ["غذاء", "صناعات غذائية", "تغذية", "مراقبة جودة"],
+                location: "الجزائر العاصمة",
+                website: "https://essaia.dz/presentation-de-lecole/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للطاقات المتجددة، البيئة و التنمية المستدامة",
+                code: "ENS RE2SD",
+                icon: "☀️",
+                field: "علوم الطبيعة، البحر و البيئة",
+                duration: "5 سنوات",
+                degree: "مهندس في الطاقات المتجددة",
+                grade: "16.00",
+                description: "تكوين مهندسين في الطاقات المتجددة والتنمية المستدامة.",
+                specialties: ["طاقة متجددة", "بيئة", "تنمية مستدامة", "كفاءة طاقوية"],
+                location: "باتنة",
+                website: "http://www.hns-re2sd.dz/ar/"
+            },
+
+            // --- autres écoles ---
+            {
+                name: "المدرسة الوطنية العليا للمناجم و علم المعادن",
+                code: "ENSM",
+                icon: "⛏️",
+                field: "هندسة المناجم",
+                duration: "5 سنوات",
+                degree: "مهندس في المناجم و علم المعادن",
+                grade: "15.20",
+                description: "تكوين مهندسين في المناجم وعلم المعادن والجيولوجيا.",
+                specialties: ["مناجم", "معادن", "جيولوجيا", "استخراج"],
+                location: "عنابة",
+                website: "https://ensti-annaba.dz/presentation-de-lecole/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم البيولوجية - وهران",
+                code: "ESSB",
+                icon: "🧬",
+                field: "علوم بيولوجية",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم البيولوجية",
+                grade: "14.80",
+                description: "تكوين مهندسين في العلوم البيولوجية والتكنولوجيا الحيوية.",
+                specialties: ["بيولوجيا", "كيمياء حيوية", "ميكروبيولوجيا", "بيوتكنولوجيا"],
+                location: "وهران",
+                website: "https://essb-oran.edu.dz/index.php/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للبيوتكنولوجيا",
+                code: "ENSB",
+                icon: "🧫",
+                field: "بيوتكنولوجيا",
+                duration: "5 سنوات",
+                degree: "مهندس في البيوتكنولوجيا",
+                grade: "15.50",
+                description: "تكوين مهندسين في البيوتكنولوجيا والتطبيقات الحيوية.",
+                specialties: ["بيوتكنولوجيا", "هندسة وراثية", "صناعات حيوية", "صيدلة"],
+                location: "قسنطينة",
+                website: "https://wp.ensbiotech.edu.dz/fr/"
+            },
+            {
+                name: "المدرسة الوطنية العليا للصحافة و علوم الإعلام",
+                code: "ENSJSI",
+                icon: "📰",
+                field: "علوم إنسانية و اجتماعية",
+                duration: "5 سنوات",
+                degree: "مهندس في الصحافة و الإعلام",
+                grade: "13.80",
+                description: "تكوين مهندسين في الصحافة وعلوم الإعلام والاتصال.",
+                specialties: ["صحافة", "إعلام", "اتصال", "إخراج"],
+                location: "الجزائر العاصمة",
+                website: ""
+            },
+            {
+                name: "المدرسة الوطنية العليا للعلوم السياسية",
+                code: "ENSSP",
+                icon: "🏛️",
+                field: "علوم إنسانية و اجتماعية",
+                duration: "5 سنوات",
+                degree: "مهندس في العلوم السياسية",
+                grade: "14.20",
+                description: "تكوين مهندسين في العلوم السياسية والعلاقات الدولية.",
+                specialties: ["علوم سياسية", "علاقات دولية", "دبلوماسية", "قانون"],
+                location: "الجزائر العاصمة",
+                website: "https://enssp.dz/"
+            },
+
+            // --- Écoles Normales Supérieures (ENS) ---
+            {
+                name: "المدرسة العليا للأساتذة - بوزريعة",
+                code: "ENS Bouzaréah",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.50",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "بيداغوجيا", "علوم", "آداب"],
+                location: "بوزريعة، الجزائر",
+                website: "https://ensb.dz/en/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - القبة",
+                code: "ENS Kouba",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.30",
+                description: "تكوين أساتذة التعليم العالي في التخصصات العلمية والأدبية.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "القبة، الجزائر",
+                website: "https://www.ens-kouba.dz/arabic/index.php"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - الأغواط",
+                code: "ENS Laghouat",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.80",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "الأغواط",
+                website: "https://www.ens-lagh.dz/fr/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - الصم و البكم",
+                code: "ENS Sourds-Muets",
+                icon: "🤟",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم الخاص",
+                grade: "13.00",
+                description: "تكوين أساتذة متخصصين في تعليم الصم والبكم.",
+                specialties: ["تعليم خاص", "لغة إشارة", "بيداغوجيا", "إعاقة"],
+                location: "الجزائر العاصمة",
+                website: ""
+            },
+            {
+                name: "المدرسة العليا للأساتذة - قسنطينة",
+                code: "ENS Constantine",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.10",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "قسنطينة",
+                website: "https://www.ensc.dz/index.php/ar/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة للتكنولوجيا - سكيكدة",
+                code: "ENSET Skikda",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم التكنولوجي",
+                grade: "13.50",
+                description: "تكوين أساتذة التعليم التكنولوجي والمهني.",
+                specialties: ["تعليم تكنولوجي", "هندسة", "صناعة", "بيداغوجيا"],
+                location: "سكيكدة",
+                website: "https://www.enset-skikda.dz/index.php/fr/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - سطيف",
+                code: "ENS Sétif",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.90",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "سطيف",
+                website: "https://www.ens-setif.dz/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - بوسعادة",
+                code: "ENS Bou Saâda",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.20",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "بوسعادة",
+                website: "https://www.ens-bousaada.dz/ar/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - ورقلة",
+                code: "ENS Ouargla",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "12.80",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "ورقلة",
+                website: "https://www.ens-ouargla.dz/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - مستغانم",
+                code: "ENS Mostaganem",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.60",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "مستغانم",
+                website: ""
+            },
+            {
+                name: "المدرسة العليا للأساتذة - وهران",
+                code: "ENS Oran",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "14.00",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "وهران",
+                website: "https://www.ens-oran.dz/index.php/fr/"
+            },
+            {
+                name: "المدرسة العليا للأساتذة - بشار",
+                code: "ENS Béchar",
+                icon: "📚",
+                field: "تكوين الأساتذة",
+                duration: "5 سنوات",
+                degree: "أستاذ التعليم العالي",
+                grade: "13.00",
+                description: "تكوين أساتذة التعليم العالي في مختلف التخصصات.",
+                specialties: ["تعليم", "علوم", "آداب", "لغات"],
+                location: "بشار",
+                website: "https://www.ens-bechar.dz/"
+            }
+        ];
+
+        // ----------------------------------------------
+        // عرض البطاقات مع روابط المواقع
+        // ----------------------------------------------
+        function renderEcoles(data) {
+            const container = document.getElementById('ecolesContainer');
+            container.innerHTML = '';
+            document.getElementById('resultsCount').textContent = `${data.length} مدرسة`;
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>لا توجد نتائج</h3>
+                        <p>لم نجد أي مدرسة تطابق بحثك. حاول تعديل كلمات البحث.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            data.forEach(ecole => {
+                const card = document.createElement('div');
+                card.className = 'ecole-card';
+
+                const specialtiesHtml = ecole.specialties.map(s =>
+                    `<span class="specialty-tag">${s}</span>`
+                ).join('');
+
+                // زر "زيارة الموقع" يظهر فقط إذا كان هناك رابط
+                const websiteBtn = ecole.website && ecole.website.trim() !== '' ? `
+                    <a href="${ecole.website}" target="_blank" class="view-details" style="background:var(--accent-gradient);color:#fff;border:none;margin-top:0.5rem;">
+                        <i class="fas fa-external-link-alt"></i> زيارة الموقع الرسمي
+                    </a>
+                ` : '';
+
+                card.innerHTML = `
+                    <div class="ecole-icon">${ecole.icon}</div>
+                    <div class="ecole-name">${ecole.name}</div>
+                    <div class="ecole-code">${ecole.code} • ${ecole.location}</div>
+
+                    <div class="ecole-details">
+                        <div class="detail-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الشهادة: <span class="detail-value">${ecole.degree}</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>المدة: <span class="detail-value">${ecole.duration}</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tag"></i>
+                            <span>المجال: <span class="detail-value">${ecole.field}</span></span>
+                        </div>
+                    </div>
+
+                    <div class="ecole-description">${ecole.description}</div>
+
+                    <div class="specialties-list">${specialtiesHtml}</div>
+
+                    <div class="grade-info">
+                        <span>معدل القبول</span>
+                        <span class="grade-value">${ecole.grade}/20</span>
+                    </div>
+
+                    <button class="view-details" onclick="showEcoleDetails('${ecole.name}')">
+                        <i class="fas fa-arrow-left"></i> عرض التفاصيل
+                    </button>
+                    ${websiteBtn}
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // ----------------------------------------------
+        // بحث وتصفية
+        // ----------------------------------------------
+        function filterEcoles() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filterCategory = document.getElementById('filterSelect').value;
+
+            let filtered = ecolesData.filter(ecole => {
+                if (filterCategory !== 'all' && !ecole.specialties.includes(filterCategory)) {
+                    return false;
+                }
+                if (searchTerm === '') return true;
+                const nameMatch = ecole.name.toLowerCase().includes(searchTerm);
+                const descMatch = ecole.description.toLowerCase().includes(searchTerm);
+                const specialtiesMatch = ecole.specialties.some(s => s.toLowerCase().includes(searchTerm));
+                const locationMatch = ecole.location.toLowerCase().includes(searchTerm);
+                return nameMatch || descMatch || specialtiesMatch || locationMatch;
+            });
+
+            renderEcoles(filtered);
+        }
+
+        // ----------------------------------------------
+        // عرض تفاصيل المدرسة في نافذة منبثقة
+        // ----------------------------------------------
+       function showEcoleDetails(name) {
+    // توجيه المستخدم إلى صفحة التفاصيل مع تمرير اسم المدرسة
+    window.location.href = `details.html?name=${encodeURIComponent(name)}`;
+}
+        // ----------------------------------------------
+        // التشغيل عند تحميل الصفحة
+        // ----------------------------------------------
+        document.addEventListener('DOMContentLoaded', function() {
+            renderEcoles(ecolesData);
+        });
+
+        // جعل الدوال عامة للاستخدام في HTML
+        window.filterEcoles = filterEcoles;
+        window.showEcoleDetails = showEcoleDetails;
+
+        // إظهار / إخفاء زر العودة للأعلى
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -989,14 +989,9 @@
                 <span>القائمة</span>
             </button>
         </div>
-        <div class="nav-brand" onclick="window.location.href='index.html'">WENDO</div>
-        <div class="nav-right">
-            <button onclick="window.location.href='index.html'">
-                <span>الرئيسية</span>
-                <i class="fas fa-home"></i>
-            </button>
-            <button class="icon-btn" title="حسابي"><i class="fas fa-user"></i></button>
-        </div>
+        <div class="nav-brand" onclick="window.location.href='index.html'">
+    <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="شعار WENDO" style="height: 50px; vertical-align: middle;">
+</div>
     </nav>
 
     <!-- ===== القائمة الجانبية ===== -->
@@ -1036,7 +1031,7 @@
                 <p>جميع التخصصات الجامعية</p>
                 <span class="count-badge" id="uniCountBadge">0 تخصص</span>
             </div>
-            <div class="category-card" data-type="ecoles" onclick="selectCategory('ecoles')">
+            <div class="category-card" data-type="ecoles" onclick="window.location.href='s.html'">
                 <span class="icon">🎓</span>
                 <h3>المدارس العليا</h3>
                 <p>المدارس الوطنية العليا</p>
@@ -1044,9 +1039,15 @@
             </div>
             <div class="category-card" data-type="instituts" onclick="selectCategory('instituts')">
                 <span class="icon">⚕️</span>
-                <h3>المعاهد الطبية</h3>
+                <h3>المعاهد الطبية و شبه الطبية</h3>
                 <p>الطب، الصيدلة، طب الأسنان</p>
                 <span class="count-badge" id="institutCountBadge">0 تخصص</span>
+            </div>
+            <div class="category-card" data-type="ens" onclick="window.location.href='ens.html'">
+                <span class="icon">🏫</span>
+                <h3>مدارس الأساتذة</h3>
+                <p>تكوين الأساتذة</p>
+                <span class="count-badge" id="ensCountBadge">0 تخصص</span>
             </div>
         </div>
 
@@ -1846,9 +1847,11 @@
             const uniCount = specialtiesData.filter(s => s.type === 'universities').length;
             const ecoleCount = specialtiesData.filter(s => s.type === 'ecoles').length;
             const institutCount = specialtiesData.filter(s => s.type === 'instituts').length;
+            const ensCount = 0; // لا يوجد تخصصات لمدارس الأساتذة في هذه البيانات
             document.getElementById('uniCountBadge').textContent = `${uniCount} تخصص`;
             document.getElementById('ecoleCountBadge').textContent = `${ecoleCount} تخصص`;
             document.getElementById('institutCountBadge').textContent = `${institutCount} تخصص`;
+            document.getElementById('ensCountBadge').textContent = `${ensCount} تخصص`;
 
             if (data.length === 0) {
                 container.innerHTML = `
