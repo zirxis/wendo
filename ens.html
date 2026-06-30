@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WENDO - مدارس الأساتذة 2025</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preload" href="arabic.otf" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="BebasNeue-Regular.OTF" as="font" type="font/otf" crossorigin>
-    <link rel="preload" href="BebasNeue-Bold.OTF" as="font" type="font/otf" crossorigin>
     <style>
         :root {
             --text-primary: #1a1a2e;
@@ -20,41 +17,15 @@
             --accent-light: #9b7fd4;
             --accent-purple: #7b5cb8;
             --accent-gradient: linear-gradient(135deg, #2d1b69, #5b3c8a);
-            --gray-gradient: linear-gradient(135deg, #4a4a6a, #7a7a9a);
             --shadow-md: 0 8px 30px rgba(43, 27, 102, 0.12);
             --shadow-lg: 0 12px 45px rgba(43, 27, 102, 0.2);
-            --font-arabic: 'ArabicFont', 'Segoe UI', system-ui, sans-serif;
-            --font-display: 'BebasNeue-Regular', 'Segoe UI', sans-serif;
-            --font-display-bold: 'BebasNeue-Bold', 'Segoe UI', sans-serif;
+            --font-arabic: 'Segoe UI', system-ui, sans-serif;
+            --font-display-bold: 'Segoe UI', sans-serif;
             --radius-sm: 10px;
             --radius-md: 18px;
             --radius-lg: 26px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @font-face {
-            font-family: 'ArabicFont';
-            src: url('arabic.otf') format('opentype');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'BebasNeue-Regular';
-            src: url('BebasNeue-Regular.OTF') format('opentype');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'BebasNeue-Bold';
-            src: url('BebasNeue-Bold.OTF') format('opentype');
-            font-weight: 700;
-            font-style: normal;
-            font-display: swap;
         }
 
         * {
@@ -137,41 +108,12 @@
             background: var(--surface-hover);
         }
 
-        .nav-right {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-right button {
-            background: none;
-            border: none;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: var(--font-display-bold);
-            color: var(--text-primary);
-            cursor: pointer;
-            padding: 0.5rem 1.2rem;
-            border-radius: 30px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-right button:hover {
-            background: var(--surface-hover);
-            transform: translateY(-2px);
-        }
-
         .container {
             max-width: 1440px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* Page Header */
         .page-header {
             text-align: center;
             margin-bottom: 3rem;
@@ -215,7 +157,6 @@
             z-index: 1;
         }
 
-        /* Dual Path */
         .dual-path {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -309,7 +250,6 @@
             border-radius: 4px;
         }
 
-        /* Accordion */
         .accordion-container {
             display: flex;
             flex-direction: column;
@@ -427,7 +367,6 @@
             border-right: 4px solid #8a8a9a;
         }
 
-        /* ENS Grid */
         .ens-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -574,7 +513,6 @@
             transform: scale(1.02);
         }
 
-        /* Journey */
         .journey-section {
             background: var(--surface-color);
             border-radius: var(--radius-lg);
@@ -645,104 +583,210 @@
             opacity: 0.7;
         }
 
-        /* Footer */
+       /* تنسيقات الفوتر */
         .footer {
-            background: var(--accent-gradient);
-            color: #fff;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            border-top: none;
             padding: 4rem 2rem 1.5rem;
-            margin-top: 4rem;
-            border-radius: 40px 40px 0 0;
-            position: relative;
-            overflow: hidden;
+            color: var(--accent-light);
         }
 
-        .footer-content {
+        .footer .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
             gap: 2.8rem;
-            position: relative;
-            z-index: 1;
         }
 
-        .footer-brand h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            font-family: var(--font-display-bold);
+        .footer .footer-brand h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 0.3rem;
             color: #fff;
-            letter-spacing: 2px;
+            letter-spacing: -0.5px;
+        }
+        
+        /* --- تنسيق شعار WENDO في الفوتر --- */
+        .footer .footer-brand .logo-img {
+            height: 68px;
+            width: auto;
+            margin-bottom: 0.5rem;
+            filter: brightness(0) invert(1); /* ليتناسب مع خلفية الفوتر الداكنة */
         }
 
-        .footer-brand .tagline {
-            font-size: 1rem;
+        .footer .footer-brand .tagline {
+            font-size: 0.95rem;
             color: var(--accent-light);
+            margin-bottom: 1.5rem;
             font-style: italic;
             border-right: 3px solid var(--accent-purple);
             padding-right: 14px;
         }
 
-        .footer-brand .description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-            margin-top: 0.8rem;
+        .footer-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 0.5rem;
+            width: 100%;
         }
 
-        .footer-col h4 {
-            font-size: 1.1rem;
+        .footer-feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 18px 10px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            min-height: 110px;
+        }
+
+        .footer-feature-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-feature-item .feature-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-light);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-feature-item:hover .feature-icon {
+            transform: scale(1.06) rotate(-2deg);
+            background: #fff;
+        }
+
+        .footer-feature-item .feature-content strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #fff;
             font-weight: 700;
-            font-family: var(--font-display-bold);
+            margin-bottom: 4px;
+        }
+
+        .footer-feature-item .feature-content .feature-desc {
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            line-height: 1.5;
+        }
+
+        .footer .footer-col h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
             color: #fff;
             margin-bottom: 1.2rem;
             position: relative;
-            padding-bottom: 10px;
-            letter-spacing: 0.5px;
+            padding-bottom: 8px;
         }
 
-        .footer-col h4::after {
+        .footer .footer-col h4::after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 32px;
-            height: 3px;
+            width: 28px;
+            height: 2.5px;
             background: var(--accent-purple);
             border-radius: 4px;
         }
 
-        .footer-col ul {
+        .footer .footer-col ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .footer-col ul li {
+        .footer .footer-col ul li {
             margin-bottom: 0.6rem;
         }
 
-        .footer-col ul li a {
-            color: rgba(255, 255, 255, 0.7);
+        .footer .footer-col ul li a {
+            color: var(--accent-light);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: var(--transition);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
             display: inline-block;
+            position: relative;
         }
 
-        .footer-col ul li a:hover {
+        .footer .footer-col ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 1.5px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .footer .footer-col ul li a:hover {
             color: #fff;
-            transform: translateX(-4px);
+        }
+        .footer .footer-col ul li a:hover::before {
+            width: 100%;
         }
 
-        .footer-bottom {
+        .footer .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-social a {
+            color: var(--accent-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .footer .footer-social a:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border-color: transparent;
+        }
+
+        .footer .footer-social .x-icon svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
+        .footer .footer-bottom {
             max-width: 1200px;
             margin: 2.5rem auto 0;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            position: relative;
-            z-index: 1;
+            color: var(--accent-light);
         }
 
         .back-to-top {
@@ -776,40 +820,20 @@
             box-shadow: 0 16px 40px rgba(43, 27, 102, 0.35);
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .dual-path {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
+        .hidden-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 0 1rem; }
-            .page-header h1 { font-size: 2rem; }
-            .navbar { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
-            .nav-brand { font-size: 1.8rem; }
-            .nav-right button span { display: none; }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
-            .accordion-body .info-grid { grid-template-columns: 1fr; }
-            .ens-grid { grid-template-columns: 1fr; }
-            .journey-steps { grid-template-columns: 1fr 1fr; }
-            .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; left: 1.2rem; }
+        .hidden-section.visible {
+            display: block;
         }
 
-        @media (max-width: 480px) {
-            .page-header h1 { font-size: 1.6rem; }
-            .page-header { padding: 1.5rem 1rem; }
-            .path-card { padding: 1.2rem; }
-            .path-card h3 { font-size: 1.2rem; }
-            .journey-steps { grid-template-columns: 1fr; }
-            .ens-card { padding: 1rem; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Detail page specific styles */
         .detail-page {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -817,11 +841,6 @@
 
         .detail-page.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .detail-hero {
@@ -977,38 +996,60 @@
             transform: translateX(-4px);
         }
 
-        .detail-section-title {
-            font-size: 1.8rem;
-            font-family: var(--font-display-bold);
-            color: var(--text-primary);
-            margin: 2rem 0 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+        .toggle-hint {
+            text-align: center;
+            margin: 1rem 0 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 992px) {
+            .dual-path {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            .detail-hero h2 {
-                font-size: 1.8rem;
-            }
+            .container { padding: 0 1rem; }
+            .page-header h1 { font-size: 2rem; }
+            .navbar { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
+            .nav-brand { font-size: 1.8rem; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .accordion-body .info-grid { grid-template-columns: 1fr; }
+            .ens-grid { grid-template-columns: 1fr; }
+            .journey-steps { grid-template-columns: 1fr 1fr; }
+            .back-to-top { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; left: 1.2rem; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .detail-hero h2 { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 { font-size: 1.6rem; }
+            .page-header { padding: 1.5rem 1rem; }
+            .path-card { padding: 1.2rem; }
+            .path-card h3 { font-size: 1.2rem; }
+            .journey-steps { grid-template-columns: 1fr; }
+            .ens-card { padding: 1rem; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar" id="navbar">
-        <div class="nav-left">
-            <button class="menu-text" onclick="history.back()">
-                <i class="fas fa-arrow-right"></i>
-                <span>رجوع</span>
-            </button>
-        </div>
-        <div class="nav-brand" onclick="window.location.href='index.html'">
-    <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="شعار WENDO" style="height: 50px; vertical-align: middle;">
+       <div class="nav-left">
+    <a href="index.html" class="menu-text" style="text-decoration: none;">
+        <i class="fas fa-arrow-right"></i>
+        <span>الرئيسية</span>
+    </a>
 </div>
+        <div class="nav-brand" onclick="resetToMain()">
+            <span>WENDO</span>
+        </div>
     </nav>
 
     <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
@@ -1016,7 +1057,7 @@
     </button>
 
     <div class="container">
-        <!-- القائمة الرئيسية -->
+        <!-- الصفحة الرئيسية -->
         <div id="mainPage">
             <div class="page-header">
                 <h1>🏫 مدارس الأساتذة 2025</h1>
@@ -1024,13 +1065,13 @@
             </div>
 
             <div class="dual-path">
-                <div class="path-card purple" onclick="document.getElementById('formationSection').scrollIntoView({behavior:'smooth'})">
+                <div class="path-card purple" onclick="showSection('formationSection')">
                     <span class="path-icon">📚</span>
                     <h3>مسار التكوين</h3>
                     <p>استكشف أطوار التعليم: الابتدائي، المتوسط، الثانوي ومحتوى كل طور</p>
                     <span class="path-badge">اكتشف الأطوار</span>
                 </div>
-                <div class="path-card gray" onclick="document.getElementById('schoolsSection').scrollIntoView({behavior:'smooth'})">
+                <div class="path-card gray" onclick="showSection('schoolsSection')">
                     <span class="path-icon">📍</span>
                     <h3>المدارس الجغرافية</h3>
                     <p>تعرف على مدارس الأساتذة في مختلف الولايات والملاحق التابعة لها</p>
@@ -1038,7 +1079,10 @@
                 </div>
             </div>
 
-            <div id="formationSection">
+            <div class="toggle-hint">👆 اختر أحد المسارين أعلاه لعرض المحتوى</div>
+
+            <!-- قسم التكوين (مخفي افتراضياً) -->
+            <div id="formationSection" class="hidden-section">
                 <div class="section-title">
                     <span class="title-icon">📚</span>
                     أطوار التكوين
@@ -1147,7 +1191,8 @@
                 </div>
             </div>
 
-            <div id="schoolsSection">
+            <!-- قسم المدارس (مخفي افتراضياً) -->
+            <div id="schoolsSection" class="hidden-section">
                 <div class="section-title">
                     <span class="title-icon">📍</span>
                     مدارس الأساتذة حسب الولايات
@@ -1196,24 +1241,23 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer scroll-animate">
         <div class="footer-content">
             <div class="footer-brand">
-                <h2>WENDO</h2>
+                <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
                 <p class="tagline">الطريق نحو المستقبل</p>
-                <p class="description">
-                    منصتك التوجيهية الذكية لاختيار التخصص الجامعي المناسب.
-                    نقدم لك دليلاً شاملاً لمؤسسات التعليم العالي في الجزائر مع معدلات القبول.
-                </p>
+                
             </div>
+
             <div class="footer-col">
                 <h4>التنقل</h4>
                 <ul>
-                    <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="#">اختبار الميول</a></li>
-                    <li><a href="sp.html">المؤسسات</a></li>
+                    <li><a href="#" onclick="app.navigate('landing-view')">الرئيسية</a></li>
+                    <li><a href="#" onclick="app.startQuiz()">تندر المهنة</a></li>
+                    <li><a href="#" onclick="app.navigate('explorer-view')">المؤسسات</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>الموارد</h4>
                 <ul>
@@ -1222,6 +1266,7 @@
                     <li><a href="#">الأسئلة الشائعة</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>من نحن</h4>
                 <ul>
@@ -1229,15 +1274,26 @@
                     <li><a href="#">اتصل بنا</a></li>
                     <li><a href="#">الخصوصية</a></li>
                 </ul>
+                <h4 style="margin-top: 1.8rem;">تابعنا</h4>
+                <div class="footer-social">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="x-icon" aria-label="X">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.888 6.694H.645l7.73-8.835L.645 2.25h6.706l4.886 6.088L17.461 2.25h.783zM17.007 18.338h1.537L5.314 3.544H3.667l13.34 14.794z"/>
+                        </svg>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات مأخوذة من وزارة التعليم العالي والبحث العلمي الجزائرية.</p>
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات المقدمة للأغراض التوجيهية فقط.</p>
         </div>
     </footer>
 
     <script>
-        // بيانات مدارس الأساتذة مع تفاصيل موسعة
         const ensSchools = [
             {
                 id: 1,
@@ -1464,14 +1520,43 @@
             }
         }
 
+        // إظهار قسم معين وإخفاء الآخر
+        function showSection(sectionId) {
+            // إخفاء كافة الأقسام
+            document.querySelectorAll('.hidden-section').forEach(el => {
+                el.classList.remove('visible');
+            });
+            // إظهار القسم المطلوب
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.add('visible');
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // إعادة تعيين الصفحة إلى الحالة الأولية
+        function resetToMain() {
+            document.querySelectorAll('.hidden-section').forEach(el => {
+                el.classList.remove('visible');
+            });
+            document.getElementById('detailPage').classList.remove('active');
+            document.getElementById('mainPage').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // تحميل البيانات عند بدء الصفحة
         document.addEventListener('DOMContentLoaded', function() {
             renderENSchools(ensSchools);
         });
 
+        // جعل الدوال متاحة عالمياً
         window.toggleAccordion = toggleAccordion;
         window.showDetail = showDetail;
         window.closeDetail = closeDetail;
+        window.showSection = showSection;
+        window.resetToMain = resetToMain;
 
+        // شريط التنقل وزر العودة للأعلى
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const backToTop = document.getElementById('backToTop');

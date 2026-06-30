@@ -813,120 +813,210 @@
             opacity: 0.7;
         }
 
-        /* --- الفوتر --- */
+         /* تنسيقات الفوتر */
         .footer {
-            background: var(--accent-gradient);
-            color: #fff;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            border-top: none;
             padding: 4rem 2rem 1.5rem;
-            margin-top: 4rem;
-            border-radius: 40px 40px 0 0;
-            position: relative;
-            overflow: hidden;
+            color: var(--accent-light);
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            left: -10%;
-            width: 50%;
-            height: 150%;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .footer-content {
+        .footer .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.2fr;
+            grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
             gap: 2.8rem;
-            position: relative;
-            z-index: 1;
         }
 
-        .footer-brand h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            font-family: var(--font-display-bold);
+        .footer .footer-brand h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
             margin-bottom: 0.3rem;
             color: #fff;
-            letter-spacing: 2px;
+            letter-spacing: -0.5px;
+        }
+        
+        /* --- تنسيق شعار WENDO في الفوتر --- */
+        .footer .footer-brand .logo-img {
+            height: 68px;
+            width: auto;
+            margin-bottom: 0.5rem;
+            filter: brightness(0) invert(1); /* ليتناسب مع خلفية الفوتر الداكنة */
         }
 
-        .footer-brand .tagline {
-            font-size: 1rem;
+        .footer .footer-brand .tagline {
+            font-size: 0.95rem;
             color: var(--accent-light);
+            margin-bottom: 1.5rem;
             font-style: italic;
             border-right: 3px solid var(--accent-purple);
             padding-right: 14px;
-            font-family: var(--font-arabic);
         }
 
-        .footer-brand .description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-            margin-top: 0.8rem;
-            font-family: var(--font-arabic);
+        .footer-features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 0.5rem;
+            width: 100%;
         }
 
-        .footer-col h4 {
-            font-size: 1.1rem;
+        .footer-feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 18px 10px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            min-height: 110px;
+        }
+
+        .footer-feature-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .footer-feature-item .feature-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-light);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-feature-item:hover .feature-icon {
+            transform: scale(1.06) rotate(-2deg);
+            background: #fff;
+        }
+
+        .footer-feature-item .feature-content strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #fff;
             font-weight: 700;
-            font-family: var(--font-display-bold);
+            margin-bottom: 4px;
+        }
+
+        .footer-feature-item .feature-content .feature-desc {
+            font-size: 0.75rem;
+            color: var(--accent-light);
+            line-height: 1.5;
+        }
+
+        .footer .footer-col h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
             color: #fff;
             margin-bottom: 1.2rem;
             position: relative;
-            padding-bottom: 10px;
-            letter-spacing: 0.5px;
+            padding-bottom: 8px;
         }
 
-        .footer-col h4::after {
+        .footer .footer-col h4::after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 32px;
-            height: 3px;
+            width: 28px;
+            height: 2.5px;
             background: var(--accent-purple);
             border-radius: 4px;
         }
 
-        .footer-col ul {
+        .footer .footer-col ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .footer-col ul li {
+        .footer .footer-col ul li {
             margin-bottom: 0.6rem;
         }
 
-        .footer-col ul li a {
-            color: rgba(255, 255, 255, 0.7);
+        .footer .footer-col ul li a {
+            color: var(--accent-light);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            font-family: var(--font-arabic);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
             display: inline-block;
+            position: relative;
         }
 
-        .footer-col ul li a:hover {
+        .footer .footer-col ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 0;
+            width: 0;
+            height: 1.5px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .footer .footer-col ul li a:hover {
             color: #fff;
-            transform: translateX(-4px);
+        }
+        .footer .footer-col ul li a:hover::before {
+            width: 100%;
         }
 
-        .footer-bottom {
+        .footer .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-social a {
+            color: var(--accent-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .footer .footer-social a:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            border-color: transparent;
+        }
+
+        .footer .footer-social .x-icon svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
+        .footer .footer-bottom {
             max-width: 1200px;
             margin: 2.5rem auto 0;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
             text-align: center;
             font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            font-family: var(--font-arabic);
-            position: relative;
-            z-index: 1;
+            color: var(--accent-light);
         }
 
         /* --- استجابة للشاشات --- */
@@ -1081,24 +1171,23 @@
     </div>
 
     <!-- ===== الفوتر ===== -->
-    <footer class="footer">
+   <footer class="footer scroll-animate">
         <div class="footer-content">
             <div class="footer-brand">
-                <h2>WENDO</h2>
+                <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
                 <p class="tagline">الطريق نحو المستقبل</p>
-                <p class="description">
-                    منصتك التوجيهية الذكية لاختيار التخصص الجامعي المناسب. 
-                    نقدم لك دليلاً شاملاً لمؤسسات التعليم العالي في الجزائر مع معدلات القبول.
-                </p>
+                
             </div>
+
             <div class="footer-col">
                 <h4>التنقل</h4>
                 <ul>
-                    <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="#">اختبار الميول</a></li>
-                    <li><a href="sp.html">المؤسسات</a></li>
+                    <li><a href="#" onclick="app.navigate('landing-view')">الرئيسية</a></li>
+                    <li><a href="#" onclick="app.startQuiz()">تندر المهنة</a></li>
+                    <li><a href="#" onclick="app.navigate('explorer-view')">المؤسسات</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>الموارد</h4>
                 <ul>
@@ -1107,6 +1196,7 @@
                     <li><a href="#">الأسئلة الشائعة</a></li>
                 </ul>
             </div>
+
             <div class="footer-col">
                 <h4>من نحن</h4>
                 <ul>
@@ -1114,10 +1204,22 @@
                     <li><a href="#">اتصل بنا</a></li>
                     <li><a href="#">الخصوصية</a></li>
                 </ul>
+                <h4 style="margin-top: 1.8rem;">تابعنا</h4>
+                <div class="footer-social">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="x-icon" aria-label="X">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.888 6.694H.645l7.73-8.835L.645 2.25h6.706l4.886 6.088L17.461 2.25h.783zM17.007 18.338h1.537L5.314 3.544H3.667l13.34 14.794z"/>
+                        </svg>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات مأخوذة من وزارة التعليم العالي والبحث العلمي الجزائرية.</p>
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات المقدمة للأغراض التوجيهية فقط.</p>
         </div>
     </footer>
 

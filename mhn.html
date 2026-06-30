@@ -103,44 +103,44 @@
             transform: scale(0.9);
         }
 
-        /* --- Filter Bar --- */
-        .filter-bar {
-            display: flex;
-            gap: 8px;
+        /* --- Filter Dropdown --- */
+        .filter-wrapper {
             padding: 0 20px 10px 20px;
-            overflow-x: auto;
-            flex-wrap: nowrap;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
             z-index: 10;
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(5px);
-        }
-        .filter-bar::-webkit-scrollbar {
-            display: none;
+            position: relative;
         }
 
-        .filter-btn {
-            background: white;
+        .filter-select {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px 16px;
             border: 1px solid #E8E8EE;
             border-radius: 20px;
-            padding: 8px 18px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: var(--text-gray);
+            color: var(--text-dark);
+            background: white;
             cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
+            appearance: none;
+            -webkit-appearance: none;
             font-family: 'CustomArabic', sans-serif;
-            flex-shrink: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A5D70' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            padding-left: 35px;
+            transition: border-color 0.2s ease;
         }
-        .filter-btn:active {
-            transform: scale(0.95);
-        }
-        .filter-btn.active {
-            background: var(--primary-purple);
-            color: white;
+
+        .filter-select:focus {
+            outline: none;
             border-color: var(--primary-purple);
+        }
+
+        .filter-select option {
+            font-family: 'CustomArabic', sans-serif;
+            padding: 8px;
         }
 
         /* --- Main Content --- */
@@ -591,14 +591,14 @@
 
         @media (max-width: 600px) {
             header { padding: 12px 15px 5px 15px; }
-            .filter-bar { padding: 0 15px 8px 15px; }
+            .filter-wrapper { padding: 0 15px 8px 15px; }
             .cards-container { max-width: 100%; margin: 0; }
             .card { border-radius: 28px; }
             .btn-main { width: 60px; height: 60px; font-size: 26px; }
             .btn-secondary { width: 45px; height: 45px; font-size: 18px; }
             .controls { gap: 15px; }
             .logo img { height: 40px; }
-            .filter-btn { font-size: 12px; padding: 6px 14px; }
+            .filter-select { max-width: 100%; font-size: 13px; padding: 8px 14px; padding-left: 35px; }
         }
 
     </style>
@@ -616,9 +616,12 @@
         </div>
     </header>
 
-    <div class="filter-bar" id="filterBar">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        </div>
+    <!-- Filter Dropdown -->
+    <div class="filter-wrapper">
+        <select class="filter-select" id="filterSelect">
+            <option value="all">الكل</option>
+        </select>
+    </div>
 
     <div class="main-content">
         <div class="cards-container" id="board"></div>
@@ -800,10 +803,7 @@
     ];
 
     // ----- التحقق من حالة تسجيل الدخول -----
-    // نتحقق من localStorage لمعرفة إذا كان المستخدم مسجلاً دخوله
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    
-    // إذا كان مسجلاً، لا يوجد حد أقصى (Infinity). إذا لم يكن، الحد هو 5 سحبات.
     const MAX_SWIPES = isLoggedIn ? Infinity : 5;
 
     // ----- متغيرات الحالة -----
@@ -815,7 +815,7 @@
 
     const board = document.getElementById('board');
     const loginModal = document.getElementById('login-modal');
-    const filterBar = document.getElementById('filterBar');
+    const filterSelect = document.getElementById('filterSelect');
 
     // ----- دوال الفلتر -----
     function getUniqueCategories() {
@@ -824,26 +824,20 @@
         return Array.from(categories);
     }
 
-    function buildFilterButtons() {
+    function buildFilterOptions() {
         const categories = getUniqueCategories();
-        const allBtn = filterBar.querySelector('[data-filter="all"]');
-        filterBar.innerHTML = '';
-        filterBar.appendChild(allBtn);
+        filterSelect.innerHTML = '<option value="all">الكل</option>';
         
         categories.forEach(category => {
-            const btn = document.createElement('button');
-            btn.classList.add('filter-btn');
-            btn.dataset.filter = category;
-            btn.textContent = category;
-            filterBar.appendChild(btn);
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            filterSelect.appendChild(option);
         });
     }
 
     function applyFilter(filter) {
         currentFilter = filter;
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
-        });
 
         if (filter === 'all') {
             filteredJobs = [...currentJobs];
@@ -852,9 +846,8 @@
         }
 
         swipedHistory = [];
-        swipeCount = 0; // إعادة تعيين العداد عند تغيير الفلتر
+        swipeCount = 0;
         
-        // إعادة التمكين في حال كان مقفلاً
         loginModal.classList.remove('active');
         board.style.pointerEvents = 'auto';
         document.getElementById('controls').style.pointerEvents = 'auto';
@@ -1089,12 +1082,12 @@
             this.card.style.opacity = '0';
 
             swipedHistory.push(filteredJobs[filteredJobs.length - 1]);
-            swipeCount++; // زيادة عداد السحب
+            swipeCount++;
             
             setTimeout(() => {
                 filteredJobs.pop(); 
                 renderCards();
-                checkSwipeLimit(); // استدعاء التحقق من الحد الأقصى هنا
+                checkSwipeLimit();
             }, 350);
         }
 
@@ -1145,7 +1138,7 @@
         if (swipedHistory.length > 0) {
             const lastJob = swipedHistory.pop();
             filteredJobs.push(lastJob); 
-            swipeCount--; // تقليل العداد عند التراجع
+            swipeCount--;
             renderCards();
             
             const cards = board.querySelectorAll('.card');
@@ -1162,12 +1155,9 @@
         }
     });
 
-    // ----- أحداث الفلتر -----
-    filterBar.addEventListener('click', (e) => {
-        const btn = e.target.closest('.filter-btn');
-        if (!btn) return;
-        if (btn.dataset.filter === currentFilter) return;
-        applyFilter(btn.dataset.filter);
+    // ----- أحداث الفلتر (من القائمة المنسدلة) -----
+    filterSelect.addEventListener('change', (e) => {
+        applyFilter(e.target.value);
     });
 
     // ----- أحداث النجمة -----
@@ -1188,7 +1178,7 @@
     });
 
     // ----- التهيئة الأولية -----
-    buildFilterButtons();
+    buildFilterOptions();
     filteredJobs = [...currentJobs];
     renderCards();
 </script>
