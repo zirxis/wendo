@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WENDO - منصتك التوجيهية الذكية | من نحن">
+    <title>WENDO - من نحن | منصتك التوجيهية الذكية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="BebasNeue-Regular.OTF" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="BebasNeue-Bold.OTF" as="font" type="font/otf" crossorigin>
+    <style>
+        /* --- أنماط مكملة خاصة بصفحة من نحن --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text-primary: #2a1f4d;
+            --text-secondary: #3d2e6b;
+            --accent-color: #6b4f9e;
+            --accent-light: #b69fd9;
+            --accent-purple: #8a6fc7;
+            --bg-color: #f8f5ff;
+            --surface-color: #ffffff;
+            --border-color: #e2d8f0;
+            --surface-hover: #f0ebfc;
+            --shadow-md: 0 12px 30px rgba(42, 31, 77, 0.08);
+            --error-color: #c0392b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* ---- NAVBAR (مطابقة للرئيسية) ---- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 2rem;
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-text {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+        .menu-text:hover {
+            background: var(--bg-color);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            font-size: 0;
+            cursor: pointer;
+        }
+        .nav-brand .logo-img {
+            height: 80px;
+            width: auto;
+            display: block;
+        }
+
+        .program-finder {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .program-finder:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-color);
+        }
+
+        .icon-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .icon-btn:hover {
+            background: var(--accent-light);
+            border-color: var(--accent-color);
+        }
+
+        /* ---- محتوى الصفحة الرئيسي ---- */
+        .about-page-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        /* الهيرو الداخلي */
+        .about-hero {
+            text-align: center;
+            padding: 3rem 1.5rem 4rem;
+            margin-bottom: 2rem;
+            border-radius: 40px;
+            background: linear-gradient(145deg, #ffffff, #f3edfc);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-hero .badge {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--text-primary);
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .about-hero h1 span {
+            background: linear-gradient(135deg, #6b4f9e, #a080e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.9;
+        }
+
+        .about-hero .hero-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            color: #fff;
+            border: none;
+            padding: 0.9rem 2.4rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(42, 31, 77, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(42, 31, 77, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            padding: 0.9rem 2.4rem;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-color);
+            border-color: var(--accent-color);
+        }
+
+        /* ---- قسم القيم ---- */
+        .values-section {
+            margin: 4rem 0;
+        }
+
+        .values-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: var(--surface-color);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .value-card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ---- قسم الخدمات ---- */
+        .services-section {
+            margin: 4rem 0;
+            padding: 2.5rem 0;
+        }
+
+        .services-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--surface-color);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            border: 1px solid var(--border-color);
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .service-card .service-icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-primary);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            flex: 1;
+        }
+
+        .service-card .service-tag {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.25rem 1rem;
+            background: var(--bg-color);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            align-self: flex-start;
+        }
+
+        /* ---- قسم الفريق ---- */
+        .team-section {
+            margin: 4rem 0 2rem;
+        }
+
+        .team-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            background: var(--surface-color);
+            border-radius: 24px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .team-member .avatar {
+            font-size: 3.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .team-member h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .team-member .role {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* ---- قسم الإحصائيات (مدمج) ---- */
+        .stats-banner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            border-radius: 40px;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .stats-banner .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stats-banner .stat-number {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .stats-banner .stat-label {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        /* ---- فوتر مطابق ---- */
+        .footer {
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            border-top: none;
+            padding: 4rem 2rem 1.5rem;
+            color: var(--accent-light);
+            margin-top: 3rem;
+        }
+
+        .footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1.2fr;
+            gap: 2.8rem;
+        }
+
+        .footer .footer-brand h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            color: #fff;
+        }
+
+        .footer .footer-brand .logo-img {
+            height: 68px;
+            width: auto;
+            margin-bottom: 0.5rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer .footer-brand .tagline {
+            font-size: 0.95rem;
+            color: var(--accent-light);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            border-right: 3px solid var(--accent-purple);
+            padding-right: 14px;
+        }
+
+        .footer .footer-col h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 28px;
+            height: 2.5px;
+            background: var(--accent-purple);
+            border-radius: 4px;
+        }
+
+        .footer .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer .footer-col ul li a {
+            color: var(--accent-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .footer .footer-col ul li a:hover {
+            color: #fff;
+        }
+
+        .footer .footer-social {
+            display: flex;
+            gap: 10px;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .footer .footer-social a {
+            color: var(--accent-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .footer .footer-social a:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            transform: translateY(-4px);
+        }
+
+        .footer .footer-social .x-icon svg {
+            width: 18px;
+            height: 18px;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+
+        .footer .footer-bottom {
+            max-width: 1200px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+        }
+
+        @media (max-width: 992px) {
+            .footer .footer-content { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .stats-banner { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .navbar { padding: 0.5rem 1rem; flex-wrap: wrap; }
+            .nav-brand .logo-img { height: 60px; }
+            .about-hero h1 { font-size: 2.2rem; }
+            .about-page-container { padding: 1.5rem 1rem; }
+            .footer .footer-content { grid-template-columns: 1fr; gap: 1.8rem; }
+            .stats-banner { grid-template-columns: 1fr 1fr; gap: 1rem; padding: 2rem 1rem; }
+            .stats-banner .stat-number { font-size: 2rem; }
+            .values-grid, .services-grid, .team-grid { grid-template-columns: 1fr; }
+            .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+        }
+
+        /* ---- إضافات صغيرة ---- */
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== شريط التنقل (مطابق للرئيسية) ===== -->
+    <nav class="navbar hec-style">
+        <div class="nav-left">
+            <button class="menu-text" onclick="alert('القائمة الجانبية قيد التطوير في هذه الصفحة المستقلة.')">
+                <i class="fas fa-bars"></i>
+                <span>القائمة</span>
+            </button>
+        </div>
+        <div class="nav-brand" onclick="window.location.href='index.html'" role="button" tabindex="2">
+            <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
+        </div>
+        <div class="nav-right">
+            <button class="program-finder" onclick="window.location.href='sp.html'">
+                <span>البحث عن تخصص</span>
+                <i class="fas fa-th"></i>
+            </button>
+            <button class="icon-btn" onclick="alert('تسجيل الدخول متاح في الصفحة الرئيسية')" title="حسابي"><i class="fas fa-user"></i></button>
+        </div>
+    </nav>
+
+    <!-- ===== محتوى صفحة من نحن ===== -->
+    <main class="about-page-container">
+
+        <!-- الهيرو -->
+        <section class="about-hero scroll-animate">
+            <div class="badge"> <i class="fas fa-compass"></i> دليلك الذكي</div>
+            <h1>من نحن <span>في WENDO</span></h1>
+            <p>
+                <i class="fas fa-quote-right" style="color: var(--accent-light); margin-left: 6px;"></i>
+                WENDO هي منصة توجيهية ذكية صُممت خصيصاً للطالب الجزائري، لتكون دليله الأمين في رحلة اختيار التخصص الجامعي أو المدرسي المناسب لميوله وقدراته. 
+                نؤمن بأن كل طالب يملك إمكانيات فريدة، وأن الطريق إلى النجاح يبدأ بفهم صحيح للذات، ومن ثم اختيار واعٍ للمسار.
+                <i class="fas fa-quote-left" style="color: var(--accent-light); margin-right: 6px;"></i>
+            </p>
+            <div class="hero-cta">
+                <a href="index.html" class="btn-primary"><i class="fas fa-rocket"></i> ابدأ رحلتك</a>
+                <a href="sp.html" class="btn-secondary"><i class="fas fa-compass"></i> استكشف التخصصات</a>
+            </div>
+        </section>
+
+        <!-- قيمنا -->
+        <section class="values-section scroll-animate">
+            <h2>🌟 قيمنا</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="icon">🎯</span>
+                    <h3>الدقة</h3>
+                    <p>نقدم معلومات موثوقة ومحدّثة عن التخصصات والجامعات والمهن.</p>
+                </div>
+                <div class="value-card">
+                    <span class="icon">🤝</span>
+                    <h3>التوجيه الشخصي</h3>
+                    <p>نضع احتياجاتك وميولك في صلب اهتمامنا، لنقدم لك خيارات تناسبك.</p>
+                </div>
+                <div class="value-card">
+                    <span class="icon">🚀</span>
+                    <h3>الابتكار</h3>
+                    <p>نستخدم أحدث الأساليب والتقنيات لتجربة توجيهية سلسة وذكية.</p>
+                </div>
+                <div class="value-card">
+                    <span class="icon">🌍</span>
+                    <h3>الانفتاح</h3>
+                    <p>نواكب تطورات سوق العمل والتعليم لنضمن لك مستقبلاً واعداً.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- خدماتنا -->
+        <section class="services-section scroll-animate" id="services">
+            <h2>🧩 خدماتنا</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏛️</div>
+                    <h3>دليل الجامعات والمدارس</h3>
+                    <p>استعرض جميع جامعات ومدارس النخبة في الجزائر مع تفاصيل التخصصات ومتطلبات القبول.</p>
+                    <span class="service-tag">أكثر من 35 مؤسسة</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>مقارنة المهن</h3>
+                    <p>قارن بين مهنتين من حيث الدخل، الطلب، وبيئة العمل لتتخذ قراراً مستنيراً.</p>
+                    <span class="service-tag">أكثر من 50 مهنة</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>اختبار الميول الذكي</h3>
+                    <p>أجب عن أسئلة ذكية وسنقترح لك التخصصات والمهن التي تتناغم مع شخصيتك.</p>
+                    <span class="service-tag">دقيق وسريع</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>لوحة تحكم شخصية</h3>
+                    <p>تتبع تقدمك، احفظ التخصصات المفضلة، واحصل على توصيات مخصصة لك.</p>
+                    <span class="service-tag">حصري للمستخدمين</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- إحصائيات -->
+        <div class="stats-banner scroll-animate">
+            <div class="stat-item">
+                <span class="stat-number">12+</span>
+                <span class="stat-label">تخصص مدروس</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">35+</span>
+                <span class="stat-label">جامعة ومدرسة</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">مهنة مستقبلية</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1200+</span>
+                <span class="stat-label">طالب استفاد</span>
+            </div>
+        </div>
+
+        <!-- فريق العمل -->
+        <section class="team-section scroll-animate">
+            <h2>👥 فريق WENDO</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="avatar">👩‍💻</div>
+                    <h4>أسماء بن سعيد</h4>
+                    <span class="role">مؤسِّسة المنصة</span>
+                </div>
+                <div class="team-member">
+                    <div class="avatar">🧑‍🏫</div>
+                    <h4>كريم حمدي</h4>
+                    <span class="role">مستشار توجيهي</span>
+                </div>
+                <div class="team-member">
+                    <div class="avatar">👨‍💻</div>
+                    <h4>يوسف مقدم</h4>
+                    <span class="role">مطور الواجهة</span>
+                </div>
+                <div class="team-member">
+                    <div class="avatar">📊</div>
+                    <h4>ليلى شريف</h4>
+                    <span class="role">محللة بيانات</span>
+                </div>
+            </div>
+            <p class="text-center mt-2" style="color: var(--text-secondary); font-size: 0.95rem;">
+                نحن فريق من المختصين في التوجيه والتعليم والتكنولوجيا، نجمع بين الخبرة والشغف لخدمة الطالب الجزائري.
+            </p>
+        </section>
+
+        <!-- دعوة للانضمام -->
+        <div class="text-center" style="margin: 4rem 0 2rem;">
+            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">انضم إلى WENDO اليوم</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem;">
+                ابدأ رحلة اكتشاف مستقبلك مع منصة التوجيه الذكية الأولى في الجزائر.
+            </p>
+            <a href="index.html" class="btn-primary"><i class="fas fa-user-plus"></i> أنشئ حسابك الآن</a>
+        </div>
+
+    </main>
+
+    <!-- ===== فوتر مطابق للرئيسية ===== -->
+    <footer class="footer scroll-animate">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://i.ibb.co/7J5wCR3s/Artboard-7-copy-2-2x.png" alt="WENDO Logo" class="logo-img">
+                <p class="tagline">الطريق نحو المستقبل</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>التنقل</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html#quiz">تندر المهنة</a></li>
+                    <li><a href="sp.html">المؤسسات</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>الموارد</h4>
+                <ul>
+                    <li><a href="#">الأدلة</a></li>
+                    <li><a href="#">المدونة</a></li>
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>من نحن</h4>
+                <ul>
+                    <li><a href="aboutus.html">من نحن؟</a></li>
+                    <li><a href="#">اتصل بنا</a></li>
+                    <li><a href="#">الخصوصية</a></li>
+                </ul>
+                <h4 style="margin-top: 1.8rem;">تابعنا</h4>
+                <div class="footer-social">
+                    <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" class="x-icon" aria-label="X">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.888 6.694H.645l7.73-8.835L.645 2.25h6.706l4.886 6.088L17.461 2.25h.783zM17.007 18.338h1.537L5.314 3.544H3.667l13.34 14.794z"/>
+                        </svg>
+                    </a>
+                    <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 WENDO. جميع الحقوق محفوظة. | جميع البيانات المقدمة للأغراض التوجيهية فقط.</p>
+        </div>
+    </footer>
+
+    <!-- ===== سكربت بسيط لتأثير التمرير ===== -->
+    <script>
+        (function() {
+            // تأثير ظهور العناصر عند التمرير (scroll-animate)
+            const animateElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+
+            // تفعيل الروابط في الفوتر (منع إعادة تحميل الصفحة)
+            document.querySelectorAll('.footer a[href="#"]').forEach(link => {
+                link.addEventListener('click', (e) => e.preventDefault());
+            });
+        })();
+    </script>
+
+</body>
+</html>
